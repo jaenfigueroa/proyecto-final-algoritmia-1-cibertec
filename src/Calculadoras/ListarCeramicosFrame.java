@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-public class ListarCeramicos extends JFrame {
+public class ListarCeramicosFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -19,7 +19,7 @@ public class ListarCeramicos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ListarCeramicos() {
+	public ListarCeramicosFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 411);
 		contentPane = new JPanel();

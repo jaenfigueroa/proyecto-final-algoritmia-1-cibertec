@@ -144,7 +144,7 @@ public class App extends JFrame {
 		mntmConsultarCermico = new JMenuItem("Consultar cerámico");
 		mntmConsultarCermico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConsultarCeramico frame = new ConsultarCeramico();
+				ConsultarCeramicoFrame frame = new ConsultarCeramicoFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 
@@ -155,7 +155,7 @@ public class App extends JFrame {
 		mntmNewMenuItem_4 = new JMenuItem("Modificar ceramico");
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ModificarCeramico frame = new ModificarCeramico();
+				ModificarCeramicoFrame frame = new ModificarCeramicoFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -165,7 +165,7 @@ public class App extends JFrame {
 		mntmNewMenuItem_5 = new JMenuItem("Listar cerámicos");
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarCeramicos frame = new ListarCeramicos();
+				ListarCeramicosFrame frame = new ListarCeramicosFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -178,7 +178,7 @@ public class App extends JFrame {
 		mntmNewMenuItem_6 = new JMenuItem("Vender");
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Vender frame = new Vender();
+				VenderFrame frame = new VenderFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -188,7 +188,7 @@ public class App extends JFrame {
 		mntmNewMenuItem_7 = new JMenuItem("Generar reportes");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GenerarReportes frame = new GenerarReportes();
+				GenerarReportesFrame frame = new GenerarReportesFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -199,21 +199,56 @@ public class App extends JFrame {
 		menuBar.add(mnNewMenu_3);
 
 		mntmNewMenuItem_9 = new JMenuItem("Configurar descuentos");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfigurarDescuentosFrame frame = new ConfigurarDescuentosFrame();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_9);
 
 		mntmNewMenuItem_10 = new JMenuItem("Configurar obsequios");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfigurarObsequiosFrame frame = new ConfigurarObsequiosFrame();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_10);
 
 		mntmNewMenuItem_11 = new JMenuItem("Configurar cantidad óptima");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfigurarCantidadOptimaFrame frame = new ConfigurarCantidadOptimaFrame();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_11);
 
 		mntmNewMenuItem_1 = new JMenuItem("Configurar cuota diaria");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfigurarCuotaDiariaFrame frame = new ConfigurarCuotaDiariaFrame();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
 		mnNewMenu_3.add(mntmNewMenuItem_1);
 
 		mnNewMenu_1 = new JMenu("Ayuda");
 		menuBar.add(mnNewMenu_1);
 
 		mntmNewMenuItem_12 = new JMenuItem("Acerca de Tienda");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame();
+				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				frame.setVisible(true);
+			}
+		});
 		mnNewMenu_1.add(mntmNewMenuItem_12);
 	}
 }

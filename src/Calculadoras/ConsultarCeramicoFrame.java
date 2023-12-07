@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class ConsultarCeramico extends JFrame {
+public class ConsultarCeramicoFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -32,7 +32,7 @@ public class ConsultarCeramico extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ConsultarCeramico frame = new ConsultarCeramico();
+					ConsultarCeramicoFrame frame = new ConsultarCeramicoFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class ConsultarCeramico extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarCeramico() {
+	public ConsultarCeramicoFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
