@@ -14,6 +14,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
+import java.awt.Color;
 
 public class App extends JFrame {
 
@@ -117,14 +123,16 @@ public class App extends JFrame {
 	public App() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 788, 487);
+		setTitle("Tienda 1.0");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+///cscs
 		menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 764, 22);
+		menuBar.setBackground(new Color(218, 218, 218));
+		menuBar.setBounds(0, 0, 764, 36);
 		contentPane.add(menuBar);
 
 		mnNewMenu = new JMenu("Archivo");
@@ -241,10 +249,10 @@ public class App extends JFrame {
 		mnNewMenu_1 = new JMenu("Ayuda");
 		menuBar.add(mnNewMenu_1);
 
-		mntmNewMenuItem_12 = new JMenuItem("Acerca de Tienda");
+		mntmNewMenuItem_12 = new JMenuItem("Acerca de la Tienda");
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame();
+				AcerdaDeFrame frame = new AcerdaDeFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}

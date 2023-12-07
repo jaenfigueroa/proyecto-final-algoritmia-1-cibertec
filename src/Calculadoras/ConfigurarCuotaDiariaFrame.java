@@ -40,6 +40,7 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 	public ConfigurarCuotaDiariaFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 472, 105);
+		setTitle("Configurar Cuota diaria");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

@@ -22,6 +22,7 @@ public class ListarCeramicosFrame extends JFrame {
 	public ListarCeramicosFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 411);
+		setTitle("Listar cerámicos");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

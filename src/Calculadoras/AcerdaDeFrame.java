@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 
-public class AcerdaDeTiendaFrame extends JFrame {
+public class AcerdaDeFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,7 +31,7 @@ public class AcerdaDeTiendaFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame();
+					AcerdaDeFrame frame = new AcerdaDeFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,9 +43,10 @@ public class AcerdaDeTiendaFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AcerdaDeTiendaFrame() {
+	public AcerdaDeFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 343);
+		setTitle("Acerca de la tienda");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

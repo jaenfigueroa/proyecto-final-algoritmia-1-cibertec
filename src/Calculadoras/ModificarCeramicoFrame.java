@@ -33,18 +33,18 @@ public class ModificarCeramicoFrame extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ModificarCeramico frame = new ModificarCeramico();
+					ModificarCeramicoFrame frame = new ModificarCeramicoFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
@@ -52,6 +52,7 @@ public class ModificarCeramicoFrame extends JFrame {
 	public ModificarCeramicoFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		setTitle("Modificar cerámico");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
