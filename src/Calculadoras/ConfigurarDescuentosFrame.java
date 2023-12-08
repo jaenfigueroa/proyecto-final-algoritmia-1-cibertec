@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ConfigurarDescuentosFrame extends JFrame {
 
@@ -19,37 +21,27 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	private JLabel lblA;
 	private JLabel lblA_2;
 	private JLabel lblA_1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JButton btnNewButton;
-	private JButton btnCancelar;
+	private JTextField tf_descuentoValor1;
+	private JTextField tf_descuentoValor2;
+	private JTextField tf_descuentoValor3;
+	private JTextField tf_descuentoValor4;
+	private JButton btn_aceptar;
+	private JButton btn_cancelar;
 	private JLabel lblA_3;
 	private JLabel lblA_4;
 	private JLabel lblS_1;
 	private JLabel lblS;
+	
+	private App appReference;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfigurarDescuentosFrame frame = new ConfigurarDescuentosFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarDescuentosFrame() {
+	public ConfigurarDescuentosFrame(App appReference) {
+		this.appReference = appReference;
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 200);
 		setTitle("Configurar descuentos");
@@ -75,33 +67,57 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		lblA_1.setBounds(18, 126, 119, 13);
 		contentPane.add(lblA_1);
 		
-		textField = new JTextField();
-		textField.setBounds(147, 10, 108, 27);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tf_descuentoValor1 = new JTextField();
+		tf_descuentoValor1.setBounds(147, 10, 108, 27);
+		contentPane.add(tf_descuentoValor1);
+		tf_descuentoValor1.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(147, 45, 108, 27);
-		contentPane.add(textField_1);
+		tf_descuentoValor2 = new JTextField();
+		tf_descuentoValor2.setColumns(10);
+		tf_descuentoValor2.setBounds(147, 45, 108, 27);
+		contentPane.add(tf_descuentoValor2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(147, 82, 108, 27);
-		contentPane.add(textField_2);
+		tf_descuentoValor3 = new JTextField();
+		tf_descuentoValor3.setColumns(10);
+		tf_descuentoValor3.setBounds(147, 82, 108, 27);
+		contentPane.add(tf_descuentoValor3);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(147, 119, 108, 27);
-		contentPane.add(textField_3);
+		tf_descuentoValor4 = new JTextField();
+		tf_descuentoValor4.setColumns(10);
+		tf_descuentoValor4.setBounds(147, 119, 108, 27);
+		contentPane.add(tf_descuentoValor4);
 		
-		btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(341, 13, 85, 21);
-		contentPane.add(btnNewButton);
+		btn_aceptar = new JButton("Aceptar");
+		btn_aceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// Declaración de variables
+				double descuentoValor1 =0, descuentoValor2=0, descuentoValor3 =0, descuentoValor4 =0; 
+				
+				// recoger los valores
+				descuentoValor1 = Double.parseDouble(tf_descuentoValor1.getText());
+				descuentoValor2 = Double.parseDouble(tf_descuentoValor2.getText());
+				descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
+				descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
+				
+				double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
+				
+				// actualizar los valores
+				appReference.setConfigurarPorcentajeDescuento(cantidades);
+			}
+		});
+		btn_aceptar.setBounds(341, 13, 85, 21);
+		contentPane.add(btn_aceptar);
 		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(341, 44, 85, 21);
-		contentPane.add(btnCancelar);
+		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
+		btn_cancelar.setBounds(341, 44, 85, 21);
+		contentPane.add(btn_cancelar);
 		
 		lblA_3 = new JLabel("%");
 		lblA_3.setBounds(261, 126, 34, 13);
@@ -118,6 +134,18 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		lblS = new JLabel("%");
 		lblS.setBounds(261, 17, 34, 13);
 		contentPane.add(lblS);
+		
+		mostrarValoresDefecto();
+	}
+	
+	// FUNCIONES
+	void mostrarValoresDefecto() {
+		double[] valores = appReference.getPorcentajesDescuento();
+		
+		tf_descuentoValor1.setText(Double.toString(valores[0]));
+		tf_descuentoValor2.setText(Double.toString(valores[1]));
+		tf_descuentoValor3.setText(Double.toString(valores[2]));
+		tf_descuentoValor4.setText(Double.toString(valores[3]));
 	}
 
 }

@@ -10,8 +10,11 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class AcerdaDeFrame extends JFrame {
+public class AcerdaDeFrame extends App {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -45,7 +48,7 @@ public class AcerdaDeFrame extends JFrame {
 	 */
 	public AcerdaDeFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 343);
+		setBounds(100, 100, 450, 331);
 		setTitle("Acerca de la tienda");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
