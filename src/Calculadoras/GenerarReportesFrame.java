@@ -1,7 +1,5 @@
 package Calculadoras;
 
-//import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -20,7 +18,7 @@ public class GenerarReportesFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JComboBox cb_tiposReportes;
+	private JComboBox<String> cb_tiposReportes;
 	private JButton btn_cerrar;
 	private JTextArea ta_resultados;
 	
@@ -57,7 +55,7 @@ public class GenerarReportesFrame extends JFrame {
 		lblNewLabel.setBounds(10, 10, 101, 13);
 		contentPane.add(lblNewLabel);
 		
-		cb_tiposReportes = new JComboBox();
+		cb_tiposReportes = new JComboBox<>();
 		cb_tiposReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int tipoReporte = cb_tiposReportes.getSelectedIndex();
@@ -65,7 +63,7 @@ public class GenerarReportesFrame extends JFrame {
 				generarReporte(tipoReporte);
 			}
 		});
-		cb_tiposReportes.setModel(new DefaultComboBoxModel(tiposReportes));
+		cb_tiposReportes.setModel(new DefaultComboBoxModel<>(tiposReportes));
 		cb_tiposReportes.setBounds(121, 6, 341, 21);
 		contentPane.add(cb_tiposReportes);
 		

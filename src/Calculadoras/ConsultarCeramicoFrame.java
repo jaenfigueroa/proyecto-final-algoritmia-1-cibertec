@@ -1,13 +1,8 @@
 package Calculadoras;
 
-//import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-//import Calculadora.App;
-
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -23,7 +18,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JComboBox cb_modelo;
+	private JComboBox<String> cb_modelo;
 	private JLabel lblPrecio;
 	private JTextField tf_precio;
 	private JLabel lblAnchocm;
@@ -59,13 +54,13 @@ public class ConsultarCeramicoFrame extends JFrame {
 		lblNewLabel.setBounds(10, 10, 45, 13);
 		contentPane.add(lblNewLabel);
 
-		cb_modelo = new JComboBox();
+		cb_modelo = new JComboBox<>();
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel(appReference.getModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
 		cb_modelo.setBounds(115, 6, 201, 21);
 		contentPane.add(cb_modelo);
 

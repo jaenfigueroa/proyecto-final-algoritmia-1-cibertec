@@ -1,7 +1,5 @@
 package Calculadoras;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,11 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
-import java.awt.ScrollPane;
-import java.awt.Panel;
-import java.awt.TextArea;
 import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
@@ -30,8 +24,7 @@ public class VenderFrame extends JFrame {
 	private JTextField tf_cantidad;
 	private JButton btn_vender;
 	private JButton btn_cerrar;
-	private JComboBox cb_modelo;
-	private JTextArea txtrCscscscs;
+	private JComboBox<String> cb_modelo;
 	private JTextArea ta_resultados;
 
 	App appReference;
@@ -104,7 +97,7 @@ public class VenderFrame extends JFrame {
 		btn_cerrar.setBounds(341, 39, 85, 21);
 		contentPane.add(btn_cerrar);
 		
-		cb_modelo = new JComboBox();
+		cb_modelo = new JComboBox<>();
 		cb_modelo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -112,7 +105,7 @@ public class VenderFrame extends JFrame {
 				mostrarPrecio(productoIndex);
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel(appReference.getModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
 		cb_modelo.setBounds(91, 14, 177, 19);
 		contentPane.add(cb_modelo);
 		
@@ -165,7 +158,7 @@ public class VenderFrame extends JFrame {
 		ta_resultados.append("Importe de compra\t: S/. " + importeCompra + " \n");
 		ta_resultados.append("Importe de descuento\t: S/. " + importeDescuento + " \n");
 		ta_resultados.append("Importe de pagar\t: S/. " + importePagar + "\n");
-		ta_resultados.append("Tipo de obsequio\t: " + appReference.tipoObsequio + "\n");
+		ta_resultados.append("Tipo de obsequio\t: " + appReference.getTipoObsequio() + "\n");
 		ta_resultados.append("Unidades obsequiadas\t: " + cantidadObsequios);
 	}
 }
