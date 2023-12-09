@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class ConsultarCeramicoFrame extends JFrame {
 
@@ -55,6 +56,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		cb_modelo = new JComboBox<>();
+		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 14));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarDatosDelProducto();
@@ -69,6 +71,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblPrecio);
 
 		tf_precio = new JTextField();
+		tf_precio.setFont(new Font("Dialog", Font.PLAIN, 14));
 		tf_precio.setEditable(false);
 		tf_precio.setBounds(113, 37, 203, 21);
 		contentPane.add(tf_precio);
@@ -79,6 +82,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblAnchocm);
 
 		tf_ancho = new JTextField();
+		tf_ancho.setFont(new Font("Dialog", Font.PLAIN, 14));
 		tf_ancho.setEditable(false);
 		tf_ancho.setColumns(10);
 		tf_ancho.setBounds(113, 72, 203, 21);
@@ -89,6 +93,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblLargocm);
 
 		tf_largo = new JTextField();
+		tf_largo.setFont(new Font("Dialog", Font.PLAIN, 14));
 		tf_largo.setEditable(false);
 		tf_largo.setColumns(10);
 		tf_largo.setBounds(113, 106, 203, 21);
@@ -99,6 +104,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblEspesormm);
 
 		tf_espesor = new JTextField();
+		tf_espesor.setFont(new Font("Dialog", Font.PLAIN, 14));
 		tf_espesor.setEditable(false);
 		tf_espesor.setColumns(10);
 		tf_espesor.setBounds(113, 136, 203, 21);
@@ -109,6 +115,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		contentPane.add(lblPrecios);
 
 		tf_contenido = new JTextField();
+		tf_contenido.setFont(new Font("Dialog", Font.PLAIN, 14));
 		tf_contenido.setEditable(false);
 		tf_contenido.setColumns(10);
 		tf_contenido.setBounds(113, 168, 203, 21);
@@ -134,7 +141,7 @@ public class ConsultarCeramicoFrame extends JFrame {
 		int indexProducto = cb_modelo.getSelectedIndex();
 
 		// Traer el producto por su index
-		Producto productoItem = appReference.getProducto(indexProducto);
+		Producto productoItem = appReference.productos[indexProducto];
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoItem.precio));

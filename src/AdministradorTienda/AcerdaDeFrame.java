@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,6 +8,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AcerdaDeFrame extends App {
 
@@ -77,6 +79,12 @@ public class AcerdaDeFrame extends App {
 		contentPane.add(lblNewLabel_5);
 		
 		btnNewButton = new JButton("Cerrar");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		btnNewButton.setBounds(145, 256, 135, 27);
 		contentPane.add(btnNewButton);
 	}

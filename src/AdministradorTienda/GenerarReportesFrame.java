@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -78,6 +78,7 @@ public class GenerarReportesFrame extends JFrame {
 		contentPane.add(btn_cerrar);
 		
 		ta_resultados = new JTextArea();
+		ta_resultados.setEditable(false);
 		ta_resultados.setBounds(10, 37, 557, 536);
 		contentPane.add(ta_resultados);
 		
@@ -96,19 +97,19 @@ public class GenerarReportesFrame extends JFrame {
 		
 		switch (tipoReporte) {
 			case 0: {
-				reporte = appReference.generarReporteVentasPorModelo();
+				reporte = appReference.getResporteTipo1();
 				break;
 			}
 			case 1: {
-				reporte = appReference.generarReporteComparacionPreciosConPrecioPromedio();
+				reporte = appReference.getResporteTipo2();
 				break;
 			}
 			case 2: {
-				reporte = appReference.generarReporteCajasVendidasCantidadOptima();
+				reporte = appReference.getResporteTipo3();
 				break;
 			}
 			case 3: {
-				reporte = appReference.generarReporteEstadisticaPrecio();
+				reporte = appReference.getResporteTipo4();
 				break;
 			}
 		}

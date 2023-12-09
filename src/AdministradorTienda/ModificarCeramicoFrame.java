@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 
 public class ModificarCeramicoFrame extends JFrame {
@@ -56,6 +57,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		cb_modelo = new JComboBox<>();
+		cb_modelo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarDatosDelProducto();
@@ -70,6 +72,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblPrecio);
 
 		tf_precio = new JTextField();
+		tf_precio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tf_precio.setBounds(113, 37, 203, 21);
 		contentPane.add(tf_precio);
 		tf_precio.setColumns(10);
@@ -79,6 +82,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblAnchocm);
 
 		tf_ancho = new JTextField();
+		tf_ancho.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tf_ancho.setColumns(10);
 		tf_ancho.setBounds(113, 72, 203, 21);
 		contentPane.add(tf_ancho);
@@ -88,6 +92,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblLargocm);
 
 		tf_largo = new JTextField();
+		tf_largo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tf_largo.setColumns(10);
 		tf_largo.setBounds(113, 106, 203, 21);
 		contentPane.add(tf_largo);
@@ -97,6 +102,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblEspesormm);
 
 		tf_espesor = new JTextField();
+		tf_espesor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tf_espesor.setColumns(10);
 		tf_espesor.setBounds(113, 136, 203, 21);
 		contentPane.add(tf_espesor);
@@ -106,6 +112,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		contentPane.add(lblPrecios);
 
 		tf_contenido = new JTextField();
+		tf_contenido.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tf_contenido.setColumns(10);
 		tf_contenido.setBounds(113, 168, 203, 21);
 		contentPane.add(tf_contenido);
@@ -142,7 +149,7 @@ public class ModificarCeramicoFrame extends JFrame {
 		int indexProducto = cb_modelo.getSelectedIndex();
 
 		// Traer el producto por su index
-		Producto productoItem = appReference.getProducto(indexProducto);
+		Producto productoItem = appReference.productos[indexProducto];
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoItem.precio));
@@ -157,17 +164,13 @@ public class ModificarCeramicoFrame extends JFrame {
 		int productoIndex = cb_modelo.getSelectedIndex();
 		
 		// recolectar los campos actualizados
-		String modelo = cb_modelo.getSelectedItem().toString();
-		double precio = Double.parseDouble(tf_precio.getText());
-		double ancho = Double.parseDouble(tf_ancho.getText());
-		double largo = Double.parseDouble(tf_largo.getText());
-		double espesor = Double.parseDouble(tf_espesor.getText());
-		int contenido = Integer.parseInt(tf_contenido.getText());
-		
-		// Crear el producto
-		Producto productoModificado = new Producto(modelo, precio, ancho, largo, espesor, contenido);
+		double nuevoPrecio = Double.parseDouble(tf_precio.getText());
+		double nuevoAncho = Double.parseDouble(tf_ancho.getText());
+		double nuevoLargo = Double.parseDouble(tf_largo.getText());
+		double nuevoEspesor = Double.parseDouble(tf_espesor.getText());
+		int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 		
 		// actualizar el producto
-		appReference.updateProducto(productoIndex, productoModificado);
+		appReference.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
 	}
 }

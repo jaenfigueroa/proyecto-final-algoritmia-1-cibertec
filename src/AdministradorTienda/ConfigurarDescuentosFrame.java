@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 
 import javax.swing.JFrame;
@@ -100,7 +100,9 @@ public class ConfigurarDescuentosFrame extends JFrame {
 				double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
 				
 				// actualizar los valores
-				appReference.setConfigurarPorcentajeDescuento(cantidades);
+				appReference.setPorcentajesDescuento(cantidades);
+				
+				setVisible(false);
 			}
 		});
 		btn_aceptar.setBounds(341, 13, 85, 21);

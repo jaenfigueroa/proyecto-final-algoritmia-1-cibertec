@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,6 +12,8 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VenderFrame extends JFrame {
 
@@ -29,14 +31,16 @@ public class VenderFrame extends JFrame {
 
 	App appReference;
 	
-	Producto productoSeleccionado = null;
-	int cantidadProductos = 0;
+	int productoSeleccionadoIndex =0;
+	int cantidadProductos = 0, cantidadObsequios=0;
+	
+		
+	// Declarar variables
+	String nombre = "";
+	double precio=0;
+	int cantidad=0;
 	
 	double importeCompra=0, importeDescuento=0, importePagar=0;
-	int cantidadObsequios=0;
-	
-	int productoIndex=0;
-	
 
 	/**
 	 * Create the frame.
@@ -44,9 +48,8 @@ public class VenderFrame extends JFrame {
 	public VenderFrame(App appReference) {
 		this.appReference = appReference;
 
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 344);
+		setBounds(100, 100, 450, 393);
 		setTitle("Vender");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,10 +84,27 @@ public class VenderFrame extends JFrame {
 		btn_vender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				realizarVenta();
+
+				// Leer valores
+				cantidadProductos = Integer.parseInt(tf_cantidad.getText());
+				cantidadObsequios = appReference.getCantidadObsequios(cantidadProductos);
+				
+				nombre = cb_modelo.getSelectedItem().toString();
+				precio = Double.parseDouble(tf_precio.getText());
+				cantidad = Integer.parseInt(tf_cantidad.getText());
+				
+				calcularImportes();
+
+				// ACTUALIZAR PRODUCTO ORIGINAL CONTADORES - REALIZAR LA COMPRA
+				appReference.productos[productoSeleccionadoIndex].vender(cantidadProductos, importePagar);
+				
+				// verificar si la venta es multiplo de 5, mostrar mensaje
+				appReference.verificar5ventas();
+				
+				mostrarResultados();
 			}
 		});
-		btn_vender.setBounds(341, 10, 85, 21);
+		btn_vender.setBounds(341, 39, 85, 21);
 		contentPane.add(btn_vender);
 		
 		btn_cerrar = new JButton("Cerrar");
@@ -94,56 +114,42 @@ public class VenderFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_cerrar.setBounds(341, 39, 85, 21);
+		btn_cerrar.setBounds(341, 10, 85, 21);
 		contentPane.add(btn_cerrar);
 		
 		cb_modelo = new JComboBox<>();
-		cb_modelo.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				productoIndex = cb_modelo.getSelectedIndex();
-				mostrarPrecio(productoIndex);
+		cb_modelo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
+				mostrarPrecio();
 			}
 		});
+
 		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
 		cb_modelo.setBounds(91, 14, 177, 19);
 		contentPane.add(cb_modelo);
 		
 		ta_resultados = new JTextArea();
+		ta_resultados.setEditable(false);
 		ta_resultados.setFont(new Font("Arial", Font.PLAIN, 14));
-		ta_resultados.setBounds(10, 106, 416, 188);
+		ta_resultados.setBounds(10, 106, 416, 235);
 		contentPane.add(ta_resultados);
 		
 		// mostrar precio del producto seleccionado por defecto
-		mostrarPrecio(cb_modelo.getSelectedIndex());
+		mostrarPrecio();
 	}
 	
-	void mostrarPrecio(int productoIndex) {
-		productoSeleccionado = appReference.getProducto(productoIndex);
-		
-		tf_precio.setText(Double.toString(productoSeleccionado.precio));
+	void mostrarPrecio() {
+		double precio = appReference.productos[productoSeleccionadoIndex].precio;
+
+		tf_precio.setText(Double.toString(precio));
 	}
-	
-	void realizarVenta() {
-		cantidadProductos = Integer.parseInt(tf_cantidad.getText());
-		cantidadObsequios = appReference.getCantidadObsequios(cantidadProductos);
-		
-		calcularImportes();
-		mostrarResultados();
-		
-		// aumentar el contador de ventas realizadas
-		appReference.cantidadVentasRealizadas++;
-		appReference.importeTotalAcumulado += importePagar;
-		
-		appReference.addVenta(productoIndex, cantidadObsequios, importeCompra);
-		
-		appReference.verificar5ventas();
-	}
+
 	
 	void calcularImportes() {
 		double porcentajeDescuento = appReference.getPorcentajeDescuento(cantidadProductos);
 		
-		importeCompra = cantidadProductos * productoSeleccionado.precio;
+		importeCompra = cantidadProductos * precio;
 		importeDescuento = importeCompra * (porcentajeDescuento/100);
 		importePagar = importeCompra - importeDescuento;
 	}
@@ -151,14 +157,16 @@ public class VenderFrame extends JFrame {
 	void mostrarResultados() {
 		ta_resultados.setText("BOLETA DE VENTA\n\n");
 
-		ta_resultados.append("Modelo\t\t: " + productoSeleccionado.modelo + " \n");
-		ta_resultados.append("Precio\t\t: S/. " + productoSeleccionado.precio + " \n");
-		ta_resultados.append("Cantidad adquirida\t: " + cantidadProductos + " \n");
+		ta_resultados.append("Modelo\t\t: " + nombre + " \n");
+		ta_resultados.append("Precio\t\t: S/. " + precio + " \n");
+		ta_resultados.append("Cantidad adquirida\t: " + cantidadProductos + " \n\n");
 
 		ta_resultados.append("Importe de compra\t: S/. " + importeCompra + " \n");
 		ta_resultados.append("Importe de descuento\t: S/. " + importeDescuento + " \n");
-		ta_resultados.append("Importe de pagar\t: S/. " + importePagar + "\n");
+		ta_resultados.append("Importe de pagar\t: S/. " + importePagar + "\n\n");
+		
 		ta_resultados.append("Tipo de obsequio\t: " + appReference.getTipoObsequio() + "\n");
 		ta_resultados.append("Unidades obsequiadas\t: " + cantidadObsequios);
 	}
+
 }

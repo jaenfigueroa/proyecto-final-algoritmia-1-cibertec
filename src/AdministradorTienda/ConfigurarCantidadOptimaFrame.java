@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 
 import javax.swing.JFrame;
@@ -55,7 +55,9 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 
 				nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
 
-				appReference.setConfigurarCantidadOptima(nuevaCantidadOptima);
+				appReference.setCantidadOptima(nuevaCantidadOptima);
+				
+				setVisible(false);
 			}
 		});
 		btn_aceptar.setBounds(361, 9, 85, 21);

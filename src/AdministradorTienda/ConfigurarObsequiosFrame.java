@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -82,7 +82,9 @@ public class ConfigurarObsequiosFrame extends JFrame {
 				
 				int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
 				
-				appReference.setConfigurarObsequios(cantidades);
+				appReference.setCantidadesObsequios(cantidades);
+				
+				setVisible(false);
 			}
 		});
 		btn_aceptar.setBounds(341, 13, 85, 21);

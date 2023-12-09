@@ -1,4 +1,4 @@
-package Calculadoras;
+package AdministradorTienda;
 
 
 import javax.swing.JButton;
@@ -54,7 +54,9 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 				
 				nuevaCuotaEsperada = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
 
-				appReference.setConfigurarCuotaDiaria(nuevaCuotaEsperada);
+				appReference.setCuotaDiaria(nuevaCuotaEsperada);
+				
+				setVisible(false);
 			}
 		});
 		btn_aceptar.setBounds(361, 9, 85, 21);
