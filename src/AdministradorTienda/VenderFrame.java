@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -85,23 +86,33 @@ public class VenderFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				// Leer valores
-				cantidadProductos = Integer.parseInt(tf_cantidad.getText());
-				cantidadObsequios = appReference.getCantidadObsequios(cantidadProductos);
-				
-				nombre = cb_modelo.getSelectedItem().toString();
-				precio = Double.parseDouble(tf_precio.getText());
-				cantidad = Integer.parseInt(tf_cantidad.getText());
-				
-				calcularImportes();
+				try {
+					// Leer valores
+					cantidadProductos = Integer.parseInt(tf_cantidad.getText());
+					cantidadObsequios = appReference.getCantidadObsequios(cantidadProductos);
+					
+					nombre = cb_modelo.getSelectedItem().toString();
+					precio = Double.parseDouble(tf_precio.getText());
+					cantidad = Integer.parseInt(tf_cantidad.getText());
+					
+					calcularImportes();
 
-				// ACTUALIZAR PRODUCTO ORIGINAL CONTADORES - REALIZAR LA COMPRA
-				appReference.productos[productoSeleccionadoIndex].vender(cantidadProductos, importePagar);
-				
-				// verificar si la venta es multiplo de 5, mostrar mensaje
-				appReference.verificar5ventas();
-				
-				mostrarResultados();
+					// ACTUALIZAR PRODUCTO ORIGINAL CONTADORES - REALIZAR LA COMPRA
+					appReference.productos[productoSeleccionadoIndex].vender(cantidadProductos, importePagar);
+					
+					// verificar si la venta es multiplo de 5, mostrar mensaje
+					appReference.verificar5ventas();
+					
+					// mostra mensaje de exito
+					JOptionPane.showMessageDialog(rootPane,"¡Venta realizada exitosamente!", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+					
+					mostrarResultados();
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+					limpiarCampos();
+				}
+		
 			}
 		});
 		btn_vender.setBounds(341, 39, 85, 21);
@@ -167,6 +178,10 @@ public class VenderFrame extends JFrame {
 		
 		ta_resultados.append("Tipo de obsequio\t: " + appReference.getTipoObsequio() + "\n");
 		ta_resultados.append("Unidades obsequiadas\t: " + cantidadObsequios);
+	}
+	
+	void limpiarCampos() {
+		ta_resultados.setText("");
 	}
 
 }

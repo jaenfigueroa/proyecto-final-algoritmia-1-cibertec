@@ -3,6 +3,7 @@ package AdministradorTienda;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -74,17 +75,30 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int cantidadObsequio1, cantidadObsequio2, cantidadObsequio3;
 				
-				cantidadObsequio1 = Integer.parseInt(tf_obsequioCantidad1.getText());
-				cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
-				cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
-				
-				int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
-				
-				appReference.setCantidadesObsequios(cantidades);
-				
-				setVisible(false);
+				try {
+					int cantidadObsequio1, cantidadObsequio2, cantidadObsequio3;
+					
+					cantidadObsequio1 = Integer.parseInt(tf_obsequioCantidad1.getText());
+					cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
+					cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
+					
+					int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
+					
+					appReference.setCantidadesObsequios(cantidades);
+					
+					// Mostrar mensaje de exito
+					JOptionPane.showMessageDialog(rootPane,"Las cantidades de obsequios fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+					
+					// cerrar ventana
+					setVisible(false);
+
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+					
+				}
+
 			}
 		});
 		btn_aceptar.setBounds(341, 13, 85, 21);

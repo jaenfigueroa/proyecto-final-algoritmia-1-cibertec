@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-
 
 public class ModificarCeramicoFrame extends JFrame {
 
@@ -133,7 +133,6 @@ public class ModificarCeramicoFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// GUARDAR CAMBIOS
 				actualizarProducto();
-				setVisible(false);
 			}
 		});
 		btn_grabar.setBounds(326, 35, 100, 21);
@@ -143,7 +142,35 @@ public class ModificarCeramicoFrame extends JFrame {
 		mostrarDatosDelProducto();
 	}
 	
-	// FUNCIONES
+	// METODOS
+
+	void actualizarProducto() {
+		// recuperar el valor indece seleccionado del combobox
+		int productoIndex = cb_modelo.getSelectedIndex();
+		
+		try {
+			
+			// recolectar los campos actualizados
+			double nuevoPrecio = Double.parseDouble(tf_precio.getText());
+			double nuevoAncho = Double.parseDouble(tf_ancho.getText());
+			double nuevoLargo = Double.parseDouble(tf_largo.getText());
+			double nuevoEspesor = Double.parseDouble(tf_espesor.getText());
+			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
+			
+			// actualizar el producto
+			appReference.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
+			
+			// Mostra mensaje
+			JOptionPane.showMessageDialog(rootPane,"¡Producto actualizado correctamente!", "Ups, ocurrió un error",  JOptionPane.INFORMATION_MESSAGE);
+			
+			// cerrar ventana
+			setVisible(false);
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	void mostrarDatosDelProducto() {
 		// recuperar valor del combobox
 		int indexProducto = cb_modelo.getSelectedIndex();
@@ -157,20 +184,5 @@ public class ModificarCeramicoFrame extends JFrame {
 		tf_largo.setText(Double.toString(productoItem.largo));
 		tf_espesor.setText(Double.toString(productoItem.espesor));
 		tf_contenido.setText(Integer.toString(productoItem.contenido));
-	}
-	
-	void actualizarProducto() {
-		// recuperar el valor indece seleccionado del combobox
-		int productoIndex = cb_modelo.getSelectedIndex();
-		
-		// recolectar los campos actualizados
-		double nuevoPrecio = Double.parseDouble(tf_precio.getText());
-		double nuevoAncho = Double.parseDouble(tf_ancho.getText());
-		double nuevoLargo = Double.parseDouble(tf_largo.getText());
-		double nuevoEspesor = Double.parseDouble(tf_espesor.getText());
-		int nuevoContenido = Integer.parseInt(tf_contenido.getText());
-		
-		// actualizar el producto
-		appReference.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
 	}
 }

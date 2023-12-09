@@ -181,7 +181,22 @@ public class App extends JFrame {
 		mntmNewMenuItem.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				// mostrar mensaje de advertencia y guardar el resultado
+				int cerrarAplicacion = JOptionPane.showOptionDialog(
+				    rootPane,
+				    "Se va a cerrar la aplicación ¿estas seguro?",
+				    "Confirma acción",
+				    JOptionPane.YES_NO_CANCEL_OPTION,
+				    JOptionPane.WARNING_MESSAGE,
+				    null,
+				    null,
+				    null
+				);
+				
+				// si el valor escogigo es YES_OPTION
+				if(cerrarAplicacion == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}		
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);

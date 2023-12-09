@@ -4,6 +4,7 @@ package AdministradorTienda;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -50,13 +51,23 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				double nuevaCuotaEsperada =0;
-				
-				nuevaCuotaEsperada = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
+				try {
+					double nuevaCuotaEsperada =0;
+					
+					nuevaCuotaEsperada = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
 
-				appReference.setCuotaDiaria(nuevaCuotaEsperada);
-				
-				setVisible(false);
+					appReference.setCuotaDiaria(nuevaCuotaEsperada);
+					
+					// Mostrar mensaje de exito
+					JOptionPane.showMessageDialog(rootPane,"La cuota diaria fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+					
+					// cerrar ventana
+					setVisible(false);
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(rootPane,"EL valor ingresado no es valido, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btn_aceptar.setBounds(361, 9, 85, 21);

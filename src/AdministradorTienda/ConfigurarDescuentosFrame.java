@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -88,21 +89,32 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// Declaración de variables
-				double descuentoValor1 =0, descuentoValor2=0, descuentoValor3 =0, descuentoValor4 =0; 
 				
-				// recoger los valores
-				descuentoValor1 = Double.parseDouble(tf_descuentoValor1.getText());
-				descuentoValor2 = Double.parseDouble(tf_descuentoValor2.getText());
-				descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
-				descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
-				
-				double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
-				
-				// actualizar los valores
-				appReference.setPorcentajesDescuento(cantidades);
-				
-				setVisible(false);
+				try {
+					// Declaración de variables
+					double descuentoValor1 =0, descuentoValor2=0, descuentoValor3 =0, descuentoValor4 =0; 
+					
+					// recoger los valores
+					descuentoValor1 = Double.parseDouble(tf_descuentoValor1.getText());
+					descuentoValor2 = Double.parseDouble(tf_descuentoValor2.getText());
+					descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
+					descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
+					
+					double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
+					
+					// actualizar los valores
+					appReference.setPorcentajesDescuento(cantidades);
+					
+					// Mostrar mensaje de exito
+					JOptionPane.showMessageDialog(rootPane,"Los descuentos fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+					
+					// cerrar ventana
+					setVisible(false);
+
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+				}
+		
 			}
 		});
 		btn_aceptar.setBounds(341, 13, 85, 21);

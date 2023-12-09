@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -51,13 +52,24 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int nuevaCantidadOptima=0;
+				try {
+					int nuevaCantidadOptima=0;
 
-				nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
+					nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
 
-				appReference.setCantidadOptima(nuevaCantidadOptima);
-				
-				setVisible(false);
+					appReference.setCantidadOptima(nuevaCantidadOptima);
+					
+					// Mostrar mensaje de exito
+					JOptionPane.showMessageDialog(rootPane,"La cantidad optima fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+					
+					// cerrar ventana
+					setVisible(false);
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(rootPane,"EL valor ingresado no es valido, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 		});
 		btn_aceptar.setBounds(361, 9, 85, 21);
