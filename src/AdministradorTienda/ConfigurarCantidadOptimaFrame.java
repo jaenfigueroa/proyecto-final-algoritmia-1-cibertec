@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class ConfigurarCantidadOptimaFrame extends JFrame {
 
@@ -27,12 +28,17 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public ConfigurarCantidadOptimaFrame(App appReference) {
+		setResizable(false);
 		this.appReference = appReference;
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 472, 105);
+		setBounds(100, 100, 550, 113);
+		
 		setTitle("Configurar cantidad óptima");
+		// Centra la ventana en la pantalla
+        setLocationRelativeTo(null); 
+        
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -40,15 +46,18 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("Cantidad óptima de unidades vendidas");
-		lblNewLabel.setBounds(10, 10, 235, 18);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 10, 269, 18);
 		contentPane.add(lblNewLabel);
 		
 		tf_cantidadOptima = new JTextField();
-		tf_cantidadOptima.setBounds(255, 10, 85, 19);
+		tf_cantidadOptima.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_cantidadOptima.setBounds(289, 10, 85, 19);
 		contentPane.add(tf_cantidadOptima);
 		tf_cantidadOptima.setColumns(10);
 		
 		btn_aceptar = new JButton("Aceptar");
+		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -72,17 +81,18 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 
 			}
 		});
-		btn_aceptar.setBounds(361, 9, 85, 21);
+		btn_aceptar.setBounds(428, 10, 98, 21);
 		contentPane.add(btn_aceptar);
 		
 		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btn_cancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		btn_cancelar.setBounds(361, 39, 85, 21);
+		btn_cancelar.setBounds(428, 40, 98, 21);
 		contentPane.add(btn_cancelar);
 		
 		mostrarValorDefecto();

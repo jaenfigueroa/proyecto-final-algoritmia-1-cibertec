@@ -2,6 +2,7 @@ package AdministradorTienda;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -10,8 +11,14 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import java.awt.Color;
+import javax.swing.border.EtchedBorder;
 
 public class GenerarReportesFrame extends JFrame {
 
@@ -34,28 +41,36 @@ public class GenerarReportesFrame extends JFrame {
 
 
 	String reporteResultados = "";
+	private JScrollPane scrollPane;
 
 	/**
 	 * Create the frame.
 	 */
 	public GenerarReportesFrame(App appReference) {
+		setResizable(false);
 		this.appReference = appReference;
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 591, 620);
+		setBounds(100, 100, 696, 618);
+		
 		setTitle("Generar reportes");
+		// Centra la ventana en la pantalla
+        setLocationRelativeTo(null); 
+        
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel = new JLabel("Tipo de reporte");
-		lblNewLabel.setBounds(10, 10, 101, 13);
+		lblNewLabel = new JLabel("Tipo de reporte:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(10, 10, 115, 13);
 		contentPane.add(lblNewLabel);
 		
 		cb_tiposReportes = new JComboBox<>();
+		cb_tiposReportes.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cb_tiposReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int tipoReporte = cb_tiposReportes.getSelectedIndex();
@@ -64,26 +79,30 @@ public class GenerarReportesFrame extends JFrame {
 			}
 		});
 		cb_tiposReportes.setModel(new DefaultComboBoxModel<>(tiposReportes));
-		cb_tiposReportes.setBounds(121, 6, 341, 21);
+		cb_tiposReportes.setBounds(135, 6, 414, 21);
 		contentPane.add(cb_tiposReportes);
 		
 		btn_cerrar = new JButton("Cerrar");
+		btn_cerrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btn_cerrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		btn_cerrar.setBounds(477, 6, 85, 21);
+		btn_cerrar.setBounds(587, 6, 85, 21);
 		contentPane.add(btn_cerrar);
 		
-		ta_resultados = new JTextArea();
-		ta_resultados.setEditable(false);
-		ta_resultados.setBounds(10, 37, 557, 536);
-		contentPane.add(ta_resultados);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 42, 662, 525);
+		contentPane.add(scrollPane);
 		
-		// Mostrar reporte de la opción seleccionada por defecto
-		generarReporte(cb_tiposReportes.getSelectedIndex());
+		ta_resultados = new JTextArea();
+		scrollPane.setViewportView(ta_resultados);
+		ta_resultados.setFont(new Font("Arial", Font.PLAIN, 15));
+		ta_resultados.setEditable(false);
+		
+		generarReporte(0);
 	}
 	
 	// METODOS
