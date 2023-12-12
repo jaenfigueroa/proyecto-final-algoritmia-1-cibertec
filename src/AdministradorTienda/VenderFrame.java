@@ -21,6 +21,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class VenderFrame extends JFrame {
 
@@ -36,7 +37,7 @@ public class VenderFrame extends JFrame {
 	private JComboBox<String> cb_modelo;
 	private JTextArea ta_resultados;
 
-	App appReference;
+	AppFrame appReference;
 	
 	int productoSeleccionadoIndex =0;
 	int cantidadProductos = 0, cantidadObsequios=0;
@@ -48,19 +49,21 @@ public class VenderFrame extends JFrame {
 	int cantidad=0;
 	
 	double importeCompra=0, importeDescuento=0, importePagar=0;
-	private JLabel lbl_imagen;
 	private JPanel panel;
 	private JPanel panel_1;
+	private JLabel lbl_imagen;
+	private JButton btn_vender_1;
 
 	/**
 	 * Create the frame.
 	 */
-	public VenderFrame(App appReference) {
+	public VenderFrame(AppFrame appReference) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VenderFrame.class.getResource("/icons/shopping-32.png")));
 		setResizable(false);
 		this.appReference = appReference;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 678, 505);
+		setBounds(100, 100, 678, 511);
 		
 		setTitle("Vender");
 		// Centra la ventana en la pantalla
@@ -74,35 +77,39 @@ public class VenderFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("Modelo");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(230, 29, 81, 13);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setBounds(230, 24, 81, 25);
 		contentPane.add(lblNewLabel);
 		
 		lblPrecio = new JLabel("Precio (S/)");
-		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPrecio.setBounds(230, 58, 81, 13);
+		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPrecio.setBounds(230, 67, 81, 13);
 		contentPane.add(lblPrecio);
 		
 		tf_precio = new JTextField();
-		tf_precio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_precio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_precio.setEditable(false);
 		tf_precio.setColumns(10);
-		tf_precio.setBounds(311, 59, 177, 19);
+		tf_precio.setBounds(317, 59, 177, 25);
 		contentPane.add(tf_precio);
 		
 		lblNewLabel_2 = new JLabel("Cantidad");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(230, 84, 81, 13);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_2.setBounds(230, 101, 81, 13);
 		contentPane.add(lblNewLabel_2);
 		
 		tf_cantidad = new JTextField();
-		tf_cantidad.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_cantidad.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_cantidad.setColumns(10);
-		tf_cantidad.setBounds(311, 85, 177, 19);
+		tf_cantidad.setBounds(317, 94, 177, 25);
 		contentPane.add(tf_cantidad);
 		
 		btn_vender = new JButton("Vender");
-		btn_vender.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_vender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_vender.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btn_vender.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -119,15 +126,15 @@ public class VenderFrame extends JFrame {
 					calcularImportes();
 
 					// ACTUALIZAR PRODUCTO ORIGINAL CONTADORES - REALIZAR LA COMPRA
-					appReference.productos[productoSeleccionadoIndex].vender(cantidadProductos, importePagar);
-					
-					// verificar si la venta es multiplo de 5, mostrar mensaje
-					appReference.verificar5ventas();
+					appReference.productos[productoSeleccionadoIndex].venderProducto(cantidadProductos, importePagar);
 					
 					// mostra mensaje de exito
 					JOptionPane.showMessageDialog(rootPane,"¡Venta realizada exitosamente!", "Exito",  JOptionPane.INFORMATION_MESSAGE);
 					
 					mostrarResultados();
+					
+					// verificar si la venta es multiplo de 5, mostrar mensaje
+					appReference.verificar5ventas();
 
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(rootPane,"La cantidad ingresada no es válida, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
@@ -136,22 +143,22 @@ public class VenderFrame extends JFrame {
 		
 			}
 		});
-		btn_vender.setBounds(549, 57, 105, 21);
+		btn_vender.setBounds(549, 67, 105, 33);
 		contentPane.add(btn_vender);
 		
 		btn_cerrar = new JButton("Cerrar");
-		btn_cerrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_cerrar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btn_cerrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		btn_cerrar.setBounds(549, 24, 105, 21);
+		btn_cerrar.setBounds(549, 24, 105, 33);
 		contentPane.add(btn_cerrar);
 		
 		cb_modelo = new JComboBox<>();
-		cb_modelo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		cb_modelo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
@@ -160,30 +167,43 @@ public class VenderFrame extends JFrame {
 		});
 
 		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
-		cb_modelo.setBounds(311, 29, 177, 19);
+		cb_modelo.setBounds(317, 24, 177, 24);
 		contentPane.add(cb_modelo);
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(10, 10, 200, 193);
+		panel.setBounds(10, 10, 190, 190);
 		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		lbl_imagen = new JLabel("");
+		lbl_imagen.setBounds(10, 10, 170, 170);
 		panel.add(lbl_imagen);
-		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel_1.setBounds(10, 213, 644, 245);
+		panel_1.setBounds(10, 210, 644, 256);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		ta_resultados = new JTextArea();
-		ta_resultados.setBounds(10, 10, 624, 225);
+		ta_resultados.setBounds(10, 10, 624, 236);
 		panel_1.add(ta_resultados);
 		ta_resultados.setEditable(false);
-		ta_resultados.setFont(new Font("Arial", Font.PLAIN, 15));
+		ta_resultados.setFont(new Font("Arial", Font.PLAIN, 16));
+		
+		btn_vender_1 = new JButton("Limpiar");
+		btn_vender_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tf_cantidad.setText("");
+				ta_resultados.setText("");
+				cb_modelo.setSelectedIndex(0);
+			}
+		});
+		btn_vender_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_vender_1.setBounds(549, 114, 105, 33);
+		contentPane.add(btn_vender_1);
 		
 		// mostrar precio del producto seleccionado por defecto
 		mostrarPrecio();
@@ -196,7 +216,7 @@ public class VenderFrame extends JFrame {
 		String imagen = producto.imagen;
 
 		tf_precio.setText(Double.toString(precio));
-		lbl_imagen.setIcon(appReference.crearImagen(180, 180, imagen));
+		lbl_imagen.setIcon(appReference.crearImagen(170, 170, imagen));
 	}
 	
 	void calcularImportes() {

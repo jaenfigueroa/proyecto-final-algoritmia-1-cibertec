@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class ConfigurarObsequiosFrame extends JFrame {
 
@@ -25,14 +26,15 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	private JButton btn_cancelar;
 	private JLabel lblTipoDeObsequio;
 	
-	private App appReference;
+	private AppFrame appReference;
 	private JTextField tf_tipoObsequio;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarObsequiosFrame(App appReference) {
+	public ConfigurarObsequiosFrame(AppFrame appReference) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarObsequiosFrame.class.getResource("/icons/gift-32.png")));
 		setResizable(false);
 		this.appReference= appReference;
 		
@@ -51,40 +53,40 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		lblNewLabel = new JLabel("1 a 5 unidades");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(10, 51, 135, 13);
 		contentPane.add(lblNewLabel);
 		
 		lblA = new JLabel("6 a 10 unidades");
-		lblA.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblA.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblA.setBounds(10, 86, 135, 13);
 		contentPane.add(lblA);
 		
 		lblA_2 = new JLabel("11 a más unidades");
-		lblA_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblA_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblA_2.setBounds(10, 123, 135, 13);
 		contentPane.add(lblA_2);
 		
 		tf_obsequioCantidad1 = new JTextField();
-		tf_obsequioCantidad1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		tf_obsequioCantidad1.setBounds(148, 47, 108, 27);
+		tf_obsequioCantidad1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tf_obsequioCantidad1.setBounds(166, 47, 108, 27);
 		contentPane.add(tf_obsequioCantidad1);
 		tf_obsequioCantidad1.setColumns(10);
 		
 		tf_obsequioCantidad2 = new JTextField();
-		tf_obsequioCantidad2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_obsequioCantidad2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_obsequioCantidad2.setColumns(10);
-		tf_obsequioCantidad2.setBounds(148, 82, 108, 27);
+		tf_obsequioCantidad2.setBounds(166, 82, 108, 27);
 		contentPane.add(tf_obsequioCantidad2);
 		
 		tf_obsequioCantidad3 = new JTextField();
-		tf_obsequioCantidad3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_obsequioCantidad3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_obsequioCantidad3.setColumns(10);
-		tf_obsequioCantidad3.setBounds(148, 119, 108, 27);
+		tf_obsequioCantidad3.setBounds(166, 119, 108, 27);
 		contentPane.add(tf_obsequioCantidad3);
 		
 		btn_aceptar = new JButton("Aceptar");
-		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -117,29 +119,29 @@ public class ConfigurarObsequiosFrame extends JFrame {
 
 			}
 		});
-		btn_aceptar.setBounds(323, 13, 103, 21);
+		btn_aceptar.setBounds(323, 13, 103, 29);
 		contentPane.add(btn_aceptar);
 		
 		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btn_cancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		btn_cancelar.setBounds(323, 44, 103, 21);
+		btn_cancelar.setBounds(323, 56, 103, 29);
 		contentPane.add(btn_cancelar);
 		
 		lblTipoDeObsequio = new JLabel("Tipo de obsequio");
-		lblTipoDeObsequio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblTipoDeObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblTipoDeObsequio.setBounds(10, 17, 135, 13);
 		contentPane.add(lblTipoDeObsequio);
 		
 		tf_tipoObsequio = new JTextField();
-		tf_tipoObsequio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		tf_tipoObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_tipoObsequio.setColumns(10);
-		tf_tipoObsequio.setBounds(148, 10, 108, 27);
+		tf_tipoObsequio.setBounds(166, 10, 108, 27);
 		contentPane.add(tf_tipoObsequio);
 		
 		mostrarValoresDefecto();

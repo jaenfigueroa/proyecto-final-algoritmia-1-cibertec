@@ -16,8 +16,9 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
-public class ConsultarProductoFrame extends JFrame {
+public class ConsultarProductoFrame extends AppFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -36,20 +37,17 @@ public class ConsultarProductoFrame extends JFrame {
 	private JButton btn_cerrar;
 
 
-	private App appReference;
+	//private App appReference;
 	private JLabel lbl_imagen;
 	private JPanel panel;
 	
 	/**
 	 * Create the frame.
 	 */
-	public ConsultarProductoFrame(App appReference) {
-		setResizable(false);
-		
-		this.appReference = appReference;
-		
+	public ConsultarProductoFrame() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ConsultarProductoFrame.class.getResource("/icons/idea-32.png")));		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 736, 319);
+		setBounds(100, 100, 768, 335);
 		
 		setTitle("Consultar cerámico");
 		// Centra la ventana en la pantalla
@@ -63,102 +61,106 @@ public class ConsultarProductoFrame extends JFrame {
 		contentPane.setLayout(null);
 
 		lblNewLabel = new JLabel("Modelo");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(292, 31, 103, 13);
+		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblNewLabel.setBounds(292, 27, 103, 29);
 		contentPane.add(lblNewLabel);
 
 		cb_modelo = new JComboBox<>();
-		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 15));
+		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 16));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
-		cb_modelo.setBounds(398, 27, 190, 21);
+		cb_modelo.setModel(new DefaultComboBoxModel<>(getModelosDeProductos()));
+		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 
 		lblPrecio = new JLabel("Precio (S/)");
-		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPrecio.setBounds(292, 60, 103, 13);
+		lblPrecio.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblPrecio.setBounds(292, 70, 103, 29);
 		contentPane.add(lblPrecio);
 
 		tf_precio = new JTextField();
-		tf_precio.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tf_precio.setFont(new Font("Dialog", Font.PLAIN, 16));
 		tf_precio.setEditable(false);
-		tf_precio.setBounds(396, 58, 192, 21);
+		tf_precio.setBounds(406, 70, 192, 29);
 		contentPane.add(tf_precio);
 		tf_precio.setColumns(10);
 
 		lblAnchocm = new JLabel("Ancho (cm)");
-		lblAnchocm.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblAnchocm.setBounds(292, 95, 103, 13);
+		lblAnchocm.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblAnchocm.setBounds(292, 115, 103, 29);
 		contentPane.add(lblAnchocm);
 
 		tf_ancho = new JTextField();
-		tf_ancho.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tf_ancho.setFont(new Font("Dialog", Font.PLAIN, 16));
 		tf_ancho.setEditable(false);
 		tf_ancho.setColumns(10);
-		tf_ancho.setBounds(396, 93, 192, 21);
+		tf_ancho.setBounds(406, 115, 192, 29);
 		contentPane.add(tf_ancho);
 
 		lblLargocm = new JLabel("Largo (cm)");
-		lblLargocm.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblLargocm.setBounds(292, 129, 103, 13);
+		lblLargocm.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblLargocm.setBounds(292, 154, 103, 32);
 		contentPane.add(lblLargocm);
 
 		tf_largo = new JTextField();
-		tf_largo.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tf_largo.setFont(new Font("Dialog", Font.PLAIN, 16));
 		tf_largo.setEditable(false);
 		tf_largo.setColumns(10);
-		tf_largo.setBounds(396, 127, 192, 21);
+		tf_largo.setBounds(406, 157, 192, 29);
 		contentPane.add(tf_largo);
 
 		lblEspesormm = new JLabel("Espesor (mm)");
-		lblEspesormm.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEspesormm.setBounds(292, 160, 103, 13);
+		lblEspesormm.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblEspesormm.setBounds(292, 202, 103, 29);
 		contentPane.add(lblEspesormm);
 
 		tf_espesor = new JTextField();
-		tf_espesor.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tf_espesor.setFont(new Font("Dialog", Font.PLAIN, 16));
 		tf_espesor.setEditable(false);
 		tf_espesor.setColumns(10);
-		tf_espesor.setBounds(396, 157, 192, 21);
+		tf_espesor.setBounds(406, 202, 192, 29);
 		contentPane.add(tf_espesor);
 
 		lblPrecios = new JLabel("Contenido");
-		lblPrecios.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPrecios.setBounds(292, 191, 103, 13);
+		lblPrecios.setFont(new Font("Dialog", Font.PLAIN, 16));
+		lblPrecios.setBounds(292, 241, 103, 31);
 		contentPane.add(lblPrecios);
 
 		tf_contenido = new JTextField();
-		tf_contenido.setFont(new Font("Dialog", Font.PLAIN, 15));
+		tf_contenido.setFont(new Font("Dialog", Font.PLAIN, 16));
 		tf_contenido.setEditable(false);
 		tf_contenido.setColumns(10);
-		tf_contenido.setBounds(396, 189, 192, 21);
+		tf_contenido.setBounds(406, 243, 192, 29);
 		contentPane.add(tf_contenido);
 
 		btn_cerrar = new JButton("Cerrar");
-		btn_cerrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btn_cerrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_cerrar.setFont(new Font("Dialog", Font.PLAIN, 16));
 		btn_cerrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		btn_cerrar.setBounds(608, 27, 100, 21);
+		btn_cerrar.setBounds(644, 27, 100, 29);
 		contentPane.add(btn_cerrar);
 		
 		panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBackground(new Color(255, 255, 255));
-		panel.setBounds(10, 10, 261, 262);
+		panel.setBounds(10, 10, 260, 260);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		lbl_imagen = new JLabel("");
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_imagen.setBounds(10, 10, 241, 230);
+		lbl_imagen.setBounds(10, 10, 240, 240);
 		panel.add(lbl_imagen);
 		
 		// Mostrar los datos del primer item por defecto
@@ -171,7 +173,7 @@ public class ConsultarProductoFrame extends JFrame {
 		int indexProducto = cb_modelo.getSelectedIndex();
 
 		// Traer el producto por su index
-		Producto productoItem = appReference.productos[indexProducto];
+		Producto productoItem = productos[indexProducto];
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoItem.precio));
@@ -180,6 +182,6 @@ public class ConsultarProductoFrame extends JFrame {
 		tf_espesor.setText(Double.toString(productoItem.espesor));
 		tf_contenido.setText(Integer.toString(productoItem.contenido));
 		
-		lbl_imagen.setIcon(appReference.crearImagen(190, 190, productoItem.imagen));
+		lbl_imagen.setIcon(crearImagen(240, 240, productoItem.imagen));
 	}
 }
