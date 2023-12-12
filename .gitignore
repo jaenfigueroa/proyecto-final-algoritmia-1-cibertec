@@ -1,1 +1,6 @@
-/bin
+# Carpeta de configuración del entorno de Eclipse
+.settings/
+
+# Carpeta de archivos binarios
+/bin/
+
