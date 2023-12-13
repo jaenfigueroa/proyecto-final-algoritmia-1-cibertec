@@ -11,6 +11,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.border.EtchedBorder;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class ConfigurarObsequiosFrame extends JFrame {
 
@@ -28,6 +31,8 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	
 	private AppFrame appReference;
 	private JTextField tf_tipoObsequio;
+	private JPanel panel;
+	private JLabel lblNewLabel_1;
 
 
 	/**
@@ -40,7 +45,7 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 200);
+		setBounds(100, 100, 622, 249);
 		
 		setTitle("Configurar obsequios");
 		// Centra la ventana en la pantalla
@@ -52,41 +57,77 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(155, 19, 443, 179);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		lblNewLabel = new JLabel("1 a 5 unidades");
+		lblNewLabel.setBounds(17, 61, 135, 13);
+		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 51, 135, 13);
-		contentPane.add(lblNewLabel);
 		
 		lblA = new JLabel("6 a 10 unidades");
+		lblA.setBounds(17, 96, 135, 13);
+		panel.add(lblA);
 		lblA.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA.setBounds(10, 86, 135, 13);
-		contentPane.add(lblA);
 		
 		lblA_2 = new JLabel("11 a más unidades");
+		lblA_2.setBounds(17, 133, 135, 13);
+		panel.add(lblA_2);
 		lblA_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA_2.setBounds(10, 123, 135, 13);
-		contentPane.add(lblA_2);
 		
 		tf_obsequioCantidad1 = new JTextField();
+		tf_obsequioCantidad1.setBounds(173, 57, 108, 27);
+		panel.add(tf_obsequioCantidad1);
 		tf_obsequioCantidad1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_obsequioCantidad1.setBounds(166, 47, 108, 27);
-		contentPane.add(tf_obsequioCantidad1);
 		tf_obsequioCantidad1.setColumns(10);
 		
 		tf_obsequioCantidad2 = new JTextField();
+		tf_obsequioCantidad2.setBounds(173, 92, 108, 27);
+		panel.add(tf_obsequioCantidad2);
 		tf_obsequioCantidad2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_obsequioCantidad2.setColumns(10);
-		tf_obsequioCantidad2.setBounds(166, 82, 108, 27);
-		contentPane.add(tf_obsequioCantidad2);
 		
 		tf_obsequioCantidad3 = new JTextField();
+		tf_obsequioCantidad3.setBounds(173, 129, 108, 27);
+		panel.add(tf_obsequioCantidad3);
 		tf_obsequioCantidad3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_obsequioCantidad3.setColumns(10);
-		tf_obsequioCantidad3.setBounds(166, 119, 108, 27);
-		contentPane.add(tf_obsequioCantidad3);
 		
 		btn_aceptar = new JButton("Aceptar");
+		btn_aceptar.setBounds(318, 23, 103, 29);
+		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBounds(318, 66, 103, 29);
+		panel.add(btn_cancelar);
+		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblTipoDeObsequio = new JLabel("Tipo de obsequio");
+		lblTipoDeObsequio.setBounds(17, 27, 135, 13);
+		panel.add(lblTipoDeObsequio);
+		lblTipoDeObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		tf_tipoObsequio = new JTextField();
+		tf_tipoObsequio.setBounds(173, 20, 108, 27);
+		panel.add(tf_tipoObsequio);
+		tf_tipoObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tf_tipoObsequio.setColumns(10);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarObsequiosFrame.class.getResource("/icons/gift-128.png")));
+		lblNewLabel_1.setBounds(10, 13, 142, 185);
+		contentPane.add(lblNewLabel_1);
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -119,30 +160,6 @@ public class ConfigurarObsequiosFrame extends JFrame {
 
 			}
 		});
-		btn_aceptar.setBounds(323, 13, 103, 29);
-		contentPane.add(btn_aceptar);
-		
-		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btn_cancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		btn_cancelar.setBounds(323, 56, 103, 29);
-		contentPane.add(btn_cancelar);
-		
-		lblTipoDeObsequio = new JLabel("Tipo de obsequio");
-		lblTipoDeObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblTipoDeObsequio.setBounds(10, 17, 135, 13);
-		contentPane.add(lblTipoDeObsequio);
-		
-		tf_tipoObsequio = new JTextField();
-		tf_tipoObsequio.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_tipoObsequio.setColumns(10);
-		tf_tipoObsequio.setBounds(166, 10, 108, 27);
-		contentPane.add(tf_tipoObsequio);
 		
 		mostrarValoresDefecto();
 	}

@@ -153,7 +153,7 @@ public class AppFrame extends JFrame {
 		menuBar.add(mnNewMenu);
 
 		mntmNewMenuItem = new JMenuItem("Salir");
-		mntmNewMenuItem.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/delete-32.png")));
+		mntmNewMenuItem.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/logout-32.png")));
 		mntmNewMenuItem.setFont(new Font("Dialog", Font.PLAIN, 17));
 		mntmNewMenuItem.setBackground(new Color(240, 240, 240));
 		mntmNewMenuItem.setForeground(new Color(0, 0, 255));

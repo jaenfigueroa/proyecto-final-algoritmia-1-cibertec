@@ -61,7 +61,7 @@ public class GenerarReportesFrame extends JFrame {
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 733, 771);
+		setBounds(100, 100, 659, 771);
 		
 		setTitle("Generar reportes");
 		// Centra la ventana en la pantalla
@@ -73,13 +73,13 @@ public class GenerarReportesFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNewLabel = new JLabel("Tipo de reporte:");
+		lblNewLabel = new JLabel("Tipo de reporte");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 10, 127, 29);
+		lblNewLabel.setBounds(10, 10, 115, 29);
 		contentPane.add(lblNewLabel);
 		
 		cb_tiposReportes = new JComboBox<>();
-		cb_tiposReportes.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cb_tiposReportes.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		cb_tiposReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tipoReporte = cb_tiposReportes.getSelectedIndex();
@@ -88,7 +88,7 @@ public class GenerarReportesFrame extends JFrame {
 			}
 		});
 		cb_tiposReportes.setModel(new DefaultComboBoxModel<>(tiposReportes));
-		cb_tiposReportes.setBounds(147, 10, 435, 29);
+		cb_tiposReportes.setBounds(128, 10, 400, 29);
 		contentPane.add(cb_tiposReportes);
 		
 		btn_cerrar = new JButton("Cerrar");
@@ -99,11 +99,11 @@ public class GenerarReportesFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_cerrar.setBounds(614, 10, 96, 29);
+		btn_cerrar.setBounds(548, 10, 86, 29);
 		contentPane.add(btn_cerrar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 102, 700, 530);
+		scrollPane.setBounds(10, 91, 624, 525);
 		contentPane.add(scrollPane);
 		
 		ta_resultados = new JTextArea();
@@ -113,14 +113,14 @@ public class GenerarReportesFrame extends JFrame {
 		
 		lblNewLabel_2 = new JLabel("Resultados:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(10, 74, 144, 18);
+		lblNewLabel_2.setBounds(10, 63, 144, 18);
 		contentPane.add(lblNewLabel_2);
 		
 		btn_limpiar = new JButton("Limpiar");
 		btn_limpiar.setEnabled(false);
 		btn_limpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cb_tiposReportes.setSelectedIndex(0);
+				//cb_tiposReportes.setSelectedIndex(0);
 				ta_resultados.setText("");
 				pb_progreso.setValue(0);
 				btn_limpiar.setEnabled(false);
@@ -128,7 +128,7 @@ public class GenerarReportesFrame extends JFrame {
 			}
 		});
 		btn_limpiar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btn_limpiar.setBounds(501, 63, 96, 29);
+		btn_limpiar.setBounds(425, 626, 96, 29);
 		contentPane.add(btn_limpiar);
 		
 		btn_actualizar = new JButton("Actualizar");
@@ -141,7 +141,7 @@ public class GenerarReportesFrame extends JFrame {
 			}
 		});
 		btn_actualizar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btn_actualizar.setBounds(595, 63, 115, 29);
+		btn_actualizar.setBounds(519, 626, 115, 29);
 		contentPane.add(btn_actualizar);
 		
 		lblNewLabel_1 = new JLabel("Progreso:");
@@ -151,7 +151,7 @@ public class GenerarReportesFrame extends JFrame {
 		
 		pb_progreso = new JProgressBar();
 		pb_progreso.setStringPainted(true);
-		pb_progreso.setBounds(8, 681, 702, 43);
+		pb_progreso.setBounds(8, 681, 624, 43);
 		contentPane.add(pb_progreso);
 		
 		generarReporte();

@@ -12,6 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
+import javax.swing.SwingConstants;
 
 public class ConfigurarDescuentosFrame extends JFrame {
 
@@ -33,6 +36,8 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	private JLabel lblS;
 	
 	private AppFrame appReference;
+	private JPanel panel;
+	private JLabel lblNewLabel_1;
 
 
 	/**
@@ -45,7 +50,7 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 471, 200);
+		setBounds(100, 100, 665, 242);
 		
 		setTitle("Configurar descuentos");
 		// Centra la ventana en la pantalla
@@ -57,52 +62,98 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel = new JPanel();
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(165, 21, 476, 177);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
 		lblNewLabel = new JLabel("1 a 5 unidades");
+		lblNewLabel.setBounds(21, 29, 145, 13);
+		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(18, 17, 145, 13);
-		contentPane.add(lblNewLabel);
 		
 		lblA = new JLabel("6 a 10 unidades");
+		lblA.setBounds(21, 66, 145, 13);
+		panel.add(lblA);
 		lblA.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA.setBounds(18, 54, 145, 13);
-		contentPane.add(lblA);
 		
 		lblA_2 = new JLabel("11  a 15 unidades");
+		lblA_2.setBounds(21, 103, 145, 13);
+		panel.add(lblA_2);
 		lblA_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA_2.setBounds(18, 91, 145, 13);
-		contentPane.add(lblA_2);
 		
 		lblA_1 = new JLabel("Más de 15 unidades");
+		lblA_1.setBounds(21, 140, 145, 13);
+		panel.add(lblA_1);
 		lblA_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA_1.setBounds(18, 128, 145, 13);
-		contentPane.add(lblA_1);
 		
 		tf_descuentoValor1 = new JTextField();
+		tf_descuentoValor1.setBounds(176, 22, 89, 27);
+		panel.add(tf_descuentoValor1);
 		tf_descuentoValor1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_descuentoValor1.setBounds(173, 10, 89, 27);
-		contentPane.add(tf_descuentoValor1);
 		tf_descuentoValor1.setColumns(10);
+		//tf_descuentoValor1.selectAll();
 		
 		tf_descuentoValor2 = new JTextField();
+		tf_descuentoValor2.setBounds(176, 59, 89, 27);
+		panel.add(tf_descuentoValor2);
 		tf_descuentoValor2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_descuentoValor2.setColumns(10);
-		tf_descuentoValor2.setBounds(173, 47, 89, 27);
-		contentPane.add(tf_descuentoValor2);
 		
 		tf_descuentoValor3 = new JTextField();
+		tf_descuentoValor3.setBounds(176, 96, 89, 27);
+		panel.add(tf_descuentoValor3);
 		tf_descuentoValor3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_descuentoValor3.setColumns(10);
-		tf_descuentoValor3.setBounds(173, 84, 89, 27);
-		contentPane.add(tf_descuentoValor3);
 		
 		tf_descuentoValor4 = new JTextField();
+		tf_descuentoValor4.setBounds(176, 133, 89, 27);
+		panel.add(tf_descuentoValor4);
 		tf_descuentoValor4.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_descuentoValor4.setColumns(10);
-		tf_descuentoValor4.setBounds(173, 121, 89, 27);
-		contentPane.add(tf_descuentoValor4);
 		
 		btn_aceptar = new JButton("Aceptar");
+		btn_aceptar.setBounds(344, 25, 106, 29);
+		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		btn_cancelar = new JButton("Cancelar");
+		btn_cancelar.setBounds(344, 64, 106, 29);
+		panel.add(btn_cancelar);
+		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblA_3 = new JLabel("%");
+		lblA_3.setBounds(271, 140, 34, 13);
+		panel.add(lblA_3);
+		lblA_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblA_4 = new JLabel("%");
+		lblA_4.setBounds(271, 103, 34, 13);
+		panel.add(lblA_4);
+		lblA_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblS_1 = new JLabel("%");
+		lblS_1.setBounds(271, 66, 34, 13);
+		panel.add(lblS_1);
+		lblS_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblS = new JLabel("%");
+		lblS.setBounds(271, 29, 34, 13);
+		panel.add(lblS);
+		lblS.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarDescuentosFrame.class.getResource("/icons/pig-128.png")));
+		lblNewLabel_1.setBounds(10, 21, 145, 163);
+		contentPane.add(lblNewLabel_1);
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -134,39 +185,6 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		
 			}
 		});
-		btn_aceptar.setBounds(341, 13, 106, 29);
-		contentPane.add(btn_aceptar);
-		
-		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btn_cancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		btn_cancelar.setBounds(341, 52, 106, 29);
-		contentPane.add(btn_cancelar);
-		
-		lblA_3 = new JLabel("%");
-		lblA_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA_3.setBounds(268, 128, 34, 13);
-		contentPane.add(lblA_3);
-		
-		lblA_4 = new JLabel("%");
-		lblA_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblA_4.setBounds(268, 91, 34, 13);
-		contentPane.add(lblA_4);
-		
-		lblS_1 = new JLabel("%");
-		lblS_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblS_1.setBounds(268, 54, 34, 13);
-		contentPane.add(lblS_1);
-		
-		lblS = new JLabel("%");
-		lblS.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblS.setBounds(268, 17, 34, 13);
-		contentPane.add(lblS);
 		
 		mostrarValoresDefecto();
 	}
@@ -180,5 +198,4 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		tf_descuentoValor3.setText(Double.toString(valores[2]));
 		tf_descuentoValor4.setText(Double.toString(valores[3]));
 	}
-
 }

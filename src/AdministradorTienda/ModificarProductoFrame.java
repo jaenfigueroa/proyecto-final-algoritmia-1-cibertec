@@ -18,6 +18,7 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class ModificarProductoFrame extends JFrame {
 
