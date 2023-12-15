@@ -59,7 +59,7 @@ public class GenerarReportesFrame extends JFrame {
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 780, 771);
+		setBounds(100, 100, 830, 771);
 		
 		setTitle("Generar reportes");
 		// Centra la ventana en la pantalla
@@ -73,7 +73,7 @@ public class GenerarReportesFrame extends JFrame {
 		
 		panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(162, 10, 590, 714);
+		panel.setBounds(162, 10, 640, 714);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -83,7 +83,7 @@ public class GenerarReportesFrame extends JFrame {
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		btn_limpiar = new JButton("Limpiar");
-		btn_limpiar.setBounds(360, 106, 96, 29);
+		btn_limpiar.setBounds(408, 106, 96, 29);
 		panel.add(btn_limpiar);
 		btn_limpiar.setEnabled(false);
 		btn_limpiar.addActionListener(new ActionListener() {
@@ -98,7 +98,7 @@ public class GenerarReportesFrame extends JFrame {
 		btn_limpiar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		btn_actualizar = new JButton("Actualizar");
-		btn_actualizar.setBounds(454, 106, 115, 29);
+		btn_actualizar.setBounds(502, 106, 115, 29);
 		panel.add(btn_actualizar);
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -116,12 +116,12 @@ public class GenerarReportesFrame extends JFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		pb_progreso = new JProgressBar();
-		pb_progreso.setBounds(22, 649, 547, 43);
+		pb_progreso.setBounds(22, 649, 595, 43);
 		panel.add(pb_progreso);
 		pb_progreso.setStringPainted(true);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(22, 145, 547, 460);
+		scrollPane.setBounds(22, 145, 595, 460);
 		panel.add(scrollPane);
 		
 		ta_resultados = new JTextArea();
@@ -143,7 +143,7 @@ public class GenerarReportesFrame extends JFrame {
 		cb_tiposReportes.setModel(new DefaultComboBoxModel<>(tiposReportes));
 		
 		btn_cerrar = new JButton("Cerrar");
-		btn_cerrar.setBounds(483, 23, 86, 29);
+		btn_cerrar.setBounds(531, 23, 86, 29);
 		panel.add(btn_cerrar);
 		btn_cerrar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		

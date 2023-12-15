@@ -38,6 +38,5 @@ public class FramePrueba extends JFrame {
 
 		setContentPane(contentPane);
 	}
-	/// ///////////////////////////////////////////////////
 
 }
