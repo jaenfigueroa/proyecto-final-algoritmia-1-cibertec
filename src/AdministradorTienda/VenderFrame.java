@@ -122,7 +122,7 @@ public class VenderFrame extends JFrame {
 			}
 		});
 
-		cb_modelo.setModel(new DefaultComboBoxModel<>(AppFrame.obtenerModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerModelosDeProductos()));
 
 		panel = new JPanel();
 		panel.setBounds(21, 24, 190, 190);
@@ -179,7 +179,7 @@ public class VenderFrame extends JFrame {
 				try {
 					// Leer valores
 					cantidadProductosCajas = Integer.parseInt(tf_cantidad.getText());
-					cantidadObsequios = AppFrame.calcularCantidadObsequios(cantidadProductosCajas);
+					cantidadObsequios = MainApp.calcularCantidadObsequios(cantidadProductosCajas);
 
 					nombre = cb_modelo.getSelectedItem().toString();
 					precio = Double.parseDouble(tf_precio.getText());
@@ -188,7 +188,7 @@ public class VenderFrame extends JFrame {
 					calcularImportes();
 
 					// ACTUALIZAR PRODUCTO ORIGINAL CONTADORES - REALIZAR LA COMPRA
-					AppFrame.productos[productoSeleccionadoIndex].venderProducto(cantidadProductosCajas, importePagar);
+					MainApp.productos[productoSeleccionadoIndex].venderProducto(cantidadProductosCajas, importePagar);
 
 					// mostra mensaje de exito
 					JOptionPane.showMessageDialog(
@@ -200,7 +200,7 @@ public class VenderFrame extends JFrame {
 
 					mostrarResultados();
 
-					AppFrame.verificarVentaMultiplo5();
+					MainApp.verificarVentaMultiplo5();
 
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(
@@ -219,20 +219,20 @@ public class VenderFrame extends JFrame {
 	}
 
 	void mostrarPrecio() {
-		Producto producto = AppFrame.productos[productoSeleccionadoIndex];
+		Producto producto = MainApp.productos[productoSeleccionadoIndex];
 
-		double precio = producto.precio;
-		String imagen = producto.imagen;
+		double precio = producto.getPrecio();	;
+		String imagen = producto.getImagen();
 
 		tf_precio.setText(Double.toString(precio));
-		lbl_imagen.setIcon(AppFrame.crearImagen(170, 170, imagen));
+		lbl_imagen.setIcon(MainApp.crearImagen(170, 170, imagen));
 	}
 
 	void calcularImportes() {
-		Producto producto = AppFrame.productos[productoSeleccionadoIndex];
+		Producto producto = MainApp.productos[productoSeleccionadoIndex];
 
-		int cantidadUnidadesCajaSeleccionada = producto.contenido;
-		double porcentajeDescuento = AppFrame.calcularPorcentajeDescuento(cantidadProductosCajas * cantidadUnidadesCajaSeleccionada);
+		int cantidadUnidadesCajaSeleccionada = producto.getContenido();
+		double porcentajeDescuento = MainApp.calcularPorcentajeDescuento(cantidadProductosCajas * cantidadUnidadesCajaSeleccionada);
 
 		importeCompra = cantidadProductosCajas * precio;
 		importeDescuento = importeCompra * (porcentajeDescuento / 100);
@@ -250,7 +250,7 @@ public class VenderFrame extends JFrame {
 		ta_resultados.append("Importe de descuento\t: S/. " + importeDescuento + " \n");
 		ta_resultados.append("Importe de pagar\t: S/. " + importePagar + "\n\n");
 
-		ta_resultados.append("Tipo de obsequio\t: " + AppFrame.getTipoObsequio() + "\n");
+		ta_resultados.append("Tipo de obsequio\t: " + MainApp.getTipoObsequio() + "\n");
 		ta_resultados.append("Unidades obsequiadas\t: " + cantidadObsequios);
 	}
 

@@ -19,7 +19,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
-
 public class ModificarProductoFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -38,26 +37,23 @@ public class ModificarProductoFrame extends JFrame {
 	private JTextField tf_contenido;
 	private JButton btn_cerrar;
 	private JButton btn_grabar;
-
-
 	private JPanel panel;
 	private JLabel lbl_imagen;
+
+	private int productoSeleccionadoIndex = 0;
 
 	/**
 	 * Create the frame.
 	 */
 	public ModificarProductoFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarProductoFrame.class.getResource("/icons/notes-32.png")));
+		setIconImage(
+				Toolkit.getDefaultToolkit().getImage(ModificarProductoFrame.class.getResource("/icons/notes-32.png")));
 		setResizable(false);
-
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 758, 329);
-		
 		setTitle("Modificar cerámico");
-		// Centra la ventana en la pantalla
-        setLocationRelativeTo(null); 
-        
+		setLocationRelativeTo(null);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -73,11 +69,13 @@ public class ModificarProductoFrame extends JFrame {
 		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 16));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
+
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(AppFrame.obtenerModelosDeProductos()));
-		cb_modelo.setBounds(403, 24, 183, 29);
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerModelosDeProductos()));
+		cb_modelo.setBounds(403, 26, 183, 29);
 		contentPane.add(cb_modelo);
 
 		lblPrecio = new JLabel("Precio (S/)");
@@ -145,7 +143,7 @@ public class ModificarProductoFrame extends JFrame {
 		});
 		btn_cerrar.setBounds(634, 22, 100, 31);
 		contentPane.add(btn_cerrar);
-		
+
 		btn_grabar = new JButton("Grabar");
 		btn_grabar.setFont(new Font("Dialog", Font.PLAIN, 16));
 		btn_grabar.addMouseListener(new MouseAdapter() {
@@ -157,66 +155,74 @@ public class ModificarProductoFrame extends JFrame {
 		});
 		btn_grabar.setBounds(634, 63, 100, 29);
 		contentPane.add(btn_grabar);
-		
+
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(10, 14, 260, 260);
 		contentPane.add(panel);
-		
+
 		lbl_imagen = new JLabel("");
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(10, 10, 240, 240);
 		panel.add(lbl_imagen);
-		
+
 		// mostrar los datos del producto seleccionado por defecto
 		mostrarDatosDelProducto();
 	}
-	
+
 	// METODOS
 
+	void mostrarDatosDelProducto() {
+		// Traer el producto por su index
+		Producto productoItem = MainApp.productos[productoSeleccionadoIndex];
+
+		// Mostrar datos del producto
+		tf_precio.setText(Double.toString(productoItem.getPrecio()));
+		tf_ancho.setText(Double.toString(productoItem.getAncho()));
+		tf_largo.setText(Double.toString(productoItem.getLargo()));
+		tf_espesor.setText(Double.toString(productoItem.getEspesor()));
+		tf_contenido.setText(Integer.toString(productoItem.getContenido()));
+		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoItem.getImagen()));
+	}
+
 	void actualizarProducto() {
-		// recuperar el valor indece seleccionado del combobox
-		int productoIndex = cb_modelo.getSelectedIndex();
-		
 		try {
-			
 			// recolectar los campos actualizados
 			double nuevoPrecio = Double.parseDouble(tf_precio.getText());
 			double nuevoAncho = Double.parseDouble(tf_ancho.getText());
 			double nuevoLargo = Double.parseDouble(tf_largo.getText());
 			double nuevoEspesor = Double.parseDouble(tf_espesor.getText());
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
-			
+
 			// actualizar el producto
-			AppFrame.productos[productoIndex].actualizarProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
+			MainApp.productos[productoSeleccionadoIndex].setPrecio(nuevoPrecio);
+			MainApp.productos[productoSeleccionadoIndex].setAncho(nuevoAncho);
+			MainApp.productos[productoSeleccionadoIndex].setLargo(nuevoLargo);
+			MainApp.productos[productoSeleccionadoIndex].setEspesor(nuevoEspesor);
+			MainApp.productos[productoSeleccionadoIndex].setContenido(nuevoContenido);
 			
-			// Mostra mensaje
-			JOptionPane.showMessageDialog(rootPane,"¡Producto actualizado correctamente!", "Ups, ocurrió un error",  JOptionPane.INFORMATION_MESSAGE);
-			
+			// Mostrar mensaje de exito
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"¡Producto actualizado correctamente!",
+					"Ups, ocurrió un error",
+					JOptionPane.INFORMATION_MESSAGE
+				);
+
 			// cerrar ventana
 			setVisible(false);
 
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+			// mostrar mensaje de error
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"Alguno de los campos ingresados no son válidos, revise nuevamente por favor",
+					"Ups, ocurrió un error",
+					JOptionPane.ERROR_MESSAGE
+				);
 		}
 	}
-	
-	void mostrarDatosDelProducto() {
-		// recuperar valor del combobox
-		int indexProducto = cb_modelo.getSelectedIndex();
 
-		// Traer el producto por su index
-		Producto productoItem = AppFrame.productos[indexProducto];
-
-		// Mostrar datos del producto
-		tf_precio.setText(Double.toString(productoItem.precio));
-		tf_ancho.setText(Double.toString(productoItem.ancho));
-		tf_largo.setText(Double.toString(productoItem.largo));
-		tf_espesor.setText(Double.toString(productoItem.espesor));
-		tf_contenido.setText(Integer.toString(productoItem.contenido));
-		
-		lbl_imagen.setIcon(AppFrame.crearImagen(240, 240, productoItem.imagen));
-	}
 }

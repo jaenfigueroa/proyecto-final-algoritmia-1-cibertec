@@ -70,6 +70,12 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 		btn_aceptar.setBounds(440, 26, 98, 31);
 		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_aceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actualizarCantidadOptima();
+			}
+		});
 		
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.setBounds(440, 67, 98, 29);
@@ -87,37 +93,30 @@ public class ConfigurarCantidadOptimaFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_aceptar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					int nuevaCantidadOptima=0;
-
-					nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
-
-					AppFrame.setCantidadOptima(nuevaCantidadOptima);
-					
-					// Mostrar mensaje de exito
-					JOptionPane.showMessageDialog(rootPane,"La cantidad optima fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
-					
-					// cerrar ventana
-					setVisible(false);
-					
-				} catch (Exception e2) {
-					// TODO: handle exception
-					JOptionPane.showMessageDialog(rootPane,"EL valor ingresado no es valido, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
-				}
-
-			}
-		});
 		
 		mostrarValorDefecto();
 	}
 	
 	void mostrarValorDefecto() {
-		int cantidadDefecto = AppFrame.getCantidadOptima();
-		
+		int cantidadDefecto = MainApp.getCantidadOptima();
+
 		tf_cantidadOptima.setText(Integer.toString(cantidadDefecto));
+	}
+	
+	void actualizarCantidadOptima() {
+		try {
+			int nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
+			MainApp.setCantidadOptima(nuevaCantidadOptima);
+			
+			// Mostrar mensaje de exito
+			JOptionPane.showMessageDialog(rootPane,"La cantidad optima fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+			
+			// cerrar ventana
+			setVisible(false);
+			
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(rootPane,"EL valor ingresado no es valido, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 }

@@ -28,8 +28,6 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	private JButton btn_aceptar;
 	private JButton btn_cancelar;
 	private JLabel lblTipoDeObsequio;
-	
-
 	private JTextField tf_tipoObsequio;
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
@@ -41,12 +39,9 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	public ConfigurarObsequiosFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarObsequiosFrame.class.getResource("/icons/gift-32.png")));
 		setResizable(false);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 630, 255);
-		
 		setTitle("Configurar obsequios");
-		// Centra la ventana en la pantalla
         setLocationRelativeTo(null); 
         
 		contentPane = new JPanel();
@@ -98,11 +93,23 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		btn_aceptar.setBounds(318, 23, 103, 29);
 		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_aceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actualizarObsequios();
+			}
+		});
 		
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.setBounds(318, 66, 103, 29);
 		panel.add(btn_cancelar);
 		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		
 		lblTipoDeObsequio = new JLabel("Tipo de obsequio");
 		lblTipoDeObsequio.setBounds(17, 27, 135, 13);
@@ -120,56 +127,51 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarObsequiosFrame.class.getResource("/icons/gift-128.png")));
 		lblNewLabel_1.setBounds(10, 13, 142, 185);
 		contentPane.add(lblNewLabel_1);
-		btn_cancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		btn_aceptar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				try {
-					String tipoObsequio ="";
-					int cantidadObsequio1, cantidadObsequio2, cantidadObsequio3;
-					
-					tipoObsequio = tf_tipoObsequio.getText();
-					cantidadObsequio1 = Integer.parseInt(tf_obsequioCantidad1.getText());
-					cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
-					cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
-					
-					int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
-					
-					AppFrame.setTipoObsequio(tipoObsequio);
-					AppFrame.setCantidadesObsequios(cantidades);
-					
-					// Mostrar mensaje de exito
-					JOptionPane.showMessageDialog(rootPane,"Los obsequios fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
-					
-					// cerrar ventana
-					setVisible(false);
 
-				} catch (Exception e2) {
-					// TODO: handle exception
-					JOptionPane.showMessageDialog(rootPane,"Alguno(s) de los campos ingresados no son válidos, revise nuevamente por favor.", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
-					
-				}
-
-			}
-		});
-		
 		mostrarValoresDefecto();
 	}
 	
 	// FUNCIONES
-	void mostrarValoresDefecto() {
-		String tipoObsequio = AppFrame.getTipoObsequio();
-		int[] valores = AppFrame.getCantidadesObsequios();
+	private void mostrarValoresDefecto() {
+		String tipoObsequio = MainApp.getTipoObsequio();
+		int[] valores = MainApp.getCantidadesObsequios();
 		
 		tf_tipoObsequio.setText(tipoObsequio);
 		tf_obsequioCantidad1.setText(Integer.toString(valores[0]));
 		tf_obsequioCantidad2.setText(Integer.toString(valores[1]));
 		tf_obsequioCantidad3.setText(Integer.toString(valores[2]));
+	}
+	
+	private void actualizarObsequios() {
+		try {
+			String tipoObsequio = tf_tipoObsequio.getText();
+			int cantidadObsequio1 = Integer.parseInt(tf_obsequioCantidad1.getText());
+			int cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
+			int cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
+			
+			int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
+			
+			MainApp.setTipoObsequio(tipoObsequio);
+			MainApp.setCantidadesObsequios(cantidades);
+			
+			// Mostrar mensaje de exito
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"Los obsequios fueron actualizados exitosamente",
+					"Exito",
+					JOptionPane.INFORMATION_MESSAGE
+				);
+			
+			// cerrar ventana
+			setVisible(false);
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"Alguno(s) de los campos ingresados no son válidos, revise nuevamente por favor.",
+					"Ups, ocurrió un error",
+					JOptionPane.ERROR_MESSAGE
+				);
+		}
 	}
 }

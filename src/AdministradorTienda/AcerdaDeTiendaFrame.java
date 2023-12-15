@@ -52,7 +52,7 @@ public class AcerdaDeTiendaFrame extends JFrame {
 		contentPane.add(lbl_version);
 
 		lbl_logo = new JLabel("");
-		lbl_logo.setIcon(AppFrame.crearImagen(128, 128, "/icons/store-128.png"));
+		lbl_logo.setIcon(MainApp.crearImagen(128, 128, "/icons/store-128.png"));
 		lbl_logo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_logo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lbl_logo.setBounds(47, 10, 155, 157);

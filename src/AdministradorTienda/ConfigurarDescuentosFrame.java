@@ -34,7 +34,6 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	private JLabel lblA_4;
 	private JLabel lblS_1;
 	private JLabel lblS;
-
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
 
@@ -45,13 +44,9 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	public ConfigurarDescuentosFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarDescuentosFrame.class.getResource("/icons/pig-32.png")));
 		setResizable(false);
-
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 253);
-		
 		setTitle("Configurar descuentos");
-		// Centra la ventana en la pantalla
         setLocationRelativeTo(null); 
         
 		contentPane = new JPanel();
@@ -115,11 +110,23 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		btn_aceptar.setBounds(344, 25, 106, 29);
 		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_aceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				actualizarDescuentos();
+			}
+		});
 		
 		btn_cancelar = new JButton("Cancelar");
 		btn_cancelar.setBounds(344, 64, 106, 29);
 		panel.add(btn_cancelar);
 		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btn_cancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setVisible(false);
+			}
+		});
 		
 		lblA_3 = new JLabel("%");
 		lblA_3.setBounds(271, 140, 34, 13);
@@ -146,54 +153,46 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarDescuentosFrame.class.getResource("/icons/pig-128.png")));
 		lblNewLabel_1.setBounds(10, 21, 145, 163);
 		contentPane.add(lblNewLabel_1);
-		btn_cancelar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setVisible(false);
-			}
-		});
-		btn_aceptar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				try {
-					// Declaración de variables
-					double descuentoValor1 =0, descuentoValor2=0, descuentoValor3 =0, descuentoValor4 =0; 
-					
-					// recoger los valores
-					descuentoValor1 = Double.parseDouble(tf_descuentoValor1.getText());
-					descuentoValor2 = Double.parseDouble(tf_descuentoValor2.getText());
-					descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
-					descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
-					
-					double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
-					
-					// actualizar los valores
-					AppFrame.setPorcentajesDescuento(cantidades);
-					
-					// Mostrar mensaje de exito
-					JOptionPane.showMessageDialog(rootPane,"Los descuentos fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
-					
-					// cerrar ventana
-					setVisible(false);
-
-				} catch (Exception e2) {
-					JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
-				}
-		
-			}
-		});
 		
 		mostrarValoresDefecto();
 	}
 	
 	// FUNCIONES
+	
 	void mostrarValoresDefecto() {
-		double[] valores = AppFrame.getPorcentajesDescuento();
+		double[] valores = MainApp.getPorcentajesDescuento();
 		
 		tf_descuentoValor1.setText(Double.toString(valores[0]));
 		tf_descuentoValor2.setText(Double.toString(valores[1]));
 		tf_descuentoValor3.setText(Double.toString(valores[2]));
 		tf_descuentoValor4.setText(Double.toString(valores[3]));
+	}
+	
+	void actualizarDescuentos() {
+		try {
+			double descuentoValor1 = Double.parseDouble(tf_descuentoValor1.getText());
+			double descuentoValor2 = Double.parseDouble(tf_descuentoValor2.getText());
+			double descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
+			double descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
+			
+			double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
+			
+			// actualizar los valores
+			MainApp.setPorcentajesDescuento(cantidades);
+			
+			// Mostrar mensaje de exito
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"Los descuentos fueron actualizados exitosamente",
+					"Exito",
+					JOptionPane.INFORMATION_MESSAGE
+				);
+			
+			// cerrar ventana
+			setVisible(false);
+
+		} catch (Exception e2) {
+			JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

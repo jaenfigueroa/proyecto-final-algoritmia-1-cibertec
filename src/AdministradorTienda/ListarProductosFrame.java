@@ -25,8 +25,6 @@ public class ListarProductosFrame extends JFrame {
 	private JTextArea ta_resultados;
 	private JButton btn_cerrar;
 	private JButton btn_listar;
-	
-	
 	private JScrollPane scrollPane;
 	private JProgressBar pb_progreso;
 	private JLabel lblNewLabel;
@@ -42,13 +40,9 @@ public class ListarProductosFrame extends JFrame {
 	public ListarProductosFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ListarProductosFrame.class.getResource("/icons/books-32.png")));
 		setResizable(false);
-
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 647, 771);
-		
 		setTitle("Listar cerámicos");
-		// Centra la ventana en la pantalla
         setLocationRelativeTo(null); 
         
 		contentPane = new JPanel();
@@ -107,7 +101,6 @@ public class ListarProductosFrame extends JFrame {
 				ta_resultados.setText("");
 				pb_progreso.setValue(0);
 				btn_borrar.setEnabled(false);
-				//btn_actualizar.setEnabled(false);
 			}
 		});
 		btn_borrar.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -146,8 +139,10 @@ public class ListarProductosFrame extends JFrame {
 		});
 	}
 	
+	// METODOS
+	
 	void mostrarResultados() {
-		ta_resultados.setText(AppFrame.generarListadoProductos());
+		ta_resultados.setText(MainApp.generarListadoProductos());
 		pb_progreso.setValue(100);
 	}
 }

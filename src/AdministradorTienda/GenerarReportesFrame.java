@@ -28,19 +28,6 @@ public class GenerarReportesFrame extends JFrame {
 	private JComboBox<String> cb_tiposReportes;
 	private JButton btn_cerrar;
 	private JTextArea ta_resultados;
-	
-
-	int tipoReporte =0;
-
-	String[] tiposReportes = {
-			"Ventas por modelo",
-			"Comparación de precios con el precio promedio",
-			"Comparación de cajas vendidas con la cantidad óptima",
-			"Estadistica sobre el precio"
-		};
-
-
-	String reporteResultados = "";
 	private JLabel lblNewLabel_2;
 	private JButton btn_limpiar;
 	private JButton btn_actualizar;
@@ -49,6 +36,10 @@ public class GenerarReportesFrame extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JPanel panel;
 	private JScrollPane scrollPane;
+	
+	
+	private int tipoReporteSelecionadoIndex = 0;
+	private String reporteResultados = "";
 
 	/**
 	 * Create the frame.
@@ -56,13 +47,9 @@ public class GenerarReportesFrame extends JFrame {
 	public GenerarReportesFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GenerarReportesFrame.class.getResource("/icons/bar-32.png")));
 		setResizable(false);
-
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 830, 771);
-		
 		setTitle("Generar reportes");
-		// Centra la ventana en la pantalla
         setLocationRelativeTo(null); 
         
 		contentPane = new JPanel();
@@ -88,11 +75,9 @@ public class GenerarReportesFrame extends JFrame {
 		btn_limpiar.setEnabled(false);
 		btn_limpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//cb_tiposReportes.setSelectedIndex(0);
 				ta_resultados.setText("");
 				pb_progreso.setValue(0);
 				btn_limpiar.setEnabled(false);
-				//btn_actualizar.setEnabled(false);
 			}
 		});
 		btn_limpiar.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -133,14 +118,18 @@ public class GenerarReportesFrame extends JFrame {
 		cb_tiposReportes.setBounds(22, 55, 439, 29);
 		panel.add(cb_tiposReportes);
 		cb_tiposReportes.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		cb_tiposReportes.setModel(new DefaultComboBoxModel<String>(new String[] {
+				"Ventas por modelo",
+				"Comparación de precios con el precio promedio",
+				"Comparación de cajas vendidas con la cantidad óptima",
+				"Estadistica sobre el precio"
+			}));
 		cb_tiposReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tipoReporte = cb_tiposReportes.getSelectedIndex();
-
+				tipoReporteSelecionadoIndex = cb_tiposReportes.getSelectedIndex();
 				generarReporte();
 			}
 		});
-		cb_tiposReportes.setModel(new DefaultComboBoxModel<>(tiposReportes));
 		
 		btn_cerrar = new JButton("Cerrar");
 		btn_cerrar.setBounds(531, 23, 86, 29);
@@ -169,7 +158,7 @@ public class GenerarReportesFrame extends JFrame {
 	
 	// METODOS
 	void generarReporte() {
-		obtenerReporteCorrespondiente(this.tipoReporte);
+		obtenerReporteCorrespondiente(this.tipoReporteSelecionadoIndex);
 		mostrarResultados();
 	}
 	
@@ -178,19 +167,19 @@ public class GenerarReportesFrame extends JFrame {
 		
 		switch (tipoReporte) {
 			case 0: {
-				reporte = AppFrame.getResporteTipo1();
+				reporte = MainApp.getResporteTipo1();
 				break;
 			}
 			case 1: {
-				reporte = AppFrame.getResporteTipo2();
+				reporte = MainApp.getResporteTipo2();
 				break;
 			}
 			case 2: {
-				reporte = AppFrame.getResporteTipo3();
+				reporte = MainApp.getResporteTipo3();
 				break;
 			}
 			case 3: {
-				reporte = AppFrame.getResporteTipo4();
+				reporte = MainApp.getResporteTipo4();
 				break;
 			}
 		}

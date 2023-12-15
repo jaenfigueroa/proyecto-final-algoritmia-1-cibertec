@@ -18,7 +18,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
-public class ConsultarProductoFrame extends AppFrame {
+public class ConsultarProductoFrame extends DashboardFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -35,11 +35,10 @@ public class ConsultarProductoFrame extends AppFrame {
 	private JLabel lblPrecios;
 	private JTextField tf_contenido;
 	private JButton btn_cerrar;
-
-
-	//private App appReference;
 	private JLabel lbl_imagen;
 	private JPanel panel;
+	
+	private int productoSeleccionadoIndex;
 	
 	/**
 	 * Create the frame.
@@ -48,11 +47,8 @@ public class ConsultarProductoFrame extends AppFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConsultarProductoFrame.class.getResource("/icons/idea-32.png")));		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 768, 335);
-		
 		setTitle("Consultar cerámico");
-		// Centra la ventana en la pantalla
         setLocationRelativeTo(null); 
-        //setUndecorated(true);
         
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,10 +65,12 @@ public class ConsultarProductoFrame extends AppFrame {
 		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 16));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
+				
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(obtenerModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerModelosDeProductos()));
 		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 
@@ -168,20 +166,18 @@ public class ConsultarProductoFrame extends AppFrame {
 	}
 	
 	// FUNCIONES
-	void mostrarDatosDelProducto() {
-		// recuperar valor del combobox
-		int indexProducto = cb_modelo.getSelectedIndex();
+	private void mostrarDatosDelProducto() {
 
 		// Traer el producto por su index
-		Producto productoItem = productos[indexProducto];
+		Producto productoItem = MainApp.productos[productoSeleccionadoIndex];
 
 		// Mostrar datos del producto
-		tf_precio.setText(Double.toString(productoItem.precio));
-		tf_ancho.setText(Double.toString(productoItem.ancho));
-		tf_largo.setText(Double.toString(productoItem.largo));
-		tf_espesor.setText(Double.toString(productoItem.espesor));
-		tf_contenido.setText(Integer.toString(productoItem.contenido));
+		tf_precio.setText(Double.toString(productoItem.getPrecio()));
+		tf_ancho.setText(Double.toString(productoItem.getAncho()));
+		tf_largo.setText(Double.toString(productoItem.getLargo()));
+		tf_espesor.setText(Double.toString(productoItem.getEspesor()));
+		tf_contenido.setText(Integer.toString(productoItem.getContenido()));
 		
-		lbl_imagen.setIcon(crearImagen(240, 240, productoItem.imagen));
+		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoItem.getImagen()));
 	}
 }
