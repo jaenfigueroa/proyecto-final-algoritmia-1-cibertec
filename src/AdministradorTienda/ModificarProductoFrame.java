@@ -190,7 +190,7 @@ public class ModificarProductoFrame extends JFrame {
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 			
 			// actualizar el producto
-			AppFrame.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
+			AppFrame.productos[productoIndex].actualizarProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
 			
 			// Mostra mensaje
 			JOptionPane.showMessageDialog(rootPane,"¡Producto actualizado correctamente!", "Ups, ocurrió un error",  JOptionPane.INFORMATION_MESSAGE);

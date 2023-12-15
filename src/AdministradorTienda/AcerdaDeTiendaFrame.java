@@ -41,7 +41,6 @@ public class AcerdaDeTiendaFrame extends JFrame {
         setLocationRelativeTo(null); // Centra la ventana en la pantalla
         
 		contentPane = new JPanel();
-		//contentPane.setBackground(new Color(160, 27, 18));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -53,7 +52,6 @@ public class AcerdaDeTiendaFrame extends JFrame {
 		contentPane.add(lbl_version);
 
 		lbl_logo = new JLabel("");
-		//lbl_logo.setIcon(AppFrame.crearImagen(300, 120, "/italia/logo.jpg"));// Establecer el ImageIcon en el JLabel
 		lbl_logo.setIcon(AppFrame.crearImagen(128, 128, "/icons/store-128.png"));
 		lbl_logo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_logo.setFont(new Font("Tahoma", Font.PLAIN, 30));

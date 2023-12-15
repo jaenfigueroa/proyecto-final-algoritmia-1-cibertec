@@ -93,10 +93,6 @@ public class AppFrame extends JFrame {
 	private JLabel lblNewLabel_4;
 	private JPanel panel_2;
 
-	// contadores y acumuladores
-	//static int cantidadVentasRealizadas = 0;
-	//static int importeTotalAcumulado = 0;
-	//static int porcentajeCuotaDiaria = 0; // DUDA PARA QUE SE USA <---------------------------
 
 	/**
 	 * Lanzar la aplicación.
