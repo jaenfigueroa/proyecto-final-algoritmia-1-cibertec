@@ -18,7 +18,7 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
+
 
 public class ModificarProductoFrame extends JFrame {
 
@@ -39,21 +39,20 @@ public class ModificarProductoFrame extends JFrame {
 	private JButton btn_cerrar;
 	private JButton btn_grabar;
 
-	private AppFrame appReference;
+
 	private JPanel panel;
 	private JLabel lbl_imagen;
 
 	/**
 	 * Create the frame.
 	 */
-	public ModificarProductoFrame(AppFrame appReference) {
+	public ModificarProductoFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarProductoFrame.class.getResource("/icons/notes-32.png")));
 		setResizable(false);
-		
-		this.appReference = appReference;
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 321);
+		setBounds(100, 100, 758, 329);
 		
 		setTitle("Modificar cerámico");
 		// Centra la ventana en la pantalla
@@ -77,7 +76,7 @@ public class ModificarProductoFrame extends JFrame {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(appReference.getModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(AppFrame.obtenerModelosDeProductos()));
 		cb_modelo.setBounds(403, 24, 183, 29);
 		contentPane.add(cb_modelo);
 
@@ -191,7 +190,7 @@ public class ModificarProductoFrame extends JFrame {
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 			
 			// actualizar el producto
-			appReference.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
+			AppFrame.productos[productoIndex].updateProducto(nuevoPrecio, nuevoAncho, nuevoLargo, nuevoEspesor, nuevoContenido);
 			
 			// Mostra mensaje
 			JOptionPane.showMessageDialog(rootPane,"¡Producto actualizado correctamente!", "Ups, ocurrió un error",  JOptionPane.INFORMATION_MESSAGE);
@@ -209,7 +208,7 @@ public class ModificarProductoFrame extends JFrame {
 		int indexProducto = cb_modelo.getSelectedIndex();
 
 		// Traer el producto por su index
-		Producto productoItem = appReference.productos[indexProducto];
+		Producto productoItem = AppFrame.productos[indexProducto];
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoItem.precio));
@@ -218,6 +217,6 @@ public class ModificarProductoFrame extends JFrame {
 		tf_espesor.setText(Double.toString(productoItem.espesor));
 		tf_contenido.setText(Integer.toString(productoItem.contenido));
 		
-		lbl_imagen.setIcon(appReference.crearImagen(240, 240, productoItem.imagen));
+		lbl_imagen.setIcon(AppFrame.crearImagen(240, 240, productoItem.imagen));
 	}
 }

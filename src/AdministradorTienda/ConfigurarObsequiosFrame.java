@@ -29,7 +29,7 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	private JButton btn_cancelar;
 	private JLabel lblTipoDeObsequio;
 	
-	private AppFrame appReference;
+
 	private JTextField tf_tipoObsequio;
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
@@ -38,14 +38,12 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarObsequiosFrame(AppFrame appReference) {
+	public ConfigurarObsequiosFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarObsequiosFrame.class.getResource("/icons/gift-32.png")));
 		setResizable(false);
-		this.appReference= appReference;
-		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 622, 249);
+		setBounds(100, 100, 630, 255);
 		
 		setTitle("Configurar obsequios");
 		// Centra la ventana en la pantalla
@@ -143,8 +141,8 @@ public class ConfigurarObsequiosFrame extends JFrame {
 					
 					int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
 					
-					appReference.setTipoObsequio(tipoObsequio);
-					appReference.setCantidadesObsequios(cantidades);
+					AppFrame.setTipoObsequio(tipoObsequio);
+					AppFrame.setCantidadesObsequios(cantidades);
 					
 					// Mostrar mensaje de exito
 					JOptionPane.showMessageDialog(rootPane,"Los obsequios fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
@@ -166,8 +164,8 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	
 	// FUNCIONES
 	void mostrarValoresDefecto() {
-		String tipoObsequio = appReference.getTipoObsequio();
-		int[] valores = appReference.getCantidadesObsequios();
+		String tipoObsequio = AppFrame.getTipoObsequio();
+		int[] valores = AppFrame.getCantidadesObsequios();
 		
 		tf_tipoObsequio.setText(tipoObsequio);
 		tf_obsequioCantidad1.setText(Integer.toString(valores[0]));

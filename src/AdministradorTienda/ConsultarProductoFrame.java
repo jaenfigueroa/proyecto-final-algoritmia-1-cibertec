@@ -72,7 +72,7 @@ public class ConsultarProductoFrame extends AppFrame {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(getModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(obtenerModelosDeProductos()));
 		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 

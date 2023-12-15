@@ -34,8 +34,7 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	private JLabel lblA_4;
 	private JLabel lblS_1;
 	private JLabel lblS;
-	
-	private AppFrame appReference;
+
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
 
@@ -43,14 +42,13 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarDescuentosFrame(AppFrame appReference) {
+	public ConfigurarDescuentosFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarDescuentosFrame.class.getResource("/icons/pig-32.png")));
 		setResizable(false);
-		this.appReference = appReference;
-		
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 665, 242);
+		setBounds(100, 100, 673, 253);
 		
 		setTitle("Configurar descuentos");
 		// Centra la ventana en la pantalla
@@ -171,7 +169,7 @@ public class ConfigurarDescuentosFrame extends JFrame {
 					double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
 					
 					// actualizar los valores
-					appReference.setPorcentajesDescuento(cantidades);
+					AppFrame.setPorcentajesDescuento(cantidades);
 					
 					// Mostrar mensaje de exito
 					JOptionPane.showMessageDialog(rootPane,"Los descuentos fueron actualizados exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
@@ -191,7 +189,7 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	
 	// FUNCIONES
 	void mostrarValoresDefecto() {
-		double[] valores = appReference.getPorcentajesDescuento();
+		double[] valores = AppFrame.getPorcentajesDescuento();
 		
 		tf_descuentoValor1.setText(Double.toString(valores[0]));
 		tf_descuentoValor2.setText(Double.toString(valores[1]));

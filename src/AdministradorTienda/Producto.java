@@ -1,8 +1,5 @@
 package AdministradorTienda;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class Producto {
 	public String modelo;
 	public double precio;
@@ -12,7 +9,7 @@ class Producto {
 	public int contenido;
 	
 	public String imagen;
-	public List<Double> historialPrecios = new ArrayList<>();
+	//public List<Double> historialPrecios = new ArrayList<>();
 
 	// contadores y acumuladores
 	public int cantidadVentas = 0;
@@ -27,11 +24,11 @@ class Producto {
 		this.espesor = espesor;
 		this.contenido = contenido;
 		this.imagen = imagen;
-		this.historialPrecios.add(precio);
+		//this.historialPrecios.add(precio);
 	}
 
 	void updateProducto(double nuevoPrecio, double nuevoAncho, double nuevoLargo, double nuevoEspesor, int nuevoContenido) {
-		addPrecioHistorial(nuevoPrecio); // modificar el historial antes que el precio
+		//addPrecioHistorial(nuevoPrecio); // modificar el historial antes que el precio
 
 		this.precio = nuevoPrecio;
 		this.ancho = nuevoAncho;
@@ -46,19 +43,19 @@ class Producto {
 		importeTotalVendido += importePagar;
 	}
 
-	void addPrecioHistorial(double nuevoPrecio) {
+	/*void addPrecioHistorial(double nuevoPrecio) {
 
 		if (nuevoPrecio != this.precio) {
 			this.historialPrecios.add(nuevoPrecio);
 		}
-	}
+	}*/
 
-	String[] getHistorial() {
+	/*String[] getHistorial() {
 		return this.historialPrecios.toArray(new String[0]);
-	}
+	}*/
 
-	double getPrecioPromedio() {
+	/*double getPrecioPromedio() {
 		double promedio = this.historialPrecios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 		return promedio;
-	}
+	}*/
 }

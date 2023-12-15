@@ -44,9 +44,11 @@ public class AppFrame extends JFrame {
 	private JMenuItem mntmNewMenuItem_12;
 	private JMenuItem mntmNewMenuItem_1;
 	private JLabel lblNewLabel;
+	private JPanel panel;
 
-	// PRODUCTOS
-	Producto[] productos = { new Producto("Cinza Plus", 92.56, 62.0, 62.0, 8, 6, "/azulejos/azulejo-1.jpg"),
+	// productos
+	static Producto[] productos = {
+			new Producto("Cinza Plus", 92.56, 62.0, 62.0, 8, 6, "/azulejos/azulejo-1.jpg"),
 			new Producto("Luxury", 42.77, 60, 60, 8.5, 4, "/azulejos/azulejo-2.jpg"),
 			new Producto("Austria", 52.45, 45, 45, 6.5, 12, "/azulejos/azulejo-3.jpg"),
 			new Producto("Yungay Mix", 55.89, 80, 120, 6.8, 9, "/azulejos/azulejo-4.jpg"),
@@ -65,32 +67,39 @@ public class AppFrame extends JFrame {
 			new Producto("Celestial Harmony", 23.57, 56, 56, 8.5, 4, "/azulejos/azulejo-17.jpg"),
 			new Producto("Pompeii Lux", 68.45, 60, 60, 6.5, 12, "/azulejos/azulejo-18.jpg"),
 			new Producto("Aurora Lux", 49.89, 70, 70, 6.8, 9, "/azulejos/azulejo-19.jpg"),
-			new Producto("Velvet Essence", 73, 63, 63, 7.2, 10, "/azulejos/azulejo-20.jpg") };
+			new Producto("Velvet Essence", 73, 63, 63, 7.2, 10, "/azulejos/azulejo-20.jpg")
+		};
 
 	// Porcentajes de descuento
-	double porcentaje1 = 7.5;
-	double porcentaje2 = 10.0;
-	double porcentaje3 = 12.5;
-	double porcentaje4 = 15.0;
+	static double porcentaje1 = 7.5;
+	static double porcentaje2 = 10.0;
+	static double porcentaje3 = 12.5;
+	static double porcentaje4 = 15.0;
 
-	// Obsequio
-	String tipoObsequio = "Lapicero";
+	// Obsequios
+	static String tipoObsequio = "Lapicero";
 
-	int obsequioCantidad1 = 2;
-	int obsequioCantidad2 = 3;
-	int obsequioCantidad3 = 4;
+	static int obsequioCantidad1 = 2;
+	static int obsequioCantidad2 = 3;
+	static int obsequioCantidad3 = 4;
 
 	// cantidades por defecto
-	int cantidadOptima = 10;
-	double cuotaDiaria = 30000;
+	static int cantidadOptima = 10;
+	static double cuotaDiaria = 30000;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JPanel panel_1;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JPanel panel_2;
 
 	// contadores y acumuladores
-	int cantidadVentasRealizadas = 0;
-	int importeTotalAcumulado = 0, porcentajeCuotaDiaria = 0;
-	private JPanel panel;
+	//static int cantidadVentasRealizadas = 0;
+	//static int importeTotalAcumulado = 0;
+	//static int porcentajeCuotaDiaria = 0; // DUDA PARA QUE SE USA <---------------------------
 
 	/**
-	 * lanzar la aplicación.
+	 * Lanzar la aplicación.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -109,27 +118,46 @@ public class AppFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public AppFrame() {
+		setBackground(new Color(255, 255, 255));
+		setTitle("Panel de administración de Zelima cerámicos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AppFrame.class.getResource("/icons/store-32.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 886, 638);
-
-		setTitle("Panel de administración de cerámica Italia");
-
-		// Centra la ventana en la pantalla
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);// Centrar la ventana en la pantalla
+		//setUndecorated(true);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		panel_2 = new JPanel();
+		panel_2.setBounds(150, 131, 557, 256);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
 
 		lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(151, 0, 256, 256);
+		panel_2.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(crearImagen(872, 545, "/italia/local.jpg"));
-		lblNewLabel.setBounds(0, 81, 872, 520);
-		contentPane.add(lblNewLabel);
+		//lblNewLabel.setIcon(crearImagen(872, 545, "/italia/local.jpg"));
+		//lblNewLabel.setIcon(crearImagen(700, 295, "/italia/logo.jpg"));
+		lblNewLabel.setIcon(crearImagen(256, 256, "/icons/store-256.png"));
+		
+		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setBounds(429, 77, 128, 128);
+		panel_2.add(lblNewLabel_3);
+		lblNewLabel_3.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/store-128.png")));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setBounds(0, 77, 128, 128);
+		panel_2.add(lblNewLabel_4);
+		lblNewLabel_4.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/store-128.png")));
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 
 		panel = new JPanel();
 		panel.setBackground(new Color(11, 34, 57));
@@ -159,15 +187,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// mostrar mensaje de advertencia y guardar el resultado
-				int cerrarAplicacion = JOptionPane.showOptionDialog(rootPane,
-						"Se va a cerrar la aplicación ¿estas seguro?", "Confirma acción", JOptionPane.YES_NO_OPTION,
-						JOptionPane.WARNING_MESSAGE, null, null, null);
-
-				// si el valor escogigo es YES_OPTION
-				if (cerrarAplicacion == JOptionPane.YES_OPTION) {
-					System.exit(0);
-				}
+				cerrarAplicacion();
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
@@ -199,7 +219,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				ModificarProductoFrame frame = new ModificarProductoFrame(AppFrame.this);
+				ModificarProductoFrame frame = new ModificarProductoFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -212,7 +232,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_5.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarProductosFrame frame = new ListarProductosFrame(AppFrame.this);
+				ListarProductosFrame frame = new ListarProductosFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -233,7 +253,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				VenderFrame frame = new VenderFrame(AppFrame.this);
+				VenderFrame frame = new VenderFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -246,7 +266,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_7.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GenerarReportesFrame frame = new GenerarReportesFrame(AppFrame.this);
+				GenerarReportesFrame frame = new GenerarReportesFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -265,7 +285,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_9.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConfigurarDescuentosFrame frame = new ConfigurarDescuentosFrame(AppFrame.this);
+				ConfigurarDescuentosFrame frame = new ConfigurarDescuentosFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -278,7 +298,7 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_10.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConfigurarObsequiosFrame frame = new ConfigurarObsequiosFrame(AppFrame.this);
+				ConfigurarObsequiosFrame frame = new ConfigurarObsequiosFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -286,12 +306,12 @@ public class AppFrame extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_10);
 
 		mntmNewMenuItem_11 = new JMenuItem("Configurar cantidad óptima");
-		mntmNewMenuItem_11.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/money-32.png")));
+		mntmNewMenuItem_11.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/briefcase-32.png")));
 		mntmNewMenuItem_11.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		mntmNewMenuItem_11.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConfigurarCantidadOptimaFrame frame = new ConfigurarCantidadOptimaFrame(AppFrame.this);
+				ConfigurarCantidadOptimaFrame frame = new ConfigurarCantidadOptimaFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -299,12 +319,12 @@ public class AppFrame extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_11);
 
 		mntmNewMenuItem_1 = new JMenuItem("Configurar cuota diaria");
-		mntmNewMenuItem_1.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/briefcase-32.png")));
+		mntmNewMenuItem_1.setIcon(new ImageIcon(AppFrame.class.getResource("/icons/money-32.png")));
 		mntmNewMenuItem_1.setFont(new Font("Segoe UI", Font.PLAIN, 17));
 		mntmNewMenuItem_1.setForeground(new Color(0, 0, 255));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConfigurarCuotaDiariaFrame frame = new ConfigurarCuotaDiariaFrame(AppFrame.this);
+				ConfigurarCuotaDiariaFrame frame = new ConfigurarCuotaDiariaFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -324,12 +344,28 @@ public class AppFrame extends JFrame {
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame(AppFrame.this);
+				AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_12);
+		
+		panel_1 = new JPanel();
+		panel_1.setBounds(293, 415, 331, 115);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		lblNewLabel_1 = new JLabel("Zelima");
+		lblNewLabel_1.setBounds(0, 0, 242, 73);
+		panel_1.add(lblNewLabel_1);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 67));
+		
+		lblNewLabel_2 = new JLabel("Cerámicos");
+		lblNewLabel_2.setForeground(new Color(113, 113, 113));
+		lblNewLabel_2.setBounds(128, 71, 203, 34);
+		panel_1.add(lblNewLabel_2);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 40));
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -338,38 +374,62 @@ public class AppFrame extends JFrame {
 	/// UTILIDADES
 	/// UTILIDADES
 	/// UTILIDADES
+	
+	static void cerrarAplicacion() {
+		// mostrar mensaje de advertencia y guardar el resultado
+		int cerrarAplicacion = JOptionPane.showOptionDialog(
+				null,
+				"Se va a cerrar la aplicación ¿estas seguro?",
+				"Confirma acción",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null,
+				null,
+				null
+			);
 
-	double getPorcentajeDescuento(int cantidadCajas) {
+		// si el valor seleccionado es YES_OPTION
+		if (cerrarAplicacion == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
+	static double calcularPorcentajeDescuento(int cantidadCajas) {
 		double procentajeDescuento = 0;
 
 		if (cantidadCajas >= 1 && cantidadCajas <= 5) {
 			procentajeDescuento = porcentaje1;
-		} else if (cantidadCajas <= 10) {
+		}
+		else if (cantidadCajas <= 10) {
 			procentajeDescuento = porcentaje2;
-		} else if (cantidadCajas <= 15) {
+		}
+		else if (cantidadCajas <= 15) {
 			procentajeDescuento = porcentaje3;
-		} else {
+		}
+		else {
 			procentajeDescuento = porcentaje4;
 		}
 
 		return procentajeDescuento;
 	}
 
-	int getCantidadObsequios(int UnidadesAdquiridas) {
+	static int calcularCantidadObsequios(int UnidadesAdquiridas) {
 		int cantidadObsequios = 0;
 
 		if (UnidadesAdquiridas >= 1 && UnidadesAdquiridas <= 5) {
 			cantidadObsequios = obsequioCantidad1;
-		} else if (UnidadesAdquiridas <= 10) {
+		}
+		else if (UnidadesAdquiridas <= 10) {
 			cantidadObsequios = obsequioCantidad2;
-		} else {
+		}
+		else {
 			cantidadObsequios = obsequioCantidad3;
 		}
 
 		return cantidadObsequios;
 	}
 
-	ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
+	static  ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
 		ImageIcon icon = new ImageIcon(AppFrame.class.getResource(rutaRelativa));
 
 		// Obtener la imagen del icono y ajustar el tamaño
@@ -381,27 +441,30 @@ public class AppFrame extends JFrame {
 		return scaledIcon;
 	}
 
+	
 	// PRODUCTOS EN CONJUNTO
 	// PRODUCTOS EN CONJUNTO
 	// PRODUCTOS EN CONJUNTO
 
+	
+	
 	// MANTENIMIENTO
-	String generateListadoProductos() {
+	static String generarListadoProductos() {
 		String mensaje = "LISTADO DE CERÄMICOS";
 
-		for (int index = 0; index < this.productos.length; index++) {
-			mensaje += "\n\nModelo\t: " + this.productos[index].modelo + "\n";
-			mensaje += "Precio\t: S/. " + this.productos[index].precio + "\n";
-			mensaje += "Ancho (cm)\t: " + this.productos[index].ancho + " cm\n";
-			mensaje += "Largo (cm)\t: " + this.productos[index].largo + " cm\n";
-			mensaje += "Espesor (mm)\t: " + this.productos[index].espesor + " mm\n";
-			mensaje += "Contenido\t: " + this.productos[index].contenido + " unidades";
+		for (int index = 0; index < productos.length; index++) {
+			mensaje += "\n\nModelo\t: " + productos[index].modelo + "\n";
+			mensaje += "Precio\t: S/. " + productos[index].precio + "\n";
+			mensaje += "Ancho (cm)\t: " + productos[index].ancho + " cm\n";
+			mensaje += "Largo (cm)\t: " + productos[index].largo + " cm\n";
+			mensaje += "Espesor (mm)\t: " + productos[index].espesor + " mm\n";
+			mensaje += "Contenido\t: " + productos[index].contenido + " unidades";
 		}
 
 		return mensaje;
 	}
 
-	String[] getModelosDeProductos() {
+	static  String[] obtenerModelosDeProductos() {
 		List<String> items = new ArrayList<>();
 
 		for (int index = 0; index < productos.length; index++) {
@@ -412,7 +475,7 @@ public class AppFrame extends JFrame {
 		return items.toArray(new String[0]);
 	}
 
-	List<Double> getListaPrecioProductos() {
+	static  List<Double> obtenerListaPrecioProductos() {
 		List<Double> precios = new ArrayList<Double>();
 
 		// recorrer los productos y solo obtener un array de los precios
@@ -428,20 +491,16 @@ public class AppFrame extends JFrame {
 	// SECCION VENDER
 	// SECCION VENDER
 
-	void verificar5ventas() {
-		int cantidadVentasTotales = 0;
-		boolean multiploDe5 = false;
+	static void verificarVentaMultiplo5() { // VERIFICAR, CREO QUE YA TENGO LA CANTIDAD DE VENTAS COMO VARIABLE GLOBAL
+		int cantidadVentasTotales = calcularCantidadVentasTotales();
+		boolean multiploDe5 = cantidadVentasTotales % 5 == 0;
 
-		for (int index = 0; index < productos.length; index++) {
-			cantidadVentasTotales += productos[index].cantidadVentas;
-		}
 
-		multiploDe5 = cantidadVentasTotales % 5 == 0;
-
-		if (cantidadVentasTotales > 0 && multiploDe5) {
+		if (multiploDe5 && cantidadVentasTotales > 0) {
 
 			// declaracion de variables
-			double importeAcumulado = 0, porcentajeDeLaCuotaDiaria = 0;
+			double importeAcumulado = 0;
+			double porcentajeDeLaCuotaDiaria = 0;
 
 			// obtener valores totales
 			for (int index = 0; index < productos.length; index++) {
@@ -453,17 +512,27 @@ public class AppFrame extends JFrame {
 			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);
 		}
 	}
+	
+	static int calcularCantidadVentasTotales() {
+		int cantidadVentasTotales = 0;
 
-	void mostrarAviso5ventas(int cantidadVentasTotales, double importeAcumulado, double porcentajeDeLaCuotaDiaria) {
+		for (int index = 0; index < productos.length; index++) {
+			cantidadVentasTotales += productos[index].cantidadVentas;
+		}
+		
+		return cantidadVentasTotales;
+	}
+
+	static void mostrarAviso5ventas(int cantidadVentasTotales, double importeAcumulado, double porcentajeDeLaCuotaDiaria) {
 
 		String mensaje = "Venta Nro. " + cantidadVentasTotales + "\n";
 		mensaje += "Importe total general acumulado: S/. " + importeAcumulado + "\n";
 		mensaje += "Porcentaje de la cuota diaria: " + porcentajeDeLaCuotaDiaria + " %";
 
-		JOptionPane.showMessageDialog(rootPane, mensaje, "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, mensaje, "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	Double getPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
+	static Double getPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
 		return (100 * cantidadAcumulada) / cuotaDiaria;
 	}
 
@@ -471,29 +540,30 @@ public class AppFrame extends JFrame {
 	// SECCION GENERAR REPORTES
 	// SECCION GENERAR REPORTES
 
-	String getResporteTipo1() {
+	static String getResporteTipo1() {
 		String mensaje = "VENTAS POR MODELO";
 
-		for (int index = 0; index < this.productos.length; index++) {
-			mensaje += "\n\nModelo\t\t: " + this.productos[index].modelo + "\n";
-			mensaje += "Cantidad de ventas\t: " + this.productos[index].cantidadVentas + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + this.productos[index].cantidadCajasVendidas + "\n";
-			mensaje += "Importe total vendido\t: S/. " + this.productos[index].importeTotalVendido + "\n";
+		for (int index = 0; index < productos.length; index++) {
+			mensaje += "\n\nModelo\t\t: " + productos[index].modelo + "\n";
+			mensaje += "Cantidad de ventas\t: " + productos[index].cantidadVentas + "\n";
+			mensaje += "Cantidad de cajas vendidas\t: " + productos[index].cantidadCajasVendidas + "\n";
+			mensaje += "Importe total vendido\t: S/. " +productos[index].importeTotalVendido + "\n";
 			mensaje += "Aporte a la cuota diaria\t: "
-					+ getPorcentajeCuotaDiariaRespectoImporteTotal(this.productos[index].importeTotalVendido) + " %";
+					+ getPorcentajeCuotaDiariaRespectoImporteTotal(productos[index].importeTotalVendido) + " %";
 		}
 
 		return mensaje;
 	}
 
-	String getResporteTipo2() {
+	static String getResporteTipo2() {
 		String mensaje = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
 
-		for (int index = 0; index < this.productos.length; index++) {
+		for (int index = 0; index < productos.length; index++) {
 
-			String modelo = this.productos[index].modelo;
-			double precio = this.productos[index].precio;
-			double precioPromedio = this.productos[index].getPrecioPromedio();
+			String modelo = productos[index].modelo;
+			double precio = productos[index].precio;
+			//double precioPromedio = productos[index].getPrecioPromedio(); // MOdiFICAR EL ES METOOD, ESTE NO DEBEERIA IR
+			double precioPromedio = getPrecioPromedioDeTodosProductos(); 
 			String comparacion = compararDouble(precio, precioPromedio);
 
 			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
@@ -505,7 +575,7 @@ public class AppFrame extends JFrame {
 		return mensaje;
 	}
 
-	String compararDouble(double primerValor, double segundoValor) {
+	static String compararDouble(double primerValor, double segundoValor) {
 		double diferencia = primerValor - segundoValor;
 
 		if (primerValor > segundoValor) {
@@ -515,7 +585,7 @@ public class AppFrame extends JFrame {
 		}
 	}
 
-	String compararInt(int primerValor, int segundoValor) {
+	static String compararInt(int primerValor, int segundoValor) {
 		int diferencia = primerValor - segundoValor;
 
 		if (primerValor > segundoValor) {
@@ -525,14 +595,14 @@ public class AppFrame extends JFrame {
 		}
 	}
 
-	String getResporteTipo3() {
+	static String getResporteTipo3() {
 		String mensaje = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
 
-		for (int index = 0; index < this.productos.length; index++) {
+		for (int index = 0; index < productos.length; index++) {
 
-			String modelo = this.productos[index].modelo;
-			int cantidadCajasVendidas = this.productos[index].cantidadCajasVendidas;
-			int cantidadOptima = this.cantidadOptima;
+			String modelo = productos[index].modelo;
+			int cantidadCajasVendidas = productos[index].cantidadCajasVendidas;
+			//int cantidadOptima = cantidadOptima;
 			String comparacion = compararInt(cantidadCajasVendidas, cantidadOptima);
 
 			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
@@ -544,7 +614,7 @@ public class AppFrame extends JFrame {
 		return mensaje;
 	}
 
-	String getResporteTipo4() {
+	static String getResporteTipo4() {
 		double precioPromedioTotal = getPrecioPromedioDeTodosProductos();
 		double precioMayor = getPrecioMayorProductos();
 		double precioMenor = getPrecioMenorProductos();
@@ -557,69 +627,69 @@ public class AppFrame extends JFrame {
 		return mensaje;
 	}
 
-	double getPrecioPromedioDeTodosProductos() {
-		List<Double> precios = getListaPrecioProductos();
+	static double getPrecioPromedioDeTodosProductos() {
+		List<Double> precios = obtenerListaPrecioProductos();
 
 		double promedio = precios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 		return promedio;
 	}
 
-	double getPrecioMayorProductos() {
-		return Collections.max(getListaPrecioProductos());
+	static double getPrecioMayorProductos() {
+		return Collections.max(obtenerListaPrecioProductos());
 	}
 
-	double getPrecioMenorProductos() {
-		return Collections.min(getListaPrecioProductos());
+	static double getPrecioMenorProductos() {
+		return Collections.min(obtenerListaPrecioProductos());
 	}
 
 	// SECCION CONFIGURACIÓN
 	// SECCION CONFIGURACIÓN
 	// SECCION CONFIGURACIÓN
 
-	double[] getPorcentajesDescuento() {
+	static double[] getPorcentajesDescuento() {
 		double[] valores = { porcentaje1, porcentaje2, porcentaje3, porcentaje4 };
 		return valores;
 	}
 
-	String getTipoObsequio() {
+	static String getTipoObsequio() {
 		return tipoObsequio;
 	}
 
-	int[] getCantidadesObsequios() {
+	static int[] getCantidadesObsequios() {
 		int[] valores = { obsequioCantidad1, obsequioCantidad2, obsequioCantidad3 };
 		return valores;
 	}
 
-	int getCantidadOptima() {
+	static int getCantidadOptima() {
 		return cantidadOptima;
 	}
 
-	double getCuotaDiaria() {
+	static double getCuotaDiaria() {
 		return cuotaDiaria;
 	}
 
-	void setPorcentajesDescuento(double[] valores) {
+	static void setPorcentajesDescuento(double[] valores) {
 		porcentaje1 = valores[0];
 		porcentaje2 = valores[1];
 		porcentaje3 = valores[2];
 		porcentaje4 = valores[3];
 	}
 
-	void setTipoObsequio(String nombreObsequio) {
-		this.tipoObsequio = nombreObsequio;
+	static void setTipoObsequio(String nombreObsequio) {
+		tipoObsequio = nombreObsequio;
 	}
 
-	void setCantidadesObsequios(int[] valores) {
+	static void setCantidadesObsequios(int[] valores) {
 		obsequioCantidad1 = valores[0];
 		obsequioCantidad2 = valores[1];
 		obsequioCantidad3 = valores[2];
 	}
 
-	void setCantidadOptima(int valor) {
+	static void setCantidadOptima(int valor) {
 		cantidadOptima = valor;
 	}
 
-	void setCuotaDiaria(double valor) {
+	static void setCuotaDiaria(double valor) {
 		cuotaDiaria = valor;
 	}
 }

@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class ConfigurarCuotaDiariaFrame extends JFrame {
 
@@ -22,8 +24,6 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 	private JTextField tf_cuotaDiariaEsperada;
 	private JButton btn_aceptar;
 	private JButton btn_cancelar;
-	
-	private AppFrame appReference;
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
 
@@ -31,13 +31,13 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarCuotaDiariaFrame(AppFrame appReference) {
+	public ConfigurarCuotaDiariaFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarCuotaDiariaFrame.class.getResource("/icons/briefcase-32.png")));
 		setResizable(false);
-		this.appReference = appReference;
+
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 676, 260);
+		setBounds(100, 100, 734, 211);
 		
 		setTitle("Configurar Cuota diaria");
 		// Centra la ventana en la pantalla
@@ -50,34 +50,36 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(163, 10, 489, 71);
+		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel.setBounds(163, 10, 539, 150);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		lblNewLabel = new JLabel("Cuota diaria esperada (S/.)");
-		lblNewLabel.setBounds(0, 0, 205, 32);
+		lblNewLabel.setBounds(21, 22, 205, 32);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		tf_cuotaDiariaEsperada = new JTextField();
-		tf_cuotaDiariaEsperada.setBounds(215, 0, 121, 33);
+		tf_cuotaDiariaEsperada.setBounds(236, 22, 121, 33);
 		panel.add(tf_cuotaDiariaEsperada);
 		tf_cuotaDiariaEsperada.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tf_cuotaDiariaEsperada.setColumns(10);
 		
 		btn_aceptar = new JButton("Aceptar");
-		btn_aceptar.setBounds(384, 0, 105, 32);
+		btn_aceptar.setBounds(408, 22, 105, 32);
 		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setBounds(384, 42, 105, 29);
+		btn_cancelar.setBounds(408, 64, 105, 29);
 		panel.add(btn_cancelar);
 		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarCuotaDiariaFrame.class.getResource("/icons/money-128.png")));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(11, 10, 142, 185);
+		lblNewLabel_1.setBounds(11, 10, 142, 150);
 		contentPane.add(lblNewLabel_1);
 		btn_cancelar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -93,7 +95,7 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 					
 					nuevaCuotaEsperada = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
 
-					appReference.setCuotaDiaria(nuevaCuotaEsperada);
+					AppFrame.setCuotaDiaria(nuevaCuotaEsperada);
 					
 					// Mostrar mensaje de exito
 					JOptionPane.showMessageDialog(rootPane,"La cuota diaria fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
@@ -112,7 +114,7 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 	}
 	
 	void mostrarValorDefecto() {
-		double cantidadDiariaDefecto = appReference.getCuotaDiaria();
+		double cantidadDiariaDefecto = AppFrame.getCuotaDiaria();
 		
 		tf_cuotaDiariaEsperada.setText(Double.toString(cantidadDiariaDefecto));
 	}
