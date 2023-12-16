@@ -16,7 +16,8 @@ public class Venta {
 	
 	
 	public Venta(Producto producto, int cantidadCajas) {
-		this.numeroVenta = MainApp.calcularCantidadVentasTotales();
+		//this.numeroVenta = MainApp.calcularCantidadVentasTotales();
+		this.numeroVenta = MainApp.getGestorProductos().calcularCantidadVentasTotales();
 		
 		this.producto = producto;
 		

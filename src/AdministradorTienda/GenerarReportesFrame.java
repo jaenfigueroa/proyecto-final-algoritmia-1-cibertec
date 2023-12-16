@@ -210,22 +210,22 @@ public class GenerarReportesFrame extends JFrame {
 	}
 	
 	double calcularPrecioMayorProductos() {
-		return Collections.max(MainApp.obtenerListaPrecios());
+		return Collections.max(MainApp.getGestorProductos().obtenerListaPrecios());
 	}
 
 	static double calcularPrecioMenorProductos() {
-		return Collections.min(MainApp.obtenerListaPrecios());
+		return Collections.min(MainApp.getGestorProductos().obtenerListaPrecios());
 	}
 	
 	String generarResporteTipo1() {
 		String mensaje = "VENTAS POR MODELO";
 
-		for (int index = 0; index < MainApp.getProductos().length; index++) {
-			mensaje += "\n\nModelo\t\t: " + MainApp.getProductos()[index].getModelo() + "\n";
-			mensaje += "Cantidad de ventas\t: " + MainApp.getProductos()[index].getCantidadVentas() + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + MainApp.getProductos()[index].getCantidadCajasVendidas() + "\n";
-			mensaje += "Importe total vendido\t: S/. " +MainApp.getProductos()[index].getImporteTotalVendido() + "\n";
-			mensaje += "Aporte a la cuota diaria\t: " + MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(MainApp.getProductos()[index].getImporteTotalVendido()) + " %";
+		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
+			mensaje += "\n\nModelo\t\t: " + MainApp.getGestorProductos().getProductos()[index].getModelo() + "\n";
+			mensaje += "Cantidad de ventas\t: " + MainApp.getGestorProductos().getProductos()[index].getCantidadVentas() + "\n";
+			mensaje += "Cantidad de cajas vendidas\t: " + MainApp.getGestorProductos().getProductos()[index].getCantidadCajasVendidas() + "\n";
+			mensaje += "Importe total vendido\t: S/. " +MainApp.getGestorProductos().getProductos()[index].getImporteTotalVendido() + "\n";
+			mensaje += "Aporte a la cuota diaria\t: " + MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(MainApp.getGestorProductos().getProductos()[index].getImporteTotalVendido()) + " %";
 		}
 
 		return mensaje;
@@ -234,11 +234,11 @@ public class GenerarReportesFrame extends JFrame {
 	String generarResporteTipo2() {
 		String mensaje = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
 
-		for (int index = 0; index < MainApp.getProductos().length; index++) {
+		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
 
-			String modelo = MainApp.getProductos()[index].getModelo();
-			double precio = MainApp.getProductos()[index].getPrecio();
-			double precioPromedio = MainApp.calcularPrecioPromedioDeTodosProductos(); 
+			String modelo = MainApp.getGestorProductos().getProductos()[index].getModelo();
+			double precio = MainApp.getGestorProductos().getProductos()[index].getPrecio();
+			double precioPromedio = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
 			String comparacion = compararDouble(precio, precioPromedio);
 
 			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
@@ -254,10 +254,10 @@ public class GenerarReportesFrame extends JFrame {
 	String generarResporteTipo3() {
 		String mensaje = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
 
-		for (int index = 0; index < MainApp.getProductos().length; index++) {
+		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
 
-			String modelo = MainApp.getProductos()[index].getModelo();
-			int cantidadCajasVendidas = MainApp.getProductos()[index].getCantidadCajasVendidas();
+			String modelo = MainApp.getGestorProductos().getProductos()[index].getModelo();
+			int cantidadCajasVendidas = MainApp.getGestorProductos().getProductos()[index].getCantidadCajasVendidas();
 			String comparacion = compararInt(cantidadCajasVendidas, MainApp.getCantidadOptima());
 
 			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
@@ -270,7 +270,7 @@ public class GenerarReportesFrame extends JFrame {
 	}
 
 	String generarResporteTipo4() {
-		double precioPromedioTotal = MainApp.calcularPrecioPromedioDeTodosProductos();
+		double precioPromedioTotal = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos();
 		double precioMayor = calcularPrecioMayorProductos();
 		double precioMenor = calcularPrecioMenorProductos();
 

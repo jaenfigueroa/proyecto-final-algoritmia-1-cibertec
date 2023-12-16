@@ -142,7 +142,7 @@ public class ListarProductosFrame extends JFrame {
 	// METODOS
 	
 	String generarListadoProductos() {
-		Producto[] productos = MainApp.getProductos();
+		Producto[] productos = MainApp.getGestorProductos().getProductos();
 
 		String mensaje = "LISTADO DE CERÄMICOS";
 

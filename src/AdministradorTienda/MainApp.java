@@ -10,13 +10,15 @@ import javax.swing.JOptionPane;
 
 public class MainApp {
 
+	// lanzar la aplicación
 	public static void main(String[] args) {
 		DashboardFrame frame = new DashboardFrame();
 		frame.setVisible(true);
 	}
-	
 
-	// lista de productos
+
+	// lista de productos y gestor de productos
+	
 	static private Producto[] productos = {
 			new Producto("Cinza Plus", 92.56, 62.0, 62.0, 8, 6, "/azulejos/azulejo-1.jpg"),
 			new Producto("Luxury", 42.77, 60, 60, 8.5, 4, "/azulejos/azulejo-2.jpg"),
@@ -39,6 +41,9 @@ public class MainApp {
 			new Producto("Aurora Lux", 49.89, 70, 70, 6.8, 9, "/azulejos/azulejo-19.jpg"),
 			new Producto("Velvet Essence", 73, 63, 63, 7.2, 10, "/azulejos/azulejo-20.jpg")
 		};
+	
+	
+	static private GestorProductos gestorProductos = new GestorProductos(productos);
 
 	// Porcentajes de descuento
 	static private double porcentaje1 = 7.5;
@@ -59,17 +64,14 @@ public class MainApp {
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
 	// GETTERS Y SETTERS
-
-	public static Producto[] getProductos() {
-		return productos;
+	
+	public static GestorProductos getGestorProductos() {
+		return gestorProductos;
 	}
 	
-	public static Producto getProducto(int productoIndex) {
-		return getProductos()[productoIndex];
-	}
-	
+	////////////////
 
 	public static double getPorcentaje1() {
 		return porcentaje1;
@@ -190,66 +192,9 @@ public class MainApp {
 	}
 
 	
-	// PARA PRODUCTOS
+	// OTROS
 	
-	static  String[] obtenerListaModelos() {
-		List<String> items = new ArrayList<>();
-
-		for (int index = 0; index < productos.length; index++) {
-			items.add(productos[index].getModelo());
-		}
-
-		// convertir de List<String> a String[]
-		return items.toArray(new String[0]);
-	}
-
-	static  List<Double> obtenerListaPrecios() {
-		List<Double> precios = new ArrayList<Double>();
-
-		// recorrer los productos y solo obtener un array de los precios
-		for (int index = 0; index < productos.length; index++) {
-			precios.add(productos[index].getPrecio());
-		}
-
-		return precios;
-	}
-
-	
-	static int calcularCantidadVentasTotales() {
-		int cantidadVentasTotales = 0;
-
-		for (int index = 0; index < productos.length; index++) {
-			cantidadVentasTotales += productos[index].getCantidadVentas();
-		}
-		
-		return cantidadVentasTotales;
-	}
-	
-	static int calcularImporteAcumuladoTotal() {
-		int importeAcumulado = 0;
-
-		for (int index = 0; index < MainApp.getProductos().length; index++) {
-			importeAcumulado += MainApp.getProducto(index).getImporteTotalVendido();
-		}
-
-		return importeAcumulado;
-	}
-
-
-	static double calcularPrecioPromedioDeTodosProductos() {
-		List<Double> precios = obtenerListaPrecios();
-
-		double promedio = precios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
-		return promedio;
-	}
-	
-	// NO ESTOY SEGURO
-	
-	static Double calcularPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
-		return (100 * cantidadAcumulada) / cuotaDiaria;
-	}
-	
-	static ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
+	/*static ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
 		ImageIcon icon = new ImageIcon(DashboardFrame.class.getResource(rutaRelativa));
 
 		// Obtener la imagen del icono y ajustar el tamaño
@@ -259,6 +204,13 @@ public class MainApp {
 		ImageIcon scaledIcon = new ImageIcon(image);
 
 		return scaledIcon;
+	}*/
+	
+
+	// TODO: NO SE DONDE PONER
+	
+	static Double calcularPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
+		return (100 * cantidadAcumulada) / cuotaDiaria;
 	}
 
 }

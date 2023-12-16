@@ -74,7 +74,7 @@ public class ModificarProductoFrame extends JFrame {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
 		cb_modelo.setBounds(403, 26, 183, 29);
 		contentPane.add(cb_modelo);
 
@@ -175,7 +175,7 @@ public class ModificarProductoFrame extends JFrame {
 
 	void mostrarDatosDelProducto() {
 
-		Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+		Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));
@@ -196,7 +196,7 @@ public class ModificarProductoFrame extends JFrame {
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 
 			// actualizar el producto
-			Producto productoParaActualizar = MainApp.getProducto(productoSeleccionadoIndex);
+			Producto productoParaActualizar = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
 			
 			productoParaActualizar.setPrecio(nuevoPrecio);
 			productoParaActualizar.setAncho(nuevoAncho);

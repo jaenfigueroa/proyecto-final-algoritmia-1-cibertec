@@ -71,7 +71,7 @@ public class ConsultarProductoFrame extends DashboardFrame {
 				mostrarDatosProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
 		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 
@@ -169,7 +169,7 @@ public class ConsultarProductoFrame extends DashboardFrame {
 	private void mostrarDatosProducto() {
 
 		// Traer el producto por su index
-		Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+		Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));

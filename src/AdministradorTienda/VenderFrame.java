@@ -44,7 +44,7 @@ public class VenderFrame extends JFrame {
 	int cantidadCajas = 0;
 	
 	int productoSeleccionadoIndex = 0;
-	Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+	Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
 	Venta ventaActual;
 	
 	String boleta = "";
@@ -131,12 +131,12 @@ public class VenderFrame extends JFrame {
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
-				productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+				productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
 				mostrarDatosProducto();
 			}
 		});
 
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
 
 		panel = new JPanel();
 		panel.setBounds(21, 24, 190, 190);
@@ -236,7 +236,7 @@ public class VenderFrame extends JFrame {
 		if (multiploDe5 && cantidadVentasTotales > 0) {
 
 			// declaracion de variables
-			double importeAcumulado = MainApp.calcularImporteAcumuladoTotal();
+			double importeAcumulado = MainApp.getGestorProductos().calcularImporteAcumuladoTotal();
 			double porcentajeDeLaCuotaDiaria = MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
 
 			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);
