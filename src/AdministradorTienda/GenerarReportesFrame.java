@@ -188,98 +188,81 @@ public class GenerarReportesFrame extends JFrame {
 		reporteResultados = reporte;
 	}
 	
-
-	String compararDouble(double primerValor, double segundoValor) {
-		double diferencia = primerValor - segundoValor;
-
-		if (primerValor > segundoValor) {
-			return Math.abs(diferencia) + " mas";
-		} else {
-			return Math.abs(diferencia) + " menos";
-		}
-	}
-
-	String compararInt(int primerValor, int segundoValor) {
-		int diferencia = primerValor - segundoValor;
-
-		if (primerValor > segundoValor) {
-			return Math.abs(diferencia) + " mas";
-		} else {
-			return Math.abs(diferencia) + " menos";
-		}
-	}
 	
-	double calcularPrecioMayorProductos() {
-		return Collections.max(MainApp.getGestorProductos().obtenerListaPrecios());
-	}
-
-	static double calcularPrecioMenorProductos() {
-		return Collections.min(MainApp.getGestorProductos().obtenerListaPrecios());
-	}
+	//////////////
+	//////////////
 	
 	String generarResporteTipo1() {
-		String mensaje = "VENTAS POR MODELO";
+		
+		Producto[] productos = MainApp.getGestorProductos().getProductos();
+		String reporte = "VENTAS POR MODELO";
+				
+		for (Producto producto : productos) {
 
-		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
-			mensaje += "\n\nModelo\t\t: " + MainApp.getGestorProductos().getProductos()[index].getModelo() + "\n";
-			mensaje += "Cantidad de ventas\t: " + MainApp.getGestorProductos().getProductos()[index].getCantidadVentas() + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + MainApp.getGestorProductos().getProductos()[index].getCantidadCajasVendidas() + "\n";
-			mensaje += "Importe total vendido\t: S/. " +MainApp.getGestorProductos().getProductos()[index].getImporteTotalVendido() + "\n";
-			mensaje += "Aporte a la cuota diaria\t: " + MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(MainApp.getGestorProductos().getProductos()[index].getImporteTotalVendido()) + " %";
+			reporte += "\n\nModelo\t\t: " + producto.getModelo() + "\n";
+			reporte += "Cantidad de ventas\t: " + producto.getCantidadVentas() + "\n";
+			reporte += "Cantidad de cajas vendidas\t: " + producto.getCantidadCajasVendidas() + "\n";
+			reporte += "Importe total vendido\t: S/. " +producto.getImporteTotalVendido() + "\n";
+			reporte += "Aporte a la cuota diaria\t: " + Utilidades.calcularPorcentajeCuotaDiariaRespectoImporteTotal(producto.getImporteTotalVendido()) + " %";
 		}
 
-		return mensaje;
+		return reporte;
 	}
 
 	String generarResporteTipo2() {
-		String mensaje = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
+		Producto[] productos = MainApp.getGestorProductos().getProductos();
+		double precioPromedio = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
+		
+		String reporte = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
+		
+		for (Producto producto : productos) {
 
-		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
+			String modelo = producto.getModelo();
+			double precio = producto.getPrecio();
+			String comparacion = Utilidades.compararDouble(precio, precioPromedio);
 
-			String modelo = MainApp.getGestorProductos().getProductos()[index].getModelo();
-			double precio = MainApp.getGestorProductos().getProductos()[index].getPrecio();
-			double precioPromedio = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
-			String comparacion = compararDouble(precio, precioPromedio);
-
-			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
-			mensaje += "Precio\t\t: S/. " + precio + "\n";
-			mensaje += "Precio promedio\t: S/. " + precioPromedio + "\n";
-			mensaje += "Comparación\t\t: " + comparacion + " que el promedio";
+			reporte += "\n\nModelo\t\t: " + modelo + "\n";
+			reporte += "Precio\t\t: S/. " + precio + "\n";
+			reporte += "Precio promedio\t: S/. " + precioPromedio + "\n";
+			reporte += "Comparación\t\t: " + comparacion + " que el promedio";
 		}
 
-		return mensaje;
+		return reporte;
 	}
 
 
 	String generarResporteTipo3() {
-		String mensaje = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
+		Producto[] productos = MainApp.getGestorProductos().getProductos();
+		int cantidadCajasOptima = MainApp.getCantidadOptima();
+		
+		String reporte = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
+		
+		for (Producto producto: productos) {
 
-		for (int index = 0; index < MainApp.getGestorProductos().getProductos().length; index++) {
+			String modelo = producto.getModelo();
+			int cantidadCajasVendidas = producto.getCantidadCajasVendidas();
+			String comparacion = Utilidades.compararInt(cantidadCajasVendidas, cantidadCajasOptima);
 
-			String modelo = MainApp.getGestorProductos().getProductos()[index].getModelo();
-			int cantidadCajasVendidas = MainApp.getGestorProductos().getProductos()[index].getCantidadCajasVendidas();
-			String comparacion = compararInt(cantidadCajasVendidas, MainApp.getCantidadOptima());
-
-			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + cantidadCajasVendidas + "\n";
-			mensaje += "Cantidad óptima\t: " + MainApp.getCantidadOptima() + "\n";
-			mensaje += "Comparación\t\t: " + comparacion + " que la cantidad óptima";
+			reporte += "\n\nModelo\t\t: " + modelo + "\n";
+			reporte += "Cantidad de cajas vendidas\t: " + cantidadCajasVendidas + "\n";
+			reporte += "Cantidad óptima\t: " + cantidadCajasOptima + "\n";
+			reporte += "Comparación\t\t: " + comparacion + " que la cantidad óptima";
 		}
 
-		return mensaje;
+		return reporte;
 	}
 
 	String generarResporteTipo4() {
 		double precioPromedioTotal = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos();
-		double precioMayor = calcularPrecioMayorProductos();
-		double precioMenor = calcularPrecioMenorProductos();
+		double precioMayor = MainApp.getGestorProductos().calcularPrecioMayorProductos();
+		double precioMenor = MainApp.getGestorProductos().calcularPrecioMenorProductos();
 
-		String mensaje = "ESTADISTICA SOBRE EL PRECIO\n\n";
-		mensaje += "Precio promedio\t: S/. " + precioPromedioTotal + "\n";
-		mensaje += "Precio mayor\t\t: S/. " + precioMayor + "\n";
-		mensaje += "Precio menor\t\t: S/. " + precioMenor;
+		String reporte = "ESTADISTICA SOBRE EL PRECIO\n\n";
+		reporte += "Precio promedio\t: S/. " + precioPromedioTotal + "\n";
+		reporte += "Precio mayor\t\t: S/. " + precioMayor + "\n";
+		reporte += "Precio menor\t\t: S/. " + precioMenor;
 
-		return mensaje;
+		return reporte;
 	}
 	
 	void mostrarResultados() {

@@ -1,6 +1,7 @@
 package AdministradorTienda;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GestorProductos {
@@ -74,6 +75,14 @@ public class GestorProductos {
 		return promedio;
 	}
 	
+	
+	double calcularPrecioMayorProductos() {
+		return Collections.max(this.obtenerListaPrecios());
+	}
+
+	double calcularPrecioMenorProductos() {
+		return Collections.min(this.obtenerListaPrecios());
+	}
 	
 	
 }

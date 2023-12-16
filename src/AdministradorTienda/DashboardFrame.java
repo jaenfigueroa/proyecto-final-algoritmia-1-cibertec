@@ -73,7 +73,7 @@ public class DashboardFrame extends JFrame {
 		lblNewLabel.setBounds(151, 0, 256, 256);
 		panel_2.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(MainApp.crearImagen(256, 256, "/icons/store-256.png"));
+		lblNewLabel.setIcon(Utilidades.crearImagen(256, 256, "/icons/store-256.png"));
 		
 		lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(429, 77, 128, 128);

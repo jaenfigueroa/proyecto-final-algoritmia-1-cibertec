@@ -178,6 +178,6 @@ public class ConsultarProductoFrame extends DashboardFrame {
 		tf_espesor.setText(Double.toString(productoSeleccionado.getEspesor()));
 		tf_contenido.setText(Integer.toString(productoSeleccionado.getContenido()));
 		
-		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoSeleccionado.getImagen()));
+		lbl_imagen.setIcon(Utilidades.crearImagen(240, 240, productoSeleccionado.getImagen()));
 	}
 }

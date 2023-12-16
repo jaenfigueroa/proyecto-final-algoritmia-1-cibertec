@@ -22,14 +22,14 @@ public class Venta {
 		this.producto = producto;
 		
 		this.cantidadCajas = cantidadCajas;
-		this.porcentajeDescuento = MainApp.calcularPorcentajeDescuento(this.cantidadCajas);
+		this.porcentajeDescuento = Utilidades.calcularPorcentajeDescuento(this.cantidadCajas);
 		
 		this.importeCompra = this.cantidadCajas * this.producto.getPrecio();
 		this.importeDescuento = this.importeCompra * (this.porcentajeDescuento / 100);
 		this.importePagar = this.importeCompra - this.importeDescuento;
 		
 		this.tipoObsequio = MainApp.getTipoObsequio();
-		this.cantidadObsequios = MainApp.calcularCantidadObsequios(this.cantidadCajas * this.producto.getContenido());
+		this.cantidadObsequios = Utilidades.calcularCantidadObsequios(this.cantidadCajas * this.producto.getContenido());
 	}
 
 	// GETTERS Y SETTERS

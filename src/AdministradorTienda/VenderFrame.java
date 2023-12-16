@@ -188,7 +188,7 @@ public class VenderFrame extends JFrame {
 		String imagen = productoSeleccionado.getImagen();
 
 		tf_precio.setText(Double.toString(precio));
-		lbl_imagen.setIcon(MainApp.crearImagen(170, 170, imagen));
+		lbl_imagen.setIcon(Utilidades.crearImagen(170, 170, imagen));
 	}
 	
 	void venderProducto() {
@@ -237,7 +237,7 @@ public class VenderFrame extends JFrame {
 
 			// declaracion de variables
 			double importeAcumulado = MainApp.getGestorProductos().calcularImporteAcumuladoTotal();
-			double porcentajeDeLaCuotaDiaria = MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
+			double porcentajeDeLaCuotaDiaria = Utilidades.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
 
 			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);
 		}
