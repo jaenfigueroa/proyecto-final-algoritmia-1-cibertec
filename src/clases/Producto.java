@@ -9,6 +9,7 @@ public class Producto {
 	private int contenido;
 	private String imagen;
 
+	// contadores y acumuladores
 	private int cantidadVentas = 0;
 	private int cantidadCajasVendidas = 0;
 	private double importeTotalVendido = 0;

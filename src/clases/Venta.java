@@ -5,14 +5,12 @@ import utilidades.Utilidades;
 public class Venta {
 	
 	private int numeroVenta = 0;
-
 	private Producto producto;
-	
 	private int cantidadCajas = 0;
 	private double porcentajeDescuento = 0;
-
-	private double importeCompra = 0, importeDescuento = 0, importePagar = 0;
-	
+	private double importeCompra = 0;
+	private double importeDescuento = 0;
+	private double importePagar = 0;
 	private String tipoObsequio = "";
 	private int cantidadObsequios = 0;
 	
