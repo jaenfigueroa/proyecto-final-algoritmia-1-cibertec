@@ -4,9 +4,7 @@ public class Venta {
 	
 	private int numeroVenta = 0;
 
-	private String nombre = "";
-	private double precio = 0;
-	private int cantidadUnidades = 0;
+	private Producto producto;
 	
 	private int cantidadCajas = 0;
 	private double porcentajeDescuento = 0;
@@ -20,37 +18,23 @@ public class Venta {
 	public Venta(Producto producto, int cantidadCajas) {
 		this.numeroVenta = MainApp.calcularCantidadVentasTotales();
 		
-		this.nombre = producto.getModelo();
-		this.precio = producto.getPrecio();
-		this.cantidadUnidades = producto.getContenido();
+		this.producto = producto;
 		
 		this.cantidadCajas = cantidadCajas;
-		this.porcentajeDescuento = MainApp.calcularPorcentajeDescuento(this.cantidadCajas * this.cantidadUnidades);
+		this.porcentajeDescuento = MainApp.calcularPorcentajeDescuento(this.cantidadCajas);
 		
-		this.importeCompra = this.cantidadCajas * this.precio;
+		this.importeCompra = this.cantidadCajas * this.producto.getPrecio();
 		this.importeDescuento = this.importeCompra * (this.porcentajeDescuento / 100);
 		this.importePagar = this.importeCompra - this.importeDescuento;
 		
 		this.tipoObsequio = MainApp.getTipoObsequio();
-		this.cantidadObsequios = MainApp.calcularCantidadObsequios(this.cantidadCajas);
+		this.cantidadObsequios = MainApp.calcularCantidadObsequios(this.cantidadCajas * this.producto.getContenido());
 	}
 
 	// GETTERS Y SETTERS
 	
 	public int getNumeroVenta() {
 		return numeroVenta;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public int getCantidadUnidades() {
-		return cantidadUnidades;
 	}
 
 	public int getCantidadCajas() {
@@ -60,7 +44,7 @@ public class Venta {
 	public double getPorcentajeDescuento() {
 		return porcentajeDescuento;
 	}
-
+	
 	
 	public double getImporteCompra() {
 		return importeCompra;
@@ -89,8 +73,8 @@ public class Venta {
 	String generarBoleta(){
 		String boleta = "BOLETA DE VENTA\n\n";
 		
-		boleta += "Modelo\t\t: " + this.nombre + " \n";
-		boleta += "Precio\t\t: S/. " + this.precio + " \n";
+		boleta += "Modelo\t\t: " + this.producto.getModelo() + " \n";
+		boleta += "Precio\t\t: S/. " + this.producto.getPrecio() + " \n";
 		boleta += "Cantidad cajas adquiridas\t: " + this.cantidadCajas + " \n\n";
 		boleta += "Importe de compra\t: S/. " + this.importeCompra + " \n";
 		boleta += "Importe de descuento\t: S/. " + this.importeDescuento + " \n";
