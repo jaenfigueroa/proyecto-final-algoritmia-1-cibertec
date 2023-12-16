@@ -220,6 +220,16 @@ public class MainApp {
 		
 		return cantidadVentasTotales;
 	}
+	
+	static int calcularImporteAcumuladoTotal() {
+		int importeAcumulado = 0;
+
+		for (int index = 0; index < MainApp.getProductos().length; index++) {
+			importeAcumulado += MainApp.getProducto(index).getImporteTotalVendido();
+		}
+
+		return importeAcumulado;
+	}
 
 
 	static double calcularPrecioPromedioDeTodosProductos() {

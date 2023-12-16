@@ -41,14 +41,13 @@ public class VenderFrame extends JFrame {
 	private JPanel panel_2;
 	private JLabel lblNewLabel_1;
 
+	int cantidadCajas = 0;
+	
 	int productoSeleccionadoIndex = 0;
-	int cantidadCajasVendidas = 0, cantidadObsequios = 0;
-
-	String nombre = "";
-	double precio = 0;
-	int cantidad = 0;
-
-	double importeCompra = 0, importeDescuento = 0, importePagar = 0;
+	Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+	Venta ventaActual;
+	
+	String boleta = "";
 
 	/**
 	 * Create the frame.
@@ -109,7 +108,7 @@ public class VenderFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				limpiarCampos();
+				limpiarCampoResultado();
 				venderProducto();
 			}
 		});
@@ -132,7 +131,8 @@ public class VenderFrame extends JFrame {
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
-				mostrarPrecio();
+				productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
+				mostrarDatosProducto();
 			}
 		});
 
@@ -180,13 +180,11 @@ public class VenderFrame extends JFrame {
 		contentPane.add(lblNewLabel_1);
 
 		// mostrar precio del producto seleccionado
-		mostrarPrecio();
+		mostrarDatosProducto();
 	}
 
-	void mostrarPrecio() {
-		Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
-
-		double precio = productoSeleccionado.getPrecio();	;
+	void mostrarDatosProducto() {
+		double precio = productoSeleccionado.getPrecio();
 		String imagen = productoSeleccionado.getImagen();
 
 		tf_precio.setText(Double.toString(precio));
@@ -196,19 +194,16 @@ public class VenderFrame extends JFrame {
 	void venderProducto() {
 		try {
 			// Leer valores
-			nombre = cb_modelo.getSelectedItem().toString();
-			precio = Double.parseDouble(tf_precio.getText());
-			cantidadCajasVendidas = Integer.parseInt(tf_cantidad.getText());
+			cantidadCajas = Integer.parseInt(tf_cantidad.getText());
 			
-			// Calcular
-			cantidadObsequios = MainApp.calcularCantidadObsequios(cantidadCajasVendidas);
-
-			calcularImportes();
-
-			// Actualizar contadores despues de la venta
-			Producto productoSeleccionado =MainApp.getProducto(productoSeleccionadoIndex);
+			// realizar la venta
+			ventaActual = new Venta(productoSeleccionado, cantidadCajas );
+		
+			// Actualizar contadores del producto despues de la venta
+			productoSeleccionado.actulizarContadoresDespuesVenta(cantidadCajas, ventaActual.getImportePagar());
 			
-			productoSeleccionado.actulizarContadoresDespuesVenta(cantidadCajasVendidas, importePagar);
+			// generar la boleta
+			boleta = ventaActual.generarBoleta();
 
 			// mostra mensaje de exito
 			JOptionPane.showMessageDialog(
@@ -218,8 +213,8 @@ public class VenderFrame extends JFrame {
 					JOptionPane.INFORMATION_MESSAGE
 				);
 
-			mostrarResultados();
-
+			mostrarBoletaAlCliente();
+	
 			verificarVentaMultiplo5();
 
 		} catch (Exception e2) {
@@ -228,38 +223,21 @@ public class VenderFrame extends JFrame {
 					"La cantidad ingresada no es válida, revise nuevamente por favor", "Ups, ocurrió un error",
 					JOptionPane.ERROR_MESSAGE
 				);
-			limpiarCampos();
+
+			limpiarCampoResultado();
 		}
-	}
-
-	void calcularImportes() {
-		Producto producto = MainApp.getProducto(productoSeleccionadoIndex);
-
-		int cantidadUnidadesCajaSeleccionada = producto.getContenido();
-		double porcentajeDescuento = MainApp.calcularPorcentajeDescuento(cantidadCajasVendidas * cantidadUnidadesCajaSeleccionada);
-
-		importeCompra = cantidadCajasVendidas * precio;
-		importeDescuento = importeCompra * (porcentajeDescuento / 100);
-		importePagar = importeCompra - importeDescuento;
 	}
 	
 	void verificarVentaMultiplo5() { // VERIFICAR, CREO QUE YA TENGO LA CANTIDAD DE VENTAS COMO VARIABLE GLOBAL
-		int cantidadVentasTotales = MainApp.calcularCantidadVentasTotales();
-		boolean multiploDe5 = cantidadVentasTotales % 5 == 0;
+		int cantidadVentasTotales = ventaActual.getNumeroVenta();
+		boolean multiploDe5 = ventaActual.verificarVentaMultiplo5();
 
 
 		if (multiploDe5 && cantidadVentasTotales > 0) {
 
 			// declaracion de variables
-			double importeAcumulado = 0;
-			double porcentajeDeLaCuotaDiaria = 0;
-
-			// obtener valores totales
-			for (int index = 0; index < MainApp.getProductos().length; index++) {
-				importeAcumulado += MainApp.getProductos()[index].getImporteTotalVendido();
-			}
-
-			porcentajeDeLaCuotaDiaria = MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
+			double importeAcumulado = MainApp.calcularImporteAcumuladoTotal();
+			double porcentajeDeLaCuotaDiaria = MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
 
 			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);
 		}
@@ -274,22 +252,11 @@ public class VenderFrame extends JFrame {
 		JOptionPane.showMessageDialog(null, mensaje, "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	void mostrarResultados() {
-		ta_resultados.setText("BOLETA DE VENTA\n\n");
-
-		ta_resultados.append("Modelo\t\t: " + nombre + " \n");
-		ta_resultados.append("Precio\t\t: S/. " + precio + " \n");
-		ta_resultados.append("Cantidad cajas adquiridas\t: " + cantidadCajasVendidas + " \n\n");
-
-		ta_resultados.append("Importe de compra\t: S/. " + importeCompra + " \n");
-		ta_resultados.append("Importe de descuento\t: S/. " + importeDescuento + " \n");
-		ta_resultados.append("Importe de pagar\t: S/. " + importePagar + "\n\n");
-
-		ta_resultados.append("Tipo de obsequio\t: " + MainApp.getTipoObsequio() + "\n");
-		ta_resultados.append("Unidades obsequiadas\t: " + cantidadObsequios);
+	void mostrarBoletaAlCliente() {
+		ta_resultados.setText(boleta);
 	}
-
-	void limpiarCampos() {
+	
+	void limpiarCampoResultado() {
 		ta_resultados.setText("");
 	}
 }
