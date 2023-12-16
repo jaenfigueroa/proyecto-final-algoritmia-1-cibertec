@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +17,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
+
+import clases.Producto;
+import clases.Tienda;
+import clases.Venta;
+import utilidades.Utilidades;
+
 import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -44,7 +50,7 @@ public class VenderFrame extends JFrame {
 	int cantidadCajas = 0;
 	
 	int productoSeleccionadoIndex = 0;
-	Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
+	Producto productoSeleccionado = Tienda.getGestorProductos().getProducto(productoSeleccionadoIndex);
 	Venta ventaActual;
 	
 	String boleta = "";
@@ -131,12 +137,12 @@ public class VenderFrame extends JFrame {
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
-				productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
+				productoSeleccionado = Tienda.getGestorProductos().getProducto(productoSeleccionadoIndex);
 				mostrarDatosProducto();
 			}
 		});
 
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(Tienda.getGestorProductos().obtenerListaModelos()));
 
 		panel = new JPanel();
 		panel.setBounds(21, 24, 190, 190);
@@ -236,7 +242,7 @@ public class VenderFrame extends JFrame {
 		if (multiploDe5 && cantidadVentasTotales > 0) {
 
 			// declaracion de variables
-			double importeAcumulado = MainApp.getGestorProductos().calcularImporteAcumuladoTotal();
+			double importeAcumulado = Tienda.getGestorProductos().calcularImporteAcumuladoTotal();
 			double porcentajeDeLaCuotaDiaria = Utilidades.calcularPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
 
 			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);

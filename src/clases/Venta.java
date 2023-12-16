@@ -1,4 +1,6 @@
-package AdministradorTienda;
+package clases;
+
+import utilidades.Utilidades;
 
 public class Venta {
 	
@@ -16,8 +18,7 @@ public class Venta {
 	
 	
 	public Venta(Producto producto, int cantidadCajas) {
-		//this.numeroVenta = MainApp.calcularCantidadVentasTotales();
-		this.numeroVenta = MainApp.getGestorProductos().calcularCantidadVentasTotales();
+		this.numeroVenta = Tienda.getGestorProductos().calcularCantidadVentasTotales();
 		
 		this.producto = producto;
 		
@@ -28,7 +29,7 @@ public class Venta {
 		this.importeDescuento = this.importeCompra * (this.porcentajeDescuento / 100);
 		this.importePagar = this.importeCompra - this.importeDescuento;
 		
-		this.tipoObsequio = MainApp.getTipoObsequio();
+		this.tipoObsequio = Tienda.getTipoObsequio();
 		this.cantidadObsequios = Utilidades.calcularCantidadObsequios(this.cantidadCajas * this.producto.getContenido());
 	}
 
@@ -71,7 +72,7 @@ public class Venta {
 	
 	// OTROS METODOS
 
-	String generarBoleta(){
+	public String generarBoleta(){
 		String boleta = "BOLETA DE VENTA\n\n";
 		
 		boleta += "Modelo\t\t: " + this.producto.getModelo() + " \n";
@@ -86,7 +87,7 @@ public class Venta {
 		return boleta;
 	}
 	
-	boolean verificarVentaMultiplo5() {
+	public boolean verificarVentaMultiplo5() {
 		return this.numeroVenta % 5 == 0;
 	}
 }

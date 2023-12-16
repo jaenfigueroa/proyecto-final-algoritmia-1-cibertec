@@ -1,24 +1,8 @@
-package AdministradorTienda;
+package clases;
 
-import java.awt.Image;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
-public class MainApp {
-
-	// lanzar la aplicación
-	public static void main(String[] args) {
-		DashboardFrame frame = new DashboardFrame();
-		frame.setVisible(true);
-	}
-
+public class Tienda {
 
 	// lista de productos y gestor de productos
-	
 	static private Producto[] productos = {
 			new Producto("Cinza Plus", 92.56, 62.0, 62.0, 8, 6, "/azulejos/azulejo-1.jpg"),
 			new Producto("Luxury", 42.77, 60, 60, 8.5, 4, "/azulejos/azulejo-2.jpg"),
@@ -78,7 +62,7 @@ public class MainApp {
 	}
 
 	public static void setPorcentaje1(double porcentaje1) {
-		MainApp.porcentaje1 = porcentaje1;
+		Tienda.porcentaje1 = porcentaje1;
 	}
 
 	public static double getPorcentaje2() {
@@ -86,7 +70,7 @@ public class MainApp {
 	}
 
 	public static void setPorcentaje2(double porcentaje2) {
-		MainApp.porcentaje2 = porcentaje2;
+		Tienda.porcentaje2 = porcentaje2;
 	}
 
 	public static double getPorcentaje3() {
@@ -94,7 +78,7 @@ public class MainApp {
 	}
 
 	public static void setPorcentaje3(double porcentaje3) {
-		MainApp.porcentaje3 = porcentaje3;
+		Tienda.porcentaje3 = porcentaje3;
 	}
 
 	public static double getPorcentaje4() {
@@ -102,7 +86,7 @@ public class MainApp {
 	}
 
 	public static void setPorcentaje4(double porcentaje4) {
-		MainApp.porcentaje4 = porcentaje4;
+		Tienda.porcentaje4 = porcentaje4;
 	}
 	
 	public static String getTipoObsequio() {
@@ -118,7 +102,7 @@ public class MainApp {
 	}
 
 	public static void setObsequioCantidad1(int obsequioCantidad1) {
-		MainApp.obsequioCantidad1 = obsequioCantidad1;
+		Tienda.obsequioCantidad1 = obsequioCantidad1;
 	}
 
 	public static int getObsequioCantidad2() {
@@ -126,7 +110,7 @@ public class MainApp {
 	}
 
 	public static void setObsequioCantidad2(int obsequioCantidad2) {
-		MainApp.obsequioCantidad2 = obsequioCantidad2;
+		Tienda.obsequioCantidad2 = obsequioCantidad2;
 	}
 
 	public static int getObsequioCantidad3() {
@@ -134,7 +118,7 @@ public class MainApp {
 	}
 
 	public static void setObsequioCantidad3(int obsequioCantidad3) {
-		MainApp.obsequioCantidad3 = obsequioCantidad3;
+		Tienda.obsequioCantidad3 = obsequioCantidad3;
 	}
 
 	public static int getCantidadOptima() {
@@ -154,5 +138,5 @@ public class MainApp {
 	}
 
 	
-	// METODOS
+	// OTROS METODOS
 }

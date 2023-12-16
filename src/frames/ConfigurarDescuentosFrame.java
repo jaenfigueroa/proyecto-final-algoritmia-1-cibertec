@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 
 import javax.swing.JFrame;
@@ -14,6 +14,9 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
+
+import clases.Tienda;
+
 import javax.swing.SwingConstants;
 
 public class ConfigurarDescuentosFrame extends JFrame {
@@ -160,10 +163,10 @@ public class ConfigurarDescuentosFrame extends JFrame {
 	// FUNCIONES
 	
 	void mostrarDescuentosDefecto() {		
-		tf_descuentoValor1.setText(MainApp.getPorcentaje1() + "");
-		tf_descuentoValor2.setText(MainApp.getPorcentaje2() + "");
-		tf_descuentoValor3.setText(MainApp.getPorcentaje3() + "");
-		tf_descuentoValor4.setText(MainApp.getPorcentaje4() + "");
+		tf_descuentoValor1.setText(Tienda.getPorcentaje1() + "");
+		tf_descuentoValor2.setText(Tienda.getPorcentaje2() + "");
+		tf_descuentoValor3.setText(Tienda.getPorcentaje3() + "");
+		tf_descuentoValor4.setText(Tienda.getPorcentaje4() + "");
 	}
 	
 	void actualizarDescuentos() {
@@ -173,10 +176,10 @@ public class ConfigurarDescuentosFrame extends JFrame {
 			double descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
 			double descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
 			
-			MainApp.setPorcentaje1(descuentoValor1);
-			MainApp.setPorcentaje2(descuentoValor2);
-			MainApp.setPorcentaje3(descuentoValor3);
-			MainApp.setPorcentaje4(descuentoValor4);
+			Tienda.setPorcentaje1(descuentoValor1);
+			Tienda.setPorcentaje2(descuentoValor2);
+			Tienda.setPorcentaje3(descuentoValor3);
+			Tienda.setPorcentaje4(descuentoValor4);
 			
 			
 			// Mostrar mensaje de exito

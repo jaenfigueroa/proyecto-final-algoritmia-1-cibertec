@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.border.EtchedBorder;
+
+import clases.Tienda;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
@@ -134,10 +137,10 @@ public class ConfigurarObsequiosFrame extends JFrame {
 	// METODOS
 	
 	private void mostrarObsequiosDefecto() {		
-		tf_tipoObsequio.setText(MainApp.getTipoObsequio());
-		tf_obsequioCantidad1.setText(MainApp.getObsequioCantidad1() + "");
-		tf_obsequioCantidad2.setText(MainApp.getObsequioCantidad2() + "");
-		tf_obsequioCantidad3.setText(MainApp.getObsequioCantidad3() + "");
+		tf_tipoObsequio.setText(Tienda.getTipoObsequio());
+		tf_obsequioCantidad1.setText(Tienda.getObsequioCantidad1() + "");
+		tf_obsequioCantidad2.setText(Tienda.getObsequioCantidad2() + "");
+		tf_obsequioCantidad3.setText(Tienda.getObsequioCantidad3() + "");
 	}
 	
 	private void actualizarObsequios() {
@@ -147,10 +150,10 @@ public class ConfigurarObsequiosFrame extends JFrame {
 			int cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
 			int cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
 			
-			MainApp.setTipoObsequio(tipoObsequio);
-			MainApp.setObsequioCantidad1(cantidadObsequio1);
-			MainApp.setObsequioCantidad2(cantidadObsequio2);
-			MainApp.setObsequioCantidad3(cantidadObsequio3);
+			Tienda.setTipoObsequio(tipoObsequio);
+			Tienda.setObsequioCantidad1(cantidadObsequio1);
+			Tienda.setObsequioCantidad2(cantidadObsequio2);
+			Tienda.setObsequioCantidad3(cantidadObsequio3);
 			
 			
 			// Mostrar mensaje de exito

@@ -1,9 +1,12 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import utilidades.Utilidades;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -253,6 +256,7 @@ public class DashboardFrame extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfigurarCuotaDiariaFrame frame = new ConfigurarCuotaDiariaFrame();
+				//HolaMundoFrame frame = new HolaMundoFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}
@@ -272,6 +276,7 @@ public class DashboardFrame extends JFrame {
 		mntmNewMenuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AcerdaDeTiendaFrame frame = new AcerdaDeTiendaFrame();
+				//HolaMundoFrame frame = new HolaMundoFrame();
 				frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 				frame.setVisible(true);
 			}

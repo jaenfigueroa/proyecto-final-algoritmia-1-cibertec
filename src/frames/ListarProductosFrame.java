@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +15,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.border.EtchedBorder;
+
+import clases.Producto;
+import clases.Tienda;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 
@@ -142,7 +146,7 @@ public class ListarProductosFrame extends JFrame {
 	// METODOS
 	
 	String generarListadoProductos() {
-		Producto[] productos = MainApp.getGestorProductos().getProductos();
+		Producto[] productos = Tienda.getGestorProductos().getProductos();
 
 		String mensaje = "LISTADO DE CERÄMICOS";
 

@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +12,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Collections;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
@@ -20,6 +19,10 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
+
+import clases.Producto;
+import clases.Tienda;
+import utilidades.Utilidades;
 
 public class GenerarReportesFrame extends JFrame {
 
@@ -199,7 +202,7 @@ public class GenerarReportesFrame extends JFrame {
 	// REPORTE TIPO 1
 	String generarResporteVentasModelo() {
 		
-		Producto[] productos = MainApp.getGestorProductos().getProductos();
+		Producto[] productos = Tienda.getGestorProductos().getProductos();
 		String reporte = "VENTAS POR MODELO";
 				
 		for (Producto producto : productos) {
@@ -216,8 +219,8 @@ public class GenerarReportesFrame extends JFrame {
 
 	// REPORTE TIPO 2
 	String generarResporteComparacionPrecios() {
-		Producto[] productos = MainApp.getGestorProductos().getProductos();
-		double precioPromedio = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
+		Producto[] productos = Tienda.getGestorProductos().getProductos();
+		double precioPromedio = Tienda.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
 		
 		String reporte = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
 		
@@ -238,8 +241,8 @@ public class GenerarReportesFrame extends JFrame {
 
 	// REPORTE TIPO 3
 	String generarResporteComparacionCajas() {
-		Producto[] productos = MainApp.getGestorProductos().getProductos();
-		int cantidadCajasOptima = MainApp.getCantidadOptima();
+		Producto[] productos = Tienda.getGestorProductos().getProductos();
+		int cantidadCajasOptima = Tienda.getCantidadOptima();
 		
 		String reporte = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
 		
@@ -260,9 +263,9 @@ public class GenerarReportesFrame extends JFrame {
 
 	// REPORTE TIPO 4
 	String generarResporteEstadisticaPrecio() {
-		double precioPromedioTotal = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos();
-		double precioMayor = MainApp.getGestorProductos().calcularPrecioMayorProductos();
-		double precioMenor = MainApp.getGestorProductos().calcularPrecioMenorProductos();
+		double precioPromedioTotal = Tienda.getGestorProductos().calcularPrecioPromedioDeTodosProductos();
+		double precioMayor = Tienda.getGestorProductos().calcularPrecioMayorProductos();
+		double precioMenor = Tienda.getGestorProductos().calcularPrecioMenorProductos();
 
 		String reporte = "ESTADISTICA SOBRE EL PRECIO\n\n";
 		reporte += "Precio promedio\t: S/. " + precioPromedioTotal + "\n";

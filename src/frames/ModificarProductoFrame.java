@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,6 +16,11 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
+
+import clases.Producto;
+import clases.Tienda;
+import utilidades.Utilidades;
+
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
@@ -74,7 +79,7 @@ public class ModificarProductoFrame extends JFrame {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(Tienda.getGestorProductos().obtenerListaModelos()));
 		cb_modelo.setBounds(403, 26, 183, 29);
 		contentPane.add(cb_modelo);
 
@@ -175,7 +180,7 @@ public class ModificarProductoFrame extends JFrame {
 
 	void mostrarDatosDelProducto() {
 
-		Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
+		Producto productoSeleccionado = Tienda.getGestorProductos().getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));
@@ -196,7 +201,7 @@ public class ModificarProductoFrame extends JFrame {
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 
 			// actualizar el producto
-			Producto productoParaActualizar = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
+			Producto productoParaActualizar = Tienda.getGestorProductos().getProducto(productoSeleccionadoIndex);
 			
 			productoParaActualizar.setPrecio(nuevoPrecio);
 			productoParaActualizar.setAncho(nuevoAncho);

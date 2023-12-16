@@ -1,6 +1,6 @@
-package AdministradorTienda;
+package clases;
 
-class Producto {
+public class Producto {
 	private String modelo;
 	private double precio;
 	private double ancho;
@@ -102,7 +102,7 @@ class Producto {
 
 	// OTROS METODOS
 
-	void actulizarContadoresDespuesVenta(int cajasVendidas, double importePagar) {
+	public void actulizarContadoresDespuesVenta(int cajasVendidas, double importePagar) {
 		this.cantidadVentas++;
 		this.cantidadCajasVendidas += cajasVendidas;
 		this.importeTotalVendido += importePagar;

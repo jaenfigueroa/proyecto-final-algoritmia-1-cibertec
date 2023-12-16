@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package clases;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,25 +8,25 @@ public class GestorProductos {
 	
 	private Producto[] listaDeProductos;
 	
-	GestorProductos(Producto[] productos){
+	public GestorProductos(Producto[] productos){
 		this.listaDeProductos = productos;
 	}
 	
 	
 	// GETTERS Y SETTERS
 	
-	Producto[] getProductos() {
+	public Producto[] getProductos() {
 		return this.listaDeProductos;
 	}
 	
-	Producto getProducto(int productoIndex) {
+	public Producto getProducto(int productoIndex) {
 		return this.listaDeProductos[productoIndex];
 	}
 	
 	
 	// METODOS
 	
-	String[] obtenerListaModelos() {
+	public String[] obtenerListaModelos() {
 		List<String> items = new ArrayList<>();
 
 		for (int index = 0; index < this.listaDeProductos.length; index++) {
@@ -37,7 +37,7 @@ public class GestorProductos {
 		return items.toArray(new String[0]);
 	}
 	
-	List<Double> obtenerListaPrecios() {
+	public List<Double> obtenerListaPrecios() {
 		List<Double> precios = new ArrayList<Double>();
 
 		// recorrer los productos y solo obtener un array de los precios
@@ -48,7 +48,7 @@ public class GestorProductos {
 		return precios;
 	}
 	
-	int calcularCantidadVentasTotales() {
+	public int calcularCantidadVentasTotales() {
 		int cantidadVentasTotales = 0;
 
 		for (int index = 0; index < this.listaDeProductos.length; index++) {
@@ -58,7 +58,7 @@ public class GestorProductos {
 		return cantidadVentasTotales;
 	}
 	
-	int calcularImporteAcumuladoTotal() {
+	public int calcularImporteAcumuladoTotal() {
 		int importeAcumulado = 0;
 
 		for (int index = 0; index < this.listaDeProductos.length; index++) {
@@ -68,7 +68,7 @@ public class GestorProductos {
 		return importeAcumulado;
 	}
 	
-	double calcularPrecioPromedioDeTodosProductos() {
+	public double calcularPrecioPromedioDeTodosProductos() {
 		List<Double> precios = this.obtenerListaPrecios();
 
 		double promedio = precios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
@@ -76,11 +76,11 @@ public class GestorProductos {
 	}
 	
 	
-	double calcularPrecioMayorProductos() {
+	public double calcularPrecioMayorProductos() {
 		return Collections.max(this.obtenerListaPrecios());
 	}
 
-	double calcularPrecioMenorProductos() {
+	public double calcularPrecioMenorProductos() {
 		return Collections.min(this.obtenerListaPrecios());
 	}
 	

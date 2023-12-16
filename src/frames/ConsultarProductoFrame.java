@@ -1,4 +1,4 @@
-package AdministradorTienda;
+package frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,6 +15,11 @@ import java.awt.event.MouseEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
+
+import clases.Producto;
+import clases.Tienda;
+import utilidades.Utilidades;
+
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
@@ -71,7 +76,7 @@ public class ConsultarProductoFrame extends DashboardFrame {
 				mostrarDatosProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.getGestorProductos().obtenerListaModelos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(Tienda.getGestorProductos().obtenerListaModelos()));
 		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 
@@ -169,7 +174,7 @@ public class ConsultarProductoFrame extends DashboardFrame {
 	private void mostrarDatosProducto() {
 
 		// Traer el producto por su index
-		Producto productoSeleccionado = MainApp.getGestorProductos().getProducto(productoSeleccionadoIndex);
+		Producto productoSeleccionado = Tienda.getGestorProductos().getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
 		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));

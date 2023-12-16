@@ -1,13 +1,12 @@
-package AdministradorTienda;
+package frames;
 
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
@@ -16,105 +15,107 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 
-public class ConfigurarCuotaDiariaFrame extends JFrame {
+import clases.Tienda;
+
+public class ConfigurarCantidadOptimaFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
-	private JTextField tf_cuotaDiariaEsperada;
+	private JTextField tf_cantidadOptima;
 	private JButton btn_aceptar;
 	private JButton btn_cancelar;
 	private JPanel panel;
 	private JLabel lblNewLabel_1;
 
-
 	/**
 	 * Create the frame.
 	 */
-	public ConfigurarCuotaDiariaFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(ConfigurarCuotaDiariaFrame.class.getResource("/icons/briefcase-32.png")));
+	public ConfigurarCantidadOptimaFrame() {
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage(ConfigurarCantidadOptimaFrame.class.getResource("/icons/money-32.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 734, 211);
-		setTitle("Configurar Cuota diaria");
-        setLocationRelativeTo(null); 
-        
+		setBounds(100, 100, 756, 216);
+		setTitle("Configurar cantidad óptima");
+		setLocationRelativeTo(null);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		panel.setBounds(163, 10, 539, 150);
+		panel.setBounds(165, 10, 560, 150);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		lblNewLabel = new JLabel("Cuota diaria esperada (S/.)");
-		lblNewLabel.setBounds(21, 22, 205, 32);
+
+		lblNewLabel = new JLabel("Cantidad óptima de unidades vendidas:");
+		lblNewLabel.setBounds(22, 26, 292, 31);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		tf_cuotaDiariaEsperada = new JTextField();
-		tf_cuotaDiariaEsperada.setBounds(236, 22, 121, 33);
-		panel.add(tf_cuotaDiariaEsperada);
-		tf_cuotaDiariaEsperada.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tf_cuotaDiariaEsperada.setColumns(10);
-		
+
+		tf_cantidadOptima = new JTextField();
+		tf_cantidadOptima.setBounds(319, 25, 90, 32);
+		panel.add(tf_cantidadOptima);
+		tf_cantidadOptima.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tf_cantidadOptima.setColumns(10);
+
 		btn_aceptar = new JButton("Aceptar");
-		btn_aceptar.setBounds(408, 22, 105, 32);
+		btn_aceptar.setBounds(440, 26, 98, 31);
 		panel.add(btn_aceptar);
 		btn_aceptar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btn_aceptar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				actualizarCuotaDiaria();
+				actualizarCantidadOptima();
 			}
 		});
-		
+
 		btn_cancelar = new JButton("Cancelar");
-		btn_cancelar.setBounds(408, 64, 105, 29);
+		btn_cancelar.setBounds(440, 67, 98, 29);
 		panel.add(btn_cancelar);
 		btn_cancelar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1
+				.setIcon(new ImageIcon(ConfigurarCantidadOptimaFrame.class.getResource("/icons/briefcase-128.png")));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(10, 12, 142, 150);
+		contentPane.add(lblNewLabel_1);
 		btn_cancelar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setVisible(false);
 			}
 		});
-		
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(ConfigurarCuotaDiariaFrame.class.getResource("/icons/money-128.png")));
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(11, 10, 142, 150);
-		contentPane.add(lblNewLabel_1);
 
-		mostrarCuotaDiariaDefecto();
+		mostrarCantidadOptimaDefecto();
 	}
-	
+
 	// METODOS
-	
-	void mostrarCuotaDiariaDefecto() {
-		double cantidadDiariaDefecto = MainApp.getCuotaDiaria();
-		
-		tf_cuotaDiariaEsperada.setText(Double.toString(cantidadDiariaDefecto));
-	}
-	
-	void actualizarCuotaDiaria() {
-		try {
-			double nuevaCuotaDiaria = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
 
-			MainApp.setCuotaDiaria(nuevaCuotaDiaria);
-			
+	void mostrarCantidadOptimaDefecto() {
+		int cantidadDefecto = Tienda.getCantidadOptima();
+
+		tf_cantidadOptima.setText(Integer.toString(cantidadDefecto));
+	}
+
+	void actualizarCantidadOptima() {
+		try {
+			int nuevaCantidadOptima = Integer.parseInt(tf_cantidadOptima.getText());
+			Tienda.setCantidadOptima(nuevaCantidadOptima);
+
 			// Mostrar mensaje de exito
 			JOptionPane.showMessageDialog(
 					rootPane,
-					"La cuota diaria fue actualizada exitosamente",
+					"La cantidad optima fue actualizada exitosamente",
 					"Exito",
 					JOptionPane.INFORMATION_MESSAGE
 				);
-			
+
 			// cerrar ventana
 			setVisible(false);
 
