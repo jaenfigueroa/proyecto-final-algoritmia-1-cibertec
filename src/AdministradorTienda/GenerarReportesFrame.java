@@ -157,42 +157,47 @@ public class GenerarReportesFrame extends JFrame {
 		generarReporte();
 	}
 	
+	// ENUMS
+	
+	public enum TipoReporte {
+	    VENTAS_POR_MODELO,
+	    COMPARACION_PRECIOS,
+	    COMPARACION_CAJAS,
+	    ESTADISTICA_PRECIO
+	}
+	
 	// METODOS
 	void generarReporte() {
-		obtenerReporteCorrespondiente(this.tipoReporteSelecionadoIndex);
+		TipoReporte tipoReporte = TipoReporte.values()[this.tipoReporteSelecionadoIndex];
+		reporteResultados = obtenerReporteCorrespondiente(tipoReporte);
 		mostrarResultados();
 	}
 	
-	void obtenerReporteCorrespondiente(int tipoReporte) {
+	String obtenerReporteCorrespondiente(TipoReporte tipoReporte) {
 		String reporte = "";
 		
-		switch (tipoReporte) {
-			case 0: {
-				reporte = this.generarResporteTipo1();
-				break;
-			}
-			case 1: {
-				reporte = this.generarResporteTipo2();
-				break;
-			}
-			case 2: {
-				reporte = this.generarResporteTipo3();
-				break;
-			}
-			case 3: {
-				reporte = this.generarResporteTipo4();
-				break;
-			}
+		if(tipoReporte == TipoReporte.VENTAS_POR_MODELO) {
+			reporte = this.generarResporteVentasModelo();
+		}
+		else if(tipoReporte == TipoReporte.COMPARACION_PRECIOS) {
+			reporte = this.generarResporteComparacionPrecios();
+		}
+		else if(tipoReporte == TipoReporte.COMPARACION_CAJAS) {
+			reporte = this.generarResporteComparacionCajas();
+		}
+		else if(tipoReporte == TipoReporte.ESTADISTICA_PRECIO) {
+			reporte = this.generarResporteEstadisticaPrecio();
 		}
 		
-		reporteResultados = reporte;
+		return reporte;
 	}
 	
 	
 	//////////////
 	//////////////
 	
-	String generarResporteTipo1() {
+	// REPORTE TIPO 1
+	String generarResporteVentasModelo() {
 		
 		Producto[] productos = MainApp.getGestorProductos().getProductos();
 		String reporte = "VENTAS POR MODELO";
@@ -209,7 +214,8 @@ public class GenerarReportesFrame extends JFrame {
 		return reporte;
 	}
 
-	String generarResporteTipo2() {
+	// REPORTE TIPO 2
+	String generarResporteComparacionPrecios() {
 		Producto[] productos = MainApp.getGestorProductos().getProductos();
 		double precioPromedio = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos(); 
 		
@@ -230,8 +236,8 @@ public class GenerarReportesFrame extends JFrame {
 		return reporte;
 	}
 
-
-	String generarResporteTipo3() {
+	// REPORTE TIPO 3
+	String generarResporteComparacionCajas() {
 		Producto[] productos = MainApp.getGestorProductos().getProductos();
 		int cantidadCajasOptima = MainApp.getCantidadOptima();
 		
@@ -252,7 +258,8 @@ public class GenerarReportesFrame extends JFrame {
 		return reporte;
 	}
 
-	String generarResporteTipo4() {
+	// REPORTE TIPO 4
+	String generarResporteEstadisticaPrecio() {
 		double precioPromedioTotal = MainApp.getGestorProductos().calcularPrecioPromedioDeTodosProductos();
 		double precioMayor = MainApp.getGestorProductos().calcularPrecioMayorProductos();
 		double precioMenor = MainApp.getGestorProductos().calcularPrecioMenorProductos();

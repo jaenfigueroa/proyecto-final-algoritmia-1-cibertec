@@ -44,28 +44,29 @@ public class Utilidades {
 		return (100 * cantidadAcumulada) / MainApp.getCuotaDiaria();
 	}
 	
-	// UTLIDADES USADO EN GENERAR REPORTES
+	// UTILIDADES USADO EN GENERAR REPORTES
 	
-	static String compararDouble(double primerValor, double segundoValor) {
-		double diferencia = primerValor - segundoValor;
+	static String compararDouble(double valor1, double valor2) {
+		double diferencia = valor1 - valor2;
 
-		if (primerValor > segundoValor) {
+		if (valor1 > valor2) {
 			return Math.abs(diferencia) + " mas";
 		} else {
 			return Math.abs(diferencia) + " menos";
 		}
 	}
 
-	static String compararInt(int primerValor, int segundoValor) {
-		int diferencia = primerValor - segundoValor;
+	static String compararInt(int valor1, int valor2) {
+		int diferencia = valor1 - valor2;
 
-		if (primerValor > segundoValor) {
+		if (valor1 > valor2) {
 			return Math.abs(diferencia) + " mas";
 		} else {
 			return Math.abs(diferencia) + " menos";
 		}
 	}
 
+	// OTROS
 
 	static ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
 		ImageIcon icon = new ImageIcon(DashboardFrame.class.getResource(rutaRelativa));
