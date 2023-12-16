@@ -14,6 +14,7 @@ public class MainApp {
 		DashboardFrame frame = new DashboardFrame();
 		frame.setVisible(true);
 	}
+	
 
 	// lista de productos
 	static private Producto[] productos = {
@@ -188,6 +189,9 @@ public class MainApp {
 		return cantidadObsequios;
 	}
 
+	
+	// PARA PRODUCTOS
+	
 	static  String[] obtenerListaModelos() {
 		List<String> items = new ArrayList<>();
 
@@ -238,6 +242,8 @@ public class MainApp {
 		double promedio = precios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 		return promedio;
 	}
+	
+	// NO ESTOY SEGURO
 	
 	static Double calcularPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
 		return (100 * cantidadAcumulada) / cuotaDiaria;
