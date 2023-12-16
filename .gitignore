@@ -1,5 +1,7 @@
 # Carpeta de configuración del entorno de Eclipse
 .settings/
+.classpath
+.project
 
 # Carpeta de archivos binarios
 /bin/
