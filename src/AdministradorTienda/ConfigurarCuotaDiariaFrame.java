@@ -90,10 +90,12 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 		lblNewLabel_1.setBounds(11, 10, 142, 150);
 		contentPane.add(lblNewLabel_1);
 
-		mostrarValorDefecto();
+		mostrarCuotaDiariaDefecto();
 	}
 	
-	void mostrarValorDefecto() {
+	// METODOS
+	
+	void mostrarCuotaDiariaDefecto() {
 		double cantidadDiariaDefecto = MainApp.getCuotaDiaria();
 		
 		tf_cuotaDiariaEsperada.setText(Double.toString(cantidadDiariaDefecto));
@@ -101,18 +103,28 @@ public class ConfigurarCuotaDiariaFrame extends JFrame {
 	
 	void actualizarCuotaDiaria() {
 		try {
-			double nuevaCuotaEsperada = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
+			double nuevaCuotaDiaria = Double.parseDouble(tf_cuotaDiariaEsperada.getText());
 
-			MainApp.setCuotaDiaria(nuevaCuotaEsperada);
+			MainApp.setCuotaDiaria(nuevaCuotaDiaria);
 			
 			// Mostrar mensaje de exito
-			JOptionPane.showMessageDialog(rootPane,"La cuota diaria fue actualizada exitosamente", "Exito",  JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"La cuota diaria fue actualizada exitosamente",
+					"Exito",
+					JOptionPane.INFORMATION_MESSAGE
+				);
 			
 			// cerrar ventana
 			setVisible(false);
 
 		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(rootPane,"EL valor ingresado no es valido, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"EL valor ingresado no es valido, revise nuevamente por favor",
+					"Ups, ocurrió un error",
+					JOptionPane.ERROR_MESSAGE
+				);
 		}
 	}
 

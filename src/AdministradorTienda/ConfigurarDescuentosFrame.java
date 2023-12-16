@@ -154,18 +154,16 @@ public class ConfigurarDescuentosFrame extends JFrame {
 		lblNewLabel_1.setBounds(10, 21, 145, 163);
 		contentPane.add(lblNewLabel_1);
 		
-		mostrarValoresDefecto();
+		mostrarDescuentosDefecto();
 	}
 	
 	// FUNCIONES
 	
-	void mostrarValoresDefecto() {
-		double[] valores = MainApp.getPorcentajesDescuento();
-		
-		tf_descuentoValor1.setText(Double.toString(valores[0]));
-		tf_descuentoValor2.setText(Double.toString(valores[1]));
-		tf_descuentoValor3.setText(Double.toString(valores[2]));
-		tf_descuentoValor4.setText(Double.toString(valores[3]));
+	void mostrarDescuentosDefecto() {		
+		tf_descuentoValor1.setText(MainApp.getPorcentaje1() + "");
+		tf_descuentoValor2.setText(MainApp.getPorcentaje2() + "");
+		tf_descuentoValor3.setText(MainApp.getPorcentaje3() + "");
+		tf_descuentoValor4.setText(MainApp.getPorcentaje4() + "");
 	}
 	
 	void actualizarDescuentos() {
@@ -175,10 +173,11 @@ public class ConfigurarDescuentosFrame extends JFrame {
 			double descuentoValor3 = Double.parseDouble(tf_descuentoValor3.getText());
 			double descuentoValor4 = Double.parseDouble(tf_descuentoValor4.getText());
 			
-			double[] cantidades = {descuentoValor1, descuentoValor2, descuentoValor3, descuentoValor4};
+			MainApp.setPorcentaje1(descuentoValor1);
+			MainApp.setPorcentaje2(descuentoValor2);
+			MainApp.setPorcentaje3(descuentoValor3);
+			MainApp.setPorcentaje4(descuentoValor4);
 			
-			// actualizar los valores
-			MainApp.setPorcentajesDescuento(cantidades);
 			
 			// Mostrar mensaje de exito
 			JOptionPane.showMessageDialog(
@@ -192,7 +191,12 @@ public class ConfigurarDescuentosFrame extends JFrame {
 			setVisible(false);
 
 		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(rootPane,"Alguno de los campos ingresados no son válidos, revise nuevamente por favor", "Ups, ocurrió un error",  JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(
+					rootPane,
+					"Alguno de los campos ingresados no son válidos, revise nuevamente por favor",
+					"Ups, ocurrió un error",
+					JOptionPane.ERROR_MESSAGE
+				);
 		}
 	}
 }

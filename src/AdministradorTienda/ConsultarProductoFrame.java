@@ -65,12 +65,13 @@ public class ConsultarProductoFrame extends DashboardFrame {
 		cb_modelo.setFont(new Font("Dialog", Font.PLAIN, 16));
 		cb_modelo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				productoSeleccionadoIndex = cb_modelo.getSelectedIndex();
 				
-				mostrarDatosDelProducto();
+				mostrarDatosProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerListaModelos()));
 		cb_modelo.setBounds(408, 27, 190, 29);
 		contentPane.add(cb_modelo);
 
@@ -161,23 +162,22 @@ public class ConsultarProductoFrame extends DashboardFrame {
 		lbl_imagen.setBounds(10, 10, 240, 240);
 		panel.add(lbl_imagen);
 		
-		// Mostrar los datos del primer item por defecto
-		mostrarDatosDelProducto();
+		mostrarDatosProducto(); // Mostrar por defecto los datos del primer producto
 	}
 	
 	// FUNCIONES
-	private void mostrarDatosDelProducto() {
+	private void mostrarDatosProducto() {
 
 		// Traer el producto por su index
-		Producto productoItem = MainApp.productos[productoSeleccionadoIndex];
+		Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
-		tf_precio.setText(Double.toString(productoItem.getPrecio()));
-		tf_ancho.setText(Double.toString(productoItem.getAncho()));
-		tf_largo.setText(Double.toString(productoItem.getLargo()));
-		tf_espesor.setText(Double.toString(productoItem.getEspesor()));
-		tf_contenido.setText(Integer.toString(productoItem.getContenido()));
+		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));
+		tf_ancho.setText(Double.toString(productoSeleccionado.getAncho()));
+		tf_largo.setText(Double.toString(productoSeleccionado.getLargo()));
+		tf_espesor.setText(Double.toString(productoSeleccionado.getEspesor()));
+		tf_contenido.setText(Integer.toString(productoSeleccionado.getContenido()));
 		
-		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoItem.getImagen()));
+		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoSeleccionado.getImagen()));
 	}
 }

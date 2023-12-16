@@ -128,18 +128,16 @@ public class ConfigurarObsequiosFrame extends JFrame {
 		lblNewLabel_1.setBounds(10, 13, 142, 185);
 		contentPane.add(lblNewLabel_1);
 
-		mostrarValoresDefecto();
+		mostrarObsequiosDefecto();
 	}
 	
-	// FUNCIONES
-	private void mostrarValoresDefecto() {
-		String tipoObsequio = MainApp.getTipoObsequio();
-		int[] valores = MainApp.getCantidadesObsequios();
-		
-		tf_tipoObsequio.setText(tipoObsequio);
-		tf_obsequioCantidad1.setText(Integer.toString(valores[0]));
-		tf_obsequioCantidad2.setText(Integer.toString(valores[1]));
-		tf_obsequioCantidad3.setText(Integer.toString(valores[2]));
+	// METODOS
+	
+	private void mostrarObsequiosDefecto() {		
+		tf_tipoObsequio.setText(MainApp.getTipoObsequio());
+		tf_obsequioCantidad1.setText(MainApp.getObsequioCantidad1() + "");
+		tf_obsequioCantidad2.setText(MainApp.getObsequioCantidad2() + "");
+		tf_obsequioCantidad3.setText(MainApp.getObsequioCantidad3() + "");
 	}
 	
 	private void actualizarObsequios() {
@@ -149,10 +147,11 @@ public class ConfigurarObsequiosFrame extends JFrame {
 			int cantidadObsequio2 = Integer.parseInt(tf_obsequioCantidad2.getText());
 			int cantidadObsequio3 = Integer.parseInt(tf_obsequioCantidad3.getText());
 			
-			int[] cantidades = {cantidadObsequio1, cantidadObsequio2, cantidadObsequio3};
-			
 			MainApp.setTipoObsequio(tipoObsequio);
-			MainApp.setCantidadesObsequios(cantidades);
+			MainApp.setObsequioCantidad1(cantidadObsequio1);
+			MainApp.setObsequioCantidad2(cantidadObsequio2);
+			MainApp.setObsequioCantidad3(cantidadObsequio3);
+			
 			
 			// Mostrar mensaje de exito
 			JOptionPane.showMessageDialog(

@@ -14,10 +14,9 @@ public class MainApp {
 		DashboardFrame frame = new DashboardFrame();
 		frame.setVisible(true);
 	}
-	
 
-	// productos
-	static Producto[] productos = {
+	// lista de productos
+	static private Producto[] productos = {
 			new Producto("Cinza Plus", 92.56, 62.0, 62.0, 8, 6, "/azulejos/azulejo-1.jpg"),
 			new Producto("Luxury", 42.77, 60, 60, 8.5, 4, "/azulejos/azulejo-2.jpg"),
 			new Producto("Austria", 52.45, 45, 45, 6.5, 12, "/azulejos/azulejo-3.jpg"),
@@ -58,17 +57,102 @@ public class MainApp {
 	static private double cuotaDiaria = 30000;
 	
 	
-	// METODOS
-	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/// UTILIDADES
-	/// UTILIDADES
-	/// UTILIDADES
-	/// UTILIDADES
+	// GETTERS Y SETTERS
+
+	public static Producto[] getProductos() {
+		return productos;
+	}
+	
+	public static Producto getProducto(int productoIndex) {
+		return getProductos()[productoIndex];
+	}
 	
 
+	public static double getPorcentaje1() {
+		return porcentaje1;
+	}
 
+	public static void setPorcentaje1(double porcentaje1) {
+		MainApp.porcentaje1 = porcentaje1;
+	}
+
+	public static double getPorcentaje2() {
+		return porcentaje2;
+	}
+
+	public static void setPorcentaje2(double porcentaje2) {
+		MainApp.porcentaje2 = porcentaje2;
+	}
+
+	public static double getPorcentaje3() {
+		return porcentaje3;
+	}
+
+	public static void setPorcentaje3(double porcentaje3) {
+		MainApp.porcentaje3 = porcentaje3;
+	}
+
+	public static double getPorcentaje4() {
+		return porcentaje4;
+	}
+
+	public static void setPorcentaje4(double porcentaje4) {
+		MainApp.porcentaje4 = porcentaje4;
+	}
+	
+	public static String getTipoObsequio() {
+		return tipoObsequio;
+	}
+	
+	public static void setTipoObsequio(String nombreObsequio) {
+		tipoObsequio = nombreObsequio;
+	}
+
+	public static int getObsequioCantidad1() {
+		return obsequioCantidad1;
+	}
+
+	public static void setObsequioCantidad1(int obsequioCantidad1) {
+		MainApp.obsequioCantidad1 = obsequioCantidad1;
+	}
+
+	public static int getObsequioCantidad2() {
+		return obsequioCantidad2;
+	}
+
+	public static void setObsequioCantidad2(int obsequioCantidad2) {
+		MainApp.obsequioCantidad2 = obsequioCantidad2;
+	}
+
+	public static int getObsequioCantidad3() {
+		return obsequioCantidad3;
+	}
+
+	public static void setObsequioCantidad3(int obsequioCantidad3) {
+		MainApp.obsequioCantidad3 = obsequioCantidad3;
+	}
+
+	public static int getCantidadOptima() {
+		return cantidadOptima;
+	}
+	
+	public static void setCantidadOptima(int valor) {
+		cantidadOptima = valor;
+	}
+
+	public static double getCuotaDiaria() {
+		return cuotaDiaria;
+	}
+
+	public static void setCuotaDiaria(double valor) {
+		cuotaDiaria = valor;
+	}
+
+	
+	// OTROS METODOS
+	
 	static double calcularPorcentajeDescuento(int cantidadCajas) {
 		double procentajeDescuento = 0;
 
@@ -104,42 +188,7 @@ public class MainApp {
 		return cantidadObsequios;
 	}
 
-	static  ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
-		ImageIcon icon = new ImageIcon(DashboardFrame.class.getResource(rutaRelativa));
-
-		// Obtener la imagen del icono y ajustar el tamaño
-		Image image = icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
-
-		// Crear un nuevo ImageIcon con la imagen ajustada
-		ImageIcon scaledIcon = new ImageIcon(image);
-
-		return scaledIcon;
-	}
-
-	
-	// PRODUCTOS EN CONJUNTO
-	// PRODUCTOS EN CONJUNTO
-	// PRODUCTOS EN CONJUNTO
-
-	
-	
-	// MANTENIMIENTO
-	static String generarListadoProductos() {
-		String mensaje = "LISTADO DE CERÄMICOS";
-
-		for (int index = 0; index < productos.length; index++) {
-			mensaje += "\n\nModelo\t: " + productos[index].getModelo() + "\n";
-			mensaje += "Precio\t: S/. " + productos[index].getPrecio() + "\n";
-			mensaje += "Ancho (cm)\t: " + productos[index].getAncho() + " cm\n";
-			mensaje += "Largo (cm)\t: " + productos[index].getLargo() + " cm\n";
-			mensaje += "Espesor (mm)\t: " + productos[index].getEspesor() + " mm\n";
-			mensaje += "Contenido\t: " + productos[index].getContenido() + " unidades";
-		}
-
-		return mensaje;
-	}
-
-	static  String[] obtenerModelosDeProductos() {
+	static  String[] obtenerListaModelos() {
 		List<String> items = new ArrayList<>();
 
 		for (int index = 0; index < productos.length; index++) {
@@ -150,7 +199,7 @@ public class MainApp {
 		return items.toArray(new String[0]);
 	}
 
-	static  List<Double> obtenerListaPrecioProductos() {
+	static  List<Double> obtenerListaPrecios() {
 		List<Double> precios = new ArrayList<Double>();
 
 		// recorrer los productos y solo obtener un array de los precios
@@ -161,32 +210,6 @@ public class MainApp {
 		return precios;
 	}
 
-	// SECCION VENDER
-	// SECCION VENDER
-	// SECCION VENDER
-	// SECCION VENDER
-
-	static void verificarVentaMultiplo5() { // VERIFICAR, CREO QUE YA TENGO LA CANTIDAD DE VENTAS COMO VARIABLE GLOBAL
-		int cantidadVentasTotales = calcularCantidadVentasTotales();
-		boolean multiploDe5 = cantidadVentasTotales % 5 == 0;
-
-
-		if (multiploDe5 && cantidadVentasTotales > 0) {
-
-			// declaracion de variables
-			double importeAcumulado = 0;
-			double porcentajeDeLaCuotaDiaria = 0;
-
-			// obtener valores totales
-			for (int index = 0; index < productos.length; index++) {
-				importeAcumulado += productos[index].getImporteTotalVendido();
-			}
-
-			porcentajeDeLaCuotaDiaria = getPorcentajeCuotaDiariaRespectoImporteTotal(importeAcumulado);
-
-			mostrarAviso5ventas(cantidadVentasTotales, importeAcumulado, porcentajeDeLaCuotaDiaria);
-		}
-	}
 	
 	static int calcularCantidadVentasTotales() {
 		int cantidadVentasTotales = 0;
@@ -198,175 +221,28 @@ public class MainApp {
 		return cantidadVentasTotales;
 	}
 
-	static void mostrarAviso5ventas(int cantidadVentasTotales, double importeAcumulado, double porcentajeDeLaCuotaDiaria) {
 
-		String mensaje = "Venta Nro. " + cantidadVentasTotales + "\n";
-		mensaje += "Importe total general acumulado: S/. " + importeAcumulado + "\n";
-		mensaje += "Porcentaje de la cuota diaria: " + porcentajeDeLaCuotaDiaria + " %";
-
-		JOptionPane.showMessageDialog(null, mensaje, "Avance de ventas", JOptionPane.INFORMATION_MESSAGE);
-	}
-
-	static Double getPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
-		return (100 * cantidadAcumulada) / cuotaDiaria;
-	}
-
-	// SECCION GENERAR REPORTES
-	// SECCION GENERAR REPORTES
-	// SECCION GENERAR REPORTES
-
-	static String getResporteTipo1() {
-		String mensaje = "VENTAS POR MODELO";
-
-		for (int index = 0; index < productos.length; index++) {
-			mensaje += "\n\nModelo\t\t: " + productos[index].getModelo() + "\n";
-			mensaje += "Cantidad de ventas\t: " + productos[index].getCantidadVentas() + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + productos[index].getCantidadCajasVendidas() + "\n";
-			mensaje += "Importe total vendido\t: S/. " +productos[index].getImporteTotalVendido() + "\n";
-			mensaje += "Aporte a la cuota diaria\t: "
-					+ getPorcentajeCuotaDiariaRespectoImporteTotal(productos[index].getImporteTotalVendido()) + " %";
-		}
-
-		return mensaje;
-	}
-
-	static String getResporteTipo2() {
-		String mensaje = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
-
-		for (int index = 0; index < productos.length; index++) {
-
-			String modelo = productos[index].getModelo();
-			double precio = productos[index].getPrecio();
-			//double precioPromedio = productos[index].getPrecioPromedio(); // MOdiFICAR EL ES METOOD, ESTE NO DEBEERIA IR
-			double precioPromedio = getPrecioPromedioDeTodosProductos(); 
-			String comparacion = compararDouble(precio, precioPromedio);
-
-			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
-			mensaje += "Precio\t\t: S/. " + precio + "\n";
-			mensaje += "Precio promedio\t: S/. " + precioPromedio + "\n";
-			mensaje += "Comparación\t\t: " + comparacion + " que el promedio";
-		}
-
-		return mensaje;
-	}
-
-	static String compararDouble(double primerValor, double segundoValor) {
-		double diferencia = primerValor - segundoValor;
-
-		if (primerValor > segundoValor) {
-			return Math.abs(diferencia) + " mas";
-		} else {
-			return Math.abs(diferencia) + " menos";
-		}
-	}
-
-	static String compararInt(int primerValor, int segundoValor) {
-		int diferencia = primerValor - segundoValor;
-
-		if (primerValor > segundoValor) {
-			return Math.abs(diferencia) + " mas";
-		} else {
-			return Math.abs(diferencia) + " menos";
-		}
-	}
-
-	static String getResporteTipo3() {
-		String mensaje = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
-
-		for (int index = 0; index < productos.length; index++) {
-
-			String modelo = productos[index].getModelo();
-			int cantidadCajasVendidas = productos[index].getCantidadCajasVendidas();
-			//int cantidadOptima = cantidadOptima;
-			String comparacion = compararInt(cantidadCajasVendidas, cantidadOptima);
-
-			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
-			mensaje += "Cantidad de cajas vendidas\t: " + cantidadCajasVendidas + "\n";
-			mensaje += "Cantidad óptima\t: " + cantidadOptima + "\n";
-			mensaje += "Comparación\t\t: " + comparacion + " que la cantidad óptima";
-		}
-
-		return mensaje;
-	}
-
-	static String getResporteTipo4() {
-		double precioPromedioTotal = getPrecioPromedioDeTodosProductos();
-		double precioMayor = getPrecioMayorProductos();
-		double precioMenor = getPrecioMenorProductos();
-
-		String mensaje = "ESTADISTICA SOBRE EL PRECIO\n\n";
-		mensaje += "Precio promedio\t: S/. " + precioPromedioTotal + "\n";
-		mensaje += "Precio mayor\t\t: S/. " + precioMayor + "\n";
-		mensaje += "Precio menor\t\t: S/. " + precioMenor;
-
-		return mensaje;
-	}
-
-	static double getPrecioPromedioDeTodosProductos() {
-		List<Double> precios = obtenerListaPrecioProductos();
+	static double calcularPrecioPromedioDeTodosProductos() {
+		List<Double> precios = obtenerListaPrecios();
 
 		double promedio = precios.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 		return promedio;
 	}
-
-	static double getPrecioMayorProductos() {
-		return Collections.max(obtenerListaPrecioProductos());
+	
+	static Double calcularPorcentajeCuotaDiariaRespectoImporteTotal(double cantidadAcumulada) {
+		return (100 * cantidadAcumulada) / cuotaDiaria;
 	}
+	
+	static ImageIcon crearImagen(int ancho, int alto, String rutaRelativa) {
+		ImageIcon icon = new ImageIcon(DashboardFrame.class.getResource(rutaRelativa));
 
-	static double getPrecioMenorProductos() {
-		return Collections.min(obtenerListaPrecioProductos());
+		// Obtener la imagen del icono y ajustar el tamaño
+		Image image = icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+
+		// Crear un nuevo ImageIcon con la imagen ajustada
+		ImageIcon scaledIcon = new ImageIcon(image);
+
+		return scaledIcon;
 	}
-
-	// SECCION CONFIGURACIÓN
-	// SECCION CONFIGURACIÓN
-	// SECCION CONFIGURACIÓN
-
-	static double[] getPorcentajesDescuento() {
-		double[] valores = { porcentaje1, porcentaje2, porcentaje3, porcentaje4 };
-		return valores;
-	}
-
-	static String getTipoObsequio() {
-		return tipoObsequio;
-	}
-
-	static int[] getCantidadesObsequios() {
-		int[] valores = { obsequioCantidad1, obsequioCantidad2, obsequioCantidad3 };
-		return valores;
-	}
-
-	static int getCantidadOptima() {
-		return cantidadOptima;
-	}
-
-	static double getCuotaDiaria() {
-		return cuotaDiaria;
-	}
-
-	static void setPorcentajesDescuento(double[] nuevosValores) {
-		porcentaje1 = nuevosValores[0];
-		porcentaje2 = nuevosValores[1];
-		porcentaje3 = nuevosValores[2];
-		porcentaje4 = nuevosValores[3];
-	}
-
-	static void setTipoObsequio(String nombreObsequio) {
-		tipoObsequio = nombreObsequio;
-	}
-
-	static void setCantidadesObsequios(int[] nuevosValores) {
-		obsequioCantidad1 = nuevosValores[0];
-		obsequioCantidad2 = nuevosValores[1];
-		obsequioCantidad3 = nuevosValores[2];
-	}
-
-	static void setCantidadOptima(int valor) {
-		cantidadOptima = valor;
-	}
-
-	static void setCuotaDiaria(double valor) {
-		cuotaDiaria = valor;
-	}
-
 
 }

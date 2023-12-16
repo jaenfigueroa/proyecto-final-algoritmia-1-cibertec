@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
@@ -167,24 +168,118 @@ public class GenerarReportesFrame extends JFrame {
 		
 		switch (tipoReporte) {
 			case 0: {
-				reporte = MainApp.getResporteTipo1();
+				reporte = this.generarResporteTipo1();
 				break;
 			}
 			case 1: {
-				reporte = MainApp.getResporteTipo2();
+				reporte = this.generarResporteTipo2();
 				break;
 			}
 			case 2: {
-				reporte = MainApp.getResporteTipo3();
+				reporte = this.generarResporteTipo3();
 				break;
 			}
 			case 3: {
-				reporte = MainApp.getResporteTipo4();
+				reporte = this.generarResporteTipo4();
 				break;
 			}
 		}
 		
 		reporteResultados = reporte;
+	}
+	
+
+	String compararDouble(double primerValor, double segundoValor) {
+		double diferencia = primerValor - segundoValor;
+
+		if (primerValor > segundoValor) {
+			return Math.abs(diferencia) + " mas";
+		} else {
+			return Math.abs(diferencia) + " menos";
+		}
+	}
+
+	String compararInt(int primerValor, int segundoValor) {
+		int diferencia = primerValor - segundoValor;
+
+		if (primerValor > segundoValor) {
+			return Math.abs(diferencia) + " mas";
+		} else {
+			return Math.abs(diferencia) + " menos";
+		}
+	}
+	
+	double calcularPrecioMayorProductos() {
+		return Collections.max(MainApp.obtenerListaPrecios());
+	}
+
+	static double calcularPrecioMenorProductos() {
+		return Collections.min(MainApp.obtenerListaPrecios());
+	}
+	
+	String generarResporteTipo1() {
+		String mensaje = "VENTAS POR MODELO";
+
+		for (int index = 0; index < MainApp.getProductos().length; index++) {
+			mensaje += "\n\nModelo\t\t: " + MainApp.getProductos()[index].getModelo() + "\n";
+			mensaje += "Cantidad de ventas\t: " + MainApp.getProductos()[index].getCantidadVentas() + "\n";
+			mensaje += "Cantidad de cajas vendidas\t: " + MainApp.getProductos()[index].getCantidadCajasVendidas() + "\n";
+			mensaje += "Importe total vendido\t: S/. " +MainApp.getProductos()[index].getImporteTotalVendido() + "\n";
+			mensaje += "Aporte a la cuota diaria\t: " + MainApp.calcularPorcentajeCuotaDiariaRespectoImporteTotal(MainApp.getProductos()[index].getImporteTotalVendido()) + " %";
+		}
+
+		return mensaje;
+	}
+
+	String generarResporteTipo2() {
+		String mensaje = "COMPARACIÓN DE PRECIOS CON EL PRECIO PROMEDIO";
+
+		for (int index = 0; index < MainApp.getProductos().length; index++) {
+
+			String modelo = MainApp.getProductos()[index].getModelo();
+			double precio = MainApp.getProductos()[index].getPrecio();
+			double precioPromedio = MainApp.calcularPrecioPromedioDeTodosProductos(); 
+			String comparacion = compararDouble(precio, precioPromedio);
+
+			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
+			mensaje += "Precio\t\t: S/. " + precio + "\n";
+			mensaje += "Precio promedio\t: S/. " + precioPromedio + "\n";
+			mensaje += "Comparación\t\t: " + comparacion + " que el promedio";
+		}
+
+		return mensaje;
+	}
+
+
+	String generarResporteTipo3() {
+		String mensaje = "COMPARACIÓN DE CAJAS VENDIDAS CON LA CANTIDAD ÓPTIMA";
+
+		for (int index = 0; index < MainApp.getProductos().length; index++) {
+
+			String modelo = MainApp.getProductos()[index].getModelo();
+			int cantidadCajasVendidas = MainApp.getProductos()[index].getCantidadCajasVendidas();
+			String comparacion = compararInt(cantidadCajasVendidas, MainApp.getCantidadOptima());
+
+			mensaje += "\n\nModelo\t\t: " + modelo + "\n";
+			mensaje += "Cantidad de cajas vendidas\t: " + cantidadCajasVendidas + "\n";
+			mensaje += "Cantidad óptima\t: " + MainApp.getCantidadOptima() + "\n";
+			mensaje += "Comparación\t\t: " + comparacion + " que la cantidad óptima";
+		}
+
+		return mensaje;
+	}
+
+	String generarResporteTipo4() {
+		double precioPromedioTotal = MainApp.calcularPrecioPromedioDeTodosProductos();
+		double precioMayor = calcularPrecioMayorProductos();
+		double precioMenor = calcularPrecioMenorProductos();
+
+		String mensaje = "ESTADISTICA SOBRE EL PRECIO\n\n";
+		mensaje += "Precio promedio\t: S/. " + precioPromedioTotal + "\n";
+		mensaje += "Precio mayor\t\t: S/. " + precioMayor + "\n";
+		mensaje += "Precio menor\t\t: S/. " + precioMenor;
+
+		return mensaje;
 	}
 	
 	void mostrarResultados() {
@@ -194,4 +289,5 @@ public class GenerarReportesFrame extends JFrame {
 		btn_actualizar.setEnabled(true);
 		pb_progreso.setValue(100);
 	}
+	
 }

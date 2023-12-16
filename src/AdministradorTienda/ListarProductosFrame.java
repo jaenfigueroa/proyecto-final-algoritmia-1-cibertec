@@ -141,8 +141,25 @@ public class ListarProductosFrame extends JFrame {
 	
 	// METODOS
 	
+	String generarListadoProductos() {
+		Producto[] productos = MainApp.getProductos();
+
+		String mensaje = "LISTADO DE CERÄMICOS";
+
+		for (int index = 0; index < productos.length; index++) {
+			mensaje += "\n\nModelo\t: " + productos[index].getModelo() + "\n";
+			mensaje += "Precio\t: S/. " + productos[index].getPrecio() + "\n";
+			mensaje += "Ancho (cm)\t: " + productos[index].getAncho() + " cm\n";
+			mensaje += "Largo (cm)\t: " + productos[index].getLargo() + " cm\n";
+			mensaje += "Espesor (mm)\t: " + productos[index].getEspesor() + " mm\n";
+			mensaje += "Contenido\t: " + productos[index].getContenido() + " unidades";
+		}
+
+		return mensaje;
+	}
+	
 	void mostrarResultados() {
-		ta_resultados.setText(MainApp.generarListadoProductos());
+		ta_resultados.setText(this.generarListadoProductos());
 		pb_progreso.setValue(100);
 	}
 }

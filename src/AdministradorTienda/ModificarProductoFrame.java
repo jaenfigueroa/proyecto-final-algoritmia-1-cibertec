@@ -74,7 +74,7 @@ public class ModificarProductoFrame extends JFrame {
 				mostrarDatosDelProducto();
 			}
 		});
-		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerModelosDeProductos()));
+		cb_modelo.setModel(new DefaultComboBoxModel<>(MainApp.obtenerListaModelos()));
 		cb_modelo.setBounds(403, 26, 183, 29);
 		contentPane.add(cb_modelo);
 
@@ -168,23 +168,22 @@ public class ModificarProductoFrame extends JFrame {
 		lbl_imagen.setBounds(10, 10, 240, 240);
 		panel.add(lbl_imagen);
 
-		// mostrar los datos del producto seleccionado por defecto
-		mostrarDatosDelProducto();
+		mostrarDatosDelProducto(); // mostrar los datos del producto seleccionado por defecto
 	}
 
 	// METODOS
 
 	void mostrarDatosDelProducto() {
-		// Traer el producto por su index
-		Producto productoItem = MainApp.productos[productoSeleccionadoIndex];
+
+		Producto productoSeleccionado = MainApp.getProducto(productoSeleccionadoIndex);
 
 		// Mostrar datos del producto
-		tf_precio.setText(Double.toString(productoItem.getPrecio()));
-		tf_ancho.setText(Double.toString(productoItem.getAncho()));
-		tf_largo.setText(Double.toString(productoItem.getLargo()));
-		tf_espesor.setText(Double.toString(productoItem.getEspesor()));
-		tf_contenido.setText(Integer.toString(productoItem.getContenido()));
-		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoItem.getImagen()));
+		tf_precio.setText(Double.toString(productoSeleccionado.getPrecio()));
+		tf_ancho.setText(Double.toString(productoSeleccionado.getAncho()));
+		tf_largo.setText(Double.toString(productoSeleccionado.getLargo()));
+		tf_espesor.setText(Double.toString(productoSeleccionado.getEspesor()));
+		tf_contenido.setText(Integer.toString(productoSeleccionado.getContenido()));
+		lbl_imagen.setIcon(MainApp.crearImagen(240, 240, productoSeleccionado.getImagen()));
 	}
 
 	void actualizarProducto() {
@@ -197,11 +196,13 @@ public class ModificarProductoFrame extends JFrame {
 			int nuevoContenido = Integer.parseInt(tf_contenido.getText());
 
 			// actualizar el producto
-			MainApp.productos[productoSeleccionadoIndex].setPrecio(nuevoPrecio);
-			MainApp.productos[productoSeleccionadoIndex].setAncho(nuevoAncho);
-			MainApp.productos[productoSeleccionadoIndex].setLargo(nuevoLargo);
-			MainApp.productos[productoSeleccionadoIndex].setEspesor(nuevoEspesor);
-			MainApp.productos[productoSeleccionadoIndex].setContenido(nuevoContenido);
+			Producto productoParaActualizar = MainApp.getProducto(productoSeleccionadoIndex);
+			
+			productoParaActualizar.setPrecio(nuevoPrecio);
+			productoParaActualizar.setAncho(nuevoAncho);
+			productoParaActualizar.setLargo(nuevoLargo);
+			productoParaActualizar.setEspesor(nuevoEspesor);
+			productoParaActualizar.setContenido(nuevoContenido);
 			
 			// Mostrar mensaje de exito
 			JOptionPane.showMessageDialog(

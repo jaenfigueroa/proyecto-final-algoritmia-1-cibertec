@@ -76,7 +76,6 @@ class Producto {
 
 	
 	
-	
 	public int getCantidadVentas() {
 		return cantidadVentas;
 	}
@@ -101,8 +100,9 @@ class Producto {
 		this.importeTotalVendido = importeTotalVendido;
 	}
 
+	// OTROS METODOS
 
-	void venderProducto(int cajasVendidas, double importePagar) {
+	void actulizarContadoresDespuesVenta(int cajasVendidas, double importePagar) {
 		this.cantidadVentas++;
 		this.cantidadCajasVendidas += cajasVendidas;
 		this.importeTotalVendido += importePagar;
