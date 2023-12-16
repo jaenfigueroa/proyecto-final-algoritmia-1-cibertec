@@ -8,6 +8,7 @@ public class GestorProductos {
 	
 	private Producto[] listaDeProductos;
 	
+	
 	public GestorProductos(Producto[] productos){
 		this.listaDeProductos = productos;
 	}
