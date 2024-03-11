@@ -1,3 +1,5 @@
+## Capturas de pantalla
+
 <img src="https://github.com/jaenfigueroa/proyecto-final_algoritmia-1_cibertec/assets/69079292/dc6f6790-d354-453b-9fe7-65c3a00f0b15" width="700px"></img> </br></br>
 <img src="https://github.com/jaenfigueroa/proyecto-final_algoritmia-1_cibertec/assets/69079292/1fd47b44-c6e3-4d6e-b185-c2967d1dbe2b" width="700px"></img> </br></br>
 <img src="https://github.com/jaenfigueroa/proyecto-final_algoritmia-1_cibertec/assets/69079292/6503af74-aa65-41b4-8d0c-d27d23817b75" width="700px"></img> </br></br>
